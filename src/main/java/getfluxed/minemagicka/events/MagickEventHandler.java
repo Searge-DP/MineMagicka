@@ -30,7 +30,7 @@ public class MagickEventHandler {
 
 	@SubscribeEvent
 	public void renderGUI(RenderGameOverlayEvent.Text e) {
-		if ((e.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS)) {
+		if ( (e.type == RenderGameOverlayEvent.ElementType.TEXT)) {
 			EntityPlayer player = MineMagicka.proxy.getPlayer();
 			if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().isItemEqual(new ItemStack(Items.stick))) {
 
