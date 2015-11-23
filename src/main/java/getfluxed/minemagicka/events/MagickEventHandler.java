@@ -101,7 +101,7 @@ public class MagickEventHandler {
 					} else if (e.dwheel < 0 && selectedElement < 7) {
 						selectedElement++;
 					}
-					PacketHandler.INSTANCE.sendToServer(new MessageSelectElement(MineMagicka.proxy.getPlayer(), selectedElement));
+					PacketHandler.INSTANCE.sendToServer(new MessageSelectElement(selectedElement));
 				}
 				if (e.button == 0 && e.buttonstate) {
 					SpellHandler.addElement(ElementRegistry.getElements().get(selectedElement));
