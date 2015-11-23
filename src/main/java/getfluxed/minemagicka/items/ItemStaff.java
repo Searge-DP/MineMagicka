@@ -1,7 +1,5 @@
 package getfluxed.minemagicka.items;
 
-import com.sun.xml.internal.ws.protocol.soap.ClientMUTube;
-
 import fluxedCore.handlers.ClientEventHandler;
 import fluxedCore.util.NBTHelper;
 import getfluxed.minemagicka.reference.Reference;
@@ -61,6 +59,12 @@ public class ItemStaff extends Item {
 			NBTHelper.initNBTTagCompound(stack);
 			NBTHelper.setInteger(stack, "MMSelectedElement", 0);
 		}
+//		if(!world.isRemote){
+//			System.out.println("Server: " + stack.stackTagCompound);
+//		}else{
+//			System.out.println("Client: " + stack.stackTagCompound);
+//		}
+//		System.out.println("side: " + getSelectedElement(stack));
 
 	}
 

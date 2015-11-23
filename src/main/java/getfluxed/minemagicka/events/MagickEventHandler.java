@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import getfluxed.minemagicka.MineMagicka;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.elements.IElement;
@@ -15,8 +16,6 @@ import getfluxed.minemagicka.network.messages.MessageSelectElement;
 import getfluxed.minemagicka.reference.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.MouseEvent;
@@ -40,7 +39,7 @@ public class MagickEventHandler {
 
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glColor4d(1, 1, 1, 1);
-//				GL11.glBlendFunc(768, 771);
+				// GL11.glBlendFunc(768, 771);
 				GL11.glPushMatrix();
 				Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Reference.modid, "textures/gui/guiElements.png"));
 				int y = 0;
@@ -102,8 +101,7 @@ public class MagickEventHandler {
 					} else if (e.dwheel < 0 && selectedElement < 7) {
 						selectedElement++;
 					}
-					PacketHandler.INSTANCE.sendTo(new MessageSelectElement(MineMagicka.proxy.getPlayer(), selectedElement), (EntityPlayerMP) MineMagicka.proxy.getPlayer());
-					
+					PacketHandler.INSTANCE.sendToServer(new MessageSelectElement(MineMagicka.proxy.getPlayer(), selectedElement));
 				}
 				if (e.button == 0 && e.buttonstate) {
 					SpellHandler.addElement(ElementRegistry.getElements().get(selectedElement));

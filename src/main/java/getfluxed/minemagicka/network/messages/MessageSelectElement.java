@@ -7,6 +7,7 @@ import fluxedCore.FluxedCore;
 import fluxedCore.util.NBTHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class MessageSelectElement implements IMessage, IMessageHandler<MessageSelectElement, IMessage> {
@@ -30,7 +31,7 @@ public class MessageSelectElement implements IMessage, IMessageHandler<MessageSe
 	@Override
 	public void fromBytes(ByteBuf buf) {
 		this.entityID = buf.readInt();
-		this.entityID = buf.readInt();
+		this.selectedID = buf.readInt();
 	}
 
 	@Override
@@ -38,8 +39,12 @@ public class MessageSelectElement implements IMessage, IMessageHandler<MessageSe
 		World world = FluxedCore.proxy.getWorld();
 		EntityPlayer entity = (EntityPlayer) world.getEntityByID(message.entityID);
 		if (entity != null) {
-			NBTHelper.setInteger(entity.inventory.getCurrentItem(), "MMSelectedElement", message.selectedID);
+			ItemStack stack = entity.inventory.getCurrentItem();
+			NBTHelper.initNBTTagCompound(stack);
+			NBTHelper.setInteger(stack, "MMSelectedElement", message.selectedID);
+			System.out.println(stack.stackTagCompound);
 		}
+		
 		return null;
 	}
 }
