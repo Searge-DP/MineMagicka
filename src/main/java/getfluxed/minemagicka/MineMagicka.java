@@ -11,6 +11,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import getfluxed.minemagicka.events.MagickEventHandler;
+import getfluxed.minemagicka.items.MMItems;
+import getfluxed.minemagicka.network.PacketHandler;
 import getfluxed.minemagicka.proxy.IProxy;
 import getfluxed.minemagicka.reference.ElementReference;
 
@@ -24,6 +26,8 @@ public class MineMagicka {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
 		ElementReference.preInit();
+		PacketHandler.preInit();
+		MMItems.preInit();
 		new MagickEventHandler();
 		
 	}

@@ -9,9 +9,13 @@ import getfluxed.minemagicka.MineMagicka;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.handlers.SpellHandler;
+import getfluxed.minemagicka.items.MMItems;
+import getfluxed.minemagicka.network.PacketHandler;
+import getfluxed.minemagicka.network.messages.MessageSelectElement;
 import getfluxed.minemagicka.reference.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -30,12 +34,13 @@ public class MagickEventHandler {
 
 	@SubscribeEvent
 	public void renderGUI(RenderGameOverlayEvent.Text e) {
-		if ( (e.type == RenderGameOverlayEvent.ElementType.TEXT)) {
+		if ((e.type == RenderGameOverlayEvent.ElementType.TEXT)) {
 			EntityPlayer player = MineMagicka.proxy.getPlayer();
-			if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().isItemEqual(new ItemStack(Items.stick))) {
+			if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().isItemEqual(new ItemStack(MMItems.staff))) {
 
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glColor4d(1, 1, 1, 1);
+//				GL11.glBlendFunc(768, 771);
 				GL11.glPushMatrix();
 				Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Reference.modid, "textures/gui/guiElements.png"));
 				int y = 0;
@@ -64,7 +69,7 @@ public class MagickEventHandler {
 				int elY = 0;
 				for (int i = 0; i < ElementRegistry.getElements().size(); i++) {
 					IElement el = ElementRegistry.getElements().get(i);
-					el.render(xCoords[xCount++], elY);
+					el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], elY);
 					if (xCount > 3) {
 						xCount = 0;
 						elY = 24;
@@ -72,7 +77,7 @@ public class MagickEventHandler {
 				}
 				for (int i = 0; i < SpellHandler.currentElements.size(); i++) {
 					IElement el = SpellHandler.currentElements.get(i);
-					el.render(xCoords[xCount++], 24 + elY);
+					el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 24 + elY);
 					if (xCount > 3) {
 						xCount = 0;
 						elY += 24;
@@ -89,7 +94,7 @@ public class MagickEventHandler {
 	public void mouse(MouseEvent e) {
 		boolean cancel = false;
 		if (Keyboard.isCreated()) {
-			if (MineMagicka.proxy.getPlayer().getCurrentEquippedItem() != null && MineMagicka.proxy.getPlayer().getCurrentEquippedItem().isItemEqual(new ItemStack(Items.stick)) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+			if (MineMagicka.proxy.getPlayer().getCurrentEquippedItem() != null && MineMagicka.proxy.getPlayer().getCurrentEquippedItem().isItemEqual(new ItemStack(MMItems.staff)) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 				if (e.dwheel != 0) {
 					cancel = true;
 					if (e.dwheel > 0 && selectedElement > 0) {
@@ -97,6 +102,8 @@ public class MagickEventHandler {
 					} else if (e.dwheel < 0 && selectedElement < 7) {
 						selectedElement++;
 					}
+					PacketHandler.INSTANCE.sendTo(new MessageSelectElement(MineMagicka.proxy.getPlayer(), selectedElement), (EntityPlayerMP) MineMagicka.proxy.getPlayer());
+					
 				}
 				if (e.button == 0 && e.buttonstate) {
 					SpellHandler.addElement(ElementRegistry.getElements().get(selectedElement));

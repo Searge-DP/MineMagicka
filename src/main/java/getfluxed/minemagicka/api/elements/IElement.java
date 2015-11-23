@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import getfluxed.minemagicka.api.casting.CastingType;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
 
 public interface IElement {
@@ -51,8 +51,9 @@ public interface IElement {
 	
 	/**
 	 * Renders the element in the current gui
+	 * @param gui
 	 * @param x
 	 * @param y
 	 */
-	public void render(int x, int y);
+	public void render(Gui gui, int x, int y);
 }
