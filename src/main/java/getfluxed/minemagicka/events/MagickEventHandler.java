@@ -1,18 +1,35 @@
 package getfluxed.minemagicka.events;
 
+import java.awt.AWTException;
+import java.awt.HeadlessException;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import getfluxed.minemagicka.MineMagicka;
 import getfluxed.minemagicka.api.ElementRegistry;
+import getfluxed.minemagicka.api.SpellRegistry;
 import getfluxed.minemagicka.api.elements.IElement;
+import getfluxed.minemagicka.api.spells.ISpell;
 import getfluxed.minemagicka.handlers.SpellHandler;
+import getfluxed.minemagicka.items.ItemStaff;
 import getfluxed.minemagicka.items.MMItems;
 import getfluxed.minemagicka.network.PacketHandler;
 import getfluxed.minemagicka.network.messages.MessageSelectElement;
+import getfluxed.minemagicka.network.messages.spells.MessageAddElement;
+import getfluxed.minemagicka.network.messages.spells.MessageCastSpell;
+import getfluxed.minemagicka.network.messages.spells.MessageClearElements;
 import getfluxed.minemagicka.reference.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,22 +38,29 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
 public class MagickEventHandler {
-	public int selectedElement = 0;
-	public int currentElement = 0;
 
 	public MagickEventHandler() {
 		MinecraftForge.EVENT_BUS.register(this);
 		FMLCommonHandler.instance().bus().register(this);
 	}
 
+	@EventHandler
+	public void toolTip(ItemTooltipEvent e){
+		if(e.itemStack.stackTagCompound.getInteger("MMItemTime")>0){
+			e.toolTip.add("mm.item.countTime" + e.itemStack.stackTagCompound.getInteger("MMItemTime"));
+		}
+	}
 	@SubscribeEvent
 	public void renderGUI(RenderGameOverlayEvent.Text e) {
 		if ((e.type == RenderGameOverlayEvent.ElementType.TEXT)) {
 			EntityPlayer player = MineMagicka.proxy.getPlayer();
 			if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().isItemEqual(new ItemStack(MMItems.staff))) {
-
+				ItemStack staffStack = MineMagicka.proxy.getPlayer().getCurrentEquippedItem();
+				ItemStaff staff = (ItemStaff) staffStack.getItem();
+				int selectedElement = staff.getSelectedElement(staffStack);
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glColor4d(1, 1, 1, 1);
 				// GL11.glBlendFunc(768, 771);
@@ -74,9 +98,13 @@ public class MagickEventHandler {
 						elY = 24;
 					}
 				}
-				for (int i = 0; i < SpellHandler.currentElements.size(); i++) {
-					IElement el = SpellHandler.currentElements.get(i);
-					el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 24 + elY);
+				ISpell spell = SpellRegistry.getSpellFromElements(SpellHandler.getElements(staffStack));
+				if (spell != null) {
+					Minecraft.getMinecraft().ingameGUI.drawString(Minecraft.getMinecraft().fontRenderer, spell.getName(), 6, elY + 28, 0xFFFFFF);
+				}
+				for (int i = 0; i < SpellHandler.getElements(staffStack).size(); i++) {
+					IElement el = SpellHandler.getElements(staffStack).get(i);
+					el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
 					if (xCount > 3) {
 						xCount = 0;
 						elY += 24;
@@ -94,6 +122,9 @@ public class MagickEventHandler {
 		boolean cancel = false;
 		if (Keyboard.isCreated()) {
 			if (MineMagicka.proxy.getPlayer().getCurrentEquippedItem() != null && MineMagicka.proxy.getPlayer().getCurrentEquippedItem().isItemEqual(new ItemStack(MMItems.staff)) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+				ItemStack staffStack = MineMagicka.proxy.getPlayer().getCurrentEquippedItem();
+				ItemStaff staff = (ItemStaff) staffStack.getItem();
+				int selectedElement = staff.getSelectedElement(staffStack);
 				if (e.dwheel != 0) {
 					cancel = true;
 					if (e.dwheel > 0 && selectedElement > 0) {
@@ -104,11 +135,19 @@ public class MagickEventHandler {
 					PacketHandler.INSTANCE.sendToServer(new MessageSelectElement(selectedElement));
 				}
 				if (e.button == 0 && e.buttonstate) {
-					SpellHandler.addElement(ElementRegistry.getElements().get(selectedElement));
+					SpellHandler.addElement(staffStack, ElementRegistry.getElements().get(selectedElement));
+					PacketHandler.INSTANCE.sendToServer(new MessageAddElement(ElementRegistry.getElements().get(selectedElement)));
 				} else if (e.button == 1 && e.buttonstate) {
-					SpellHandler.currentElements.clear();
+					SpellHandler.clearElements(staffStack);
+					PacketHandler.INSTANCE.sendToServer(new MessageClearElements());
 				}
 				cancel = true;
+			}
+			if (MineMagicka.proxy.getPlayer().getCurrentEquippedItem() != null && MineMagicka.proxy.getPlayer().getCurrentEquippedItem().isItemEqual(new ItemStack(MMItems.staff)) && !Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && e.button == 1 && e.buttonstate) {
+				ISpell spell = SpellRegistry.getSpellFromElements(SpellHandler.getElements(MineMagicka.proxy.getPlayer().getCurrentEquippedItem()));
+				if (spell != null) {
+					PacketHandler.INSTANCE.sendToServer(new MessageCastSpell(spell, MineMagicka.proxy.getPlayer().posX, MineMagicka.proxy.getPlayer().posY, MineMagicka.proxy.getPlayer().posZ));
+				}
 			}
 		}
 		e.setCanceled(cancel);

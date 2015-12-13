@@ -14,7 +14,11 @@ public interface IElement {
 	 * @return the name of the element
 	 */
 	public String getName();
-
+	/**
+	 * 
+	 * return the unlocalized name of the element
+	 */
+	public String getUnlocalizedName();
 	/**
 	 * Gets the description of the element
 	 * 
@@ -56,4 +60,5 @@ public interface IElement {
 	 * @param y
 	 */
 	public void render(Gui gui, int x, int y);
+	
 }

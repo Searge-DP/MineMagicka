@@ -17,7 +17,10 @@ public class ElementWater extends ElementBase {
 	public String getName() {
 		return StatCollector.translateToLocal("mm.element.water.name");
 	}
-
+	@Override
+	public String getUnlocalizedName() {
+		return "water";
+	}
 	@Override
 	public String getDescription() {
 		return StatCollector.translateToLocal("mm.element.water.description");

@@ -19,6 +19,11 @@ public class ElementEarth extends ElementBase {
 	}
 
 	@Override
+	public String getUnlocalizedName() {
+		return "earth";
+	}
+
+	@Override
 	public String getDescription() {
 		return StatCollector.translateToLocal("mm.element.earth.description");
 	}

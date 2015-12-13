@@ -17,7 +17,10 @@ public class ElementLife extends ElementBase {
 	public String getName() {
 		return StatCollector.translateToLocal("mm.element.life.name");
 	}
-
+	@Override
+	public String getUnlocalizedName() {
+		return "life";
+	}
 	@Override
 	public String getDescription() {
 		return StatCollector.translateToLocal("mm.element.life.description");

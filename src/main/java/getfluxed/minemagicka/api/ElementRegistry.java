@@ -1,8 +1,6 @@
 package getfluxed.minemagicka.api;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import getfluxed.minemagicka.api.elements.IElement;
@@ -18,5 +16,14 @@ public class ElementRegistry {
 
 	public static Map<Integer, IElement> getElements() {
 		return elements;
+	}
+	
+	public static IElement getElementFromName(String name){
+		for(IElement el : elements.values()){
+			if(el.getUnlocalizedName().equals(name)){
+				return el;
+			}
+		}
+		return null;
 	}
 }

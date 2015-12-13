@@ -12,6 +12,7 @@ public interface ISpell {
 	public CastingType type = null;
 	
 	public String getName();
+	public String getUnlocalizedName();
 	public List<IElement> getElements();
 	public void cast(World world, EntityPlayer player, double x, double y, double z);
 	

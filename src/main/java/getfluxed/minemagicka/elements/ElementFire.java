@@ -17,7 +17,10 @@ public class ElementFire extends ElementBase {
 	public String getName() {
 		return StatCollector.translateToLocal("mm.element.fire.name");
 	}
-
+	@Override
+	public String getUnlocalizedName() {
+		return "fire";
+	}
 	@Override
 	public String getDescription() {
 		return StatCollector.translateToLocal("mm.element.fire.description");

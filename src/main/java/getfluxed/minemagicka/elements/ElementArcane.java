@@ -19,6 +19,11 @@ public class ElementArcane extends ElementBase {
 	}
 
 	@Override
+	public String getUnlocalizedName() {
+		return "arcane";
+	}
+
+	@Override
 	public String getDescription() {
 		return StatCollector.translateToLocal("mm.element.arcane.description");
 	}

@@ -33,10 +33,12 @@ public class MessageSelectElement implements IMessage, IMessageHandler<MessageSe
 		EntityPlayer entity = ctx.getServerHandler().playerEntity;
 		if (entity != null) {
 			ItemStack stack = entity.inventory.getCurrentItem();
-			NBTHelper.initNBTTagCompound(stack);
-			NBTHelper.setInteger(stack, "MMSelectedElement", message.selectedID);
+			if (stack != null) {
+				NBTHelper.initNBTTagCompound(stack);
+				NBTHelper.setInteger(stack, "MMSelectedElement", message.selectedID);
+			}
 		}
-		
+
 		return null;
 	}
 }

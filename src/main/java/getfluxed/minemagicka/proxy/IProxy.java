@@ -8,4 +8,6 @@ public interface IProxy {
 	public EntityPlayer getPlayer();
 
 	public World getWorld();
+	
+	public void registerRenderers();
 }

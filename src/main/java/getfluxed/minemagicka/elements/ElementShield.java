@@ -17,7 +17,10 @@ public class ElementShield extends ElementBase {
 	public String getName() {
 		return StatCollector.translateToLocal("mm.element.shield.name");
 	}
-
+	@Override
+	public String getUnlocalizedName() {
+		return "shield";
+	}
 	@Override
 	public String getDescription() {
 		return StatCollector.translateToLocal("mm.element.shield.description");

@@ -16,4 +16,9 @@ public class ServerProxy implements IProxy{
 		return FMLServerHandler.instance().getServer().getEntityWorld();
 	}
 
+	@Override
+	public void registerRenderers() {
+		
+	}
+
 }

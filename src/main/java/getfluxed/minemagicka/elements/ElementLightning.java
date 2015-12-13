@@ -17,7 +17,10 @@ public class ElementLightning extends ElementBase {
 	public String getName() {
 		return StatCollector.translateToLocal("mm.element.lightning.name");
 	}
-
+	@Override
+	public String getUnlocalizedName() {
+		return "lightning";
+	}
 	@Override
 	public String getDescription() {
 		return StatCollector.translateToLocal("mm.element.lightning.description");

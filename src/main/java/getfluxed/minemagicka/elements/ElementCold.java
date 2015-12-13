@@ -17,7 +17,10 @@ public class ElementCold extends ElementBase {
 	public String getName() {
 		return StatCollector.translateToLocal("mm.element.cold.name");
 	}
-
+	@Override
+	public String getUnlocalizedName() {
+		return "cold";
+	}
 	@Override
 	public String getDescription() {
 		return StatCollector.translateToLocal("mm.element.cold.description");
