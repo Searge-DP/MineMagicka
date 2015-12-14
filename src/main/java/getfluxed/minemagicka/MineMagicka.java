@@ -39,14 +39,16 @@ public class MineMagicka {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
+		MMLiquids.preInit();
+		MMBlocks.preInit();
+		MMItems.preInit();
 		RecipeRegistry.registerMagickInfusionRecipe(new RecipeMagickInfusion(new ItemStack(Items.stick), new ItemStack(Items.diamond), 500));
 		ElementReference.preInit();
 		SpellReference.preInit();
 		BuffReference.preInit();
 		PacketHandler.preInit();
-		MMLiquids.preInit();
-		MMBlocks.preInit();
-		MMItems.preInit();
+		
+		
 		new GUIHandler();
 		EntityRegistry.registerModEntity(EntityBall.class, "ball", 0, INSTANCE, 30, 30, true);
 

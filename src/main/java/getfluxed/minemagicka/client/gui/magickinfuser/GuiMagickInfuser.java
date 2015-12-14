@@ -39,13 +39,11 @@ public class GuiMagickInfuser extends GuiContainer {
 		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		int barHeight = (int) (((float) tile.infuserTimer / tile.infuserTimerMax) * 13);
-		System.out.println(tile.infuserTimer);
-		if(tile.infuserTimer==0){
+		if (tile.infuserTimer == 0) {
 			barHeight = 13;
 		}
-		drawTexturedModalRect(80, 33+(barHeight), 176, 0, 16, 13-barHeight);
+		drawTexturedModalRect(80, 33 + (barHeight), 176, 0, 16, 13 - barHeight);
 		int barWidth = (int) (((float) tile.currentMagick / tile.maxMagick) * 89);
-		
 		drawTexturedModalRect(43, 50, 0, 166, barWidth, 18);
 	}
 

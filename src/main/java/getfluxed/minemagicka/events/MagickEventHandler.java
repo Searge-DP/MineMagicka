@@ -1,27 +1,18 @@
 package getfluxed.minemagicka.events;
 
-import java.awt.AWTException;
-import java.awt.HeadlessException;
-import java.awt.Rectangle;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import getfluxed.minemagicka.MineMagicka;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.SpellRegistry;
 import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.api.spells.ISpell;
+import getfluxed.minemagicka.blocks.MMBlocks;
 import getfluxed.minemagicka.handlers.SpellHandler;
 import getfluxed.minemagicka.items.ItemStaff;
 import getfluxed.minemagicka.items.MMItems;
@@ -31,13 +22,17 @@ import getfluxed.minemagicka.network.messages.spells.MessageAddElement;
 import getfluxed.minemagicka.network.messages.spells.MessageCastSpell;
 import getfluxed.minemagicka.network.messages.spells.MessageClearElements;
 import getfluxed.minemagicka.reference.Reference;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
 public class MagickEventHandler {
@@ -151,5 +146,30 @@ public class MagickEventHandler {
 			}
 		}
 		e.setCanceled(cancel);
+	}
+	
+	@SubscribeEvent
+	public void bucketFill(FillBucketEvent evt) {
+		if (evt.current.getItem() == Items.bucket && evt.target.typeOfHit == MovingObjectType.BLOCK) {
+			int hitX = evt.target.blockX;
+			int hitY = evt.target.blockY;
+			int hitZ = evt.target.blockZ;
+
+			if (evt.entityPlayer != null && !evt.entityPlayer.canPlayerEdit(hitX, hitY, hitZ, evt.target.sideHit, evt.current)) {
+				return;
+			}
+
+			Block bID = evt.world.getBlock(hitX, hitY, hitZ);
+				if (bID == MMBlocks.blockLiquidMagick) {
+					if (evt.entityPlayer.capabilities.isCreativeMode) {
+						evt.world.setBlockToAir(hitX, hitY, hitZ);
+					} else {
+						evt.world.setBlockToAir(hitX, hitY, hitZ);
+
+						evt.setResult(Result.ALLOW);
+						evt.result = new ItemStack(MMItems.bucketMagickLiquid);
+					}
+				}
+		}
 	}
 }

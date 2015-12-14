@@ -4,25 +4,34 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import getfluxed.minemagicka.items.MMItems;
 import getfluxed.minemagicka.liquids.MMLiquids;
 import getfluxed.minemagicka.reference.Reference;
+import getfluxed.minemagicka.tileentities.TileEntityMagickInfuser;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFurnace;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
 
 public class MMBlocks {
-	public static Block magickInfused = new BlockMagickInfused();
 	public static Block blockLiquidMagick = new BlockLiquidMagick();
 	public static Block magickInfuser = new BlockMagickInfuser();
+	public static Block bricksEmbrane = new BlockEmbraneBricks();
 
 	public static void preInit() {
 		registerBlock(blockLiquidMagick, "blockLiquidMagick", "liquidMagick");
-		registerBlock(magickInfuser, "magickInfuser", "magickInfuser");
-		
-
+		registerBlock(magickInfuser, "magickInfuser", "magickInfuser", TileEntityMagickInfuser.class);
+		registerBlock(bricksEmbrane, "embraneBricks", "bricksEmbrane", "bricks");
 	}
 
 	private static void registerBlock(Block block, String name, String key) {
 		block.setBlockName(name).setBlockTextureName(Reference.modid + ":" + key).setCreativeTab(MMItems.tab);
 		GameRegistry.registerBlock(block, key);
+	}
+
+	private static void registerBlock(Block block, String name, String key, Class tile) {
+		block.setBlockName(name).setBlockTextureName(Reference.modid + ":" + key).setCreativeTab(MMItems.tab);
+		GameRegistry.registerBlock(block, key);
+		GameRegistry.registerTileEntity(tile, key);
 	}
 
 	@SuppressWarnings("unused")

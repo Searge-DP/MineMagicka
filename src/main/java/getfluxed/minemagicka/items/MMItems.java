@@ -13,12 +13,13 @@ public class MMItems {
 	public static CreativeTabs tab = new CreativeTabMM();;
 
 	public static Item staff = new ItemStaff();
-	public static ItemFluidBucket bucketMagickLiquid = new ItemFluidBucket((BlockFluidBase) MMBlocks.blockLiquidMagick);
+	public static Item bucketMagickLiquid = new ItemFluidBucket((BlockFluidBase) MMBlocks.blockLiquidMagick);
+	public static Item ingotEmbrane = new ItemIngot();
 
 	public static void preInit() {
+		registerItem(bucketMagickLiquid, "bucketMagickLiquid", "bucketmagickliquid", "bucketmagickliquid");
+		registerItem(ingotEmbrane, "embraneIngot", "embrane_ingot");
 		registerItemNoTexture(staff, "staff", "staff");
-		registerItem(bucketMagickLiquid, "bucketMagickLiquid", "bucketMagickLiquid");
-
 	}
 
 	public static void registerItem(Item item, String name, String key) {

@@ -11,14 +11,13 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityMagickInfuser extends TileEntityInventory {
 
-	public int infuserTimer = 0;
+	public int infuserTimer = 40;
 	public int infuserTimerMax = 40;
 	public int currentMagick = 0;
 	public int maxMagick = 8000;
 
 	public TileEntityMagickInfuser() {
 		super(2);
-		infuserTimer = 40;
 	}
 
 	@Override
@@ -45,7 +44,7 @@ public class TileEntityMagickInfuser extends TileEntityInventory {
 						}
 					}
 				} else {
-					infuserTimer = 0;
+					infuserTimer = 40;
 				}
 			}
 
@@ -62,7 +61,6 @@ public class TileEntityMagickInfuser extends TileEntityInventory {
 				getStackInSlot(i).stackSize += itemstack.stackSize;
 			}
 			if (getStackInSlot(i).stackSize > getInventoryStackLimit()) {
-				// getStackInSlot(i).stackSize = getInventoryStackLimit();
 				return false;
 			}
 		} else {
@@ -81,11 +79,17 @@ public class TileEntityMagickInfuser extends TileEntityInventory {
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
+		readInventoryFromNBT(nbt);
+		this.infuserTimer = nbt.getInteger("infuseTimer");
+		this.currentMagick = nbt.getInteger("currentMagick");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
+		writeInventoryToNBT(tag);
+		tag.setInteger("infuseTimer", infuserTimer);
+		tag.setInteger("currentMagick", currentMagick);
 	}
 
 	@Override

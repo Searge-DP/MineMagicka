@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 public class CreativeTabMM extends CreativeTabs{
 
 	public CreativeTabMM() {
-		super("mmc.tab.name");
+		super("mm.tab.name");
 	}
 
 	@Override
