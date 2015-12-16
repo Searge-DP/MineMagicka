@@ -15,11 +15,15 @@ public class MMItems {
 	public static Item staff = new ItemStaff();
 	public static Item bucketMagickLiquid = new ItemFluidBucket((BlockFluidBase) MMBlocks.blockLiquidMagick);
 	public static Item ingotEmbrane = new ItemIngot();
+	public static Item bookMagick= new ItemMagickBook();
 
+	
 	public static void preInit() {
 		registerItem(bucketMagickLiquid, "bucketMagickLiquid", "bucketmagickliquid", "bucketmagickliquid");
+		registerItem(bookMagick, "bookMagick", "bookMagick", "magick_book");
 		registerItem(ingotEmbrane, "embraneIngot", "embrane_ingot");
 		registerItemNoTexture(staff, "staff", "staff");
+		
 	}
 
 	public static void registerItem(Item item, String name, String key) {
