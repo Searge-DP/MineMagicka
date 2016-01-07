@@ -1,5 +1,8 @@
 package getfluxed.minemagicka.api.compendium;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 /**
  * @author WireSegal
  *         <p/>
@@ -15,6 +18,7 @@ public interface ICompendiumPage {
      * @param mx  - The mouse's relative X position.
      * @param my  - The mouse's relative Y position.
      */
+    @SideOnly(Side.CLIENT)
     void renderPage(IGuiCompendium gui, int mx, int my);
 
     /**
@@ -22,6 +26,7 @@ public interface ICompendiumPage {
      *
      * @param gui - The active GuiScreen.
      */
+    @SideOnly(Side.CLIENT)
     void onTick(IGuiCompendium gui);
 
     /**
@@ -29,6 +34,7 @@ public interface ICompendiumPage {
      *
      * @param gui - The active GuiScreen.
      */
+    @SideOnly(Side.CLIENT)
     void onOpened(IGuiCompendium gui);
 
     /**
@@ -36,6 +42,7 @@ public interface ICompendiumPage {
      *
      * @param gui - The active GuiScreen.
      */
+    @SideOnly(Side.CLIENT)
     void onClosed(IGuiCompendium gui);
 
     /**

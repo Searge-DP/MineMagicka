@@ -7,7 +7,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiBookMagick extends GuiScreen {
+public class GuiBookMagick extends GuiScreen { // TODO: 1/6/16 Implement getfluxed.minemagicka.api.compendium.IGuiCompendium 
 	int guiWidth = 256;
 	int guiHeight = 256;
 	int left, top;

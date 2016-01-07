@@ -1,5 +1,7 @@
 package getfluxed.minemagicka.api.compendium;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
@@ -13,9 +15,16 @@ import java.util.List;
  */
 public interface ICompendiumEntry {
     /**
-     * @return Every page to be returned.
+     * @return Every page in the entry.
      */
     List<ICompendiumPage> getPages();
+
+    /**
+     * Get a page by its index.
+     * @param index - The index to search for.
+     * @return The found page.
+     */
+    ICompendiumPage getPage(int index);
 
     /**
      * @return Every requirement for the page to be displayed. Returns an empty list if unlocked by default.
@@ -45,5 +54,6 @@ public interface ICompendiumEntry {
     /**
      * @return The itemstack that will be used as the entry icon.
      */
+    @SideOnly(Side.CLIENT)
     ItemStack getIcon();
 }
