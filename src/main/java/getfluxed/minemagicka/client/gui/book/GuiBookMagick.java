@@ -1,5 +1,7 @@
 package getfluxed.minemagicka.client.gui.book;
 
+import java.util.List;
+
 import getfluxed.minemagicka.reference.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -7,7 +9,8 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiBookMagick extends GuiScreen { // TODO: 1/6/16 Implement getfluxed.minemagicka.api.compendium.IGuiCompendium 
+public class GuiBookMagick extends GuiScreen { // TODO: 1/6/16 Implement
+                                               // getfluxed.minemagicka.api.compendium.IGuiCompendium
     public static ResourceLocation texture = new ResourceLocation(Reference.modid, "textures/gui/guiBookMagick.png");
     public static ResourceLocation other = new ResourceLocation(Reference.modid, "textures/gui/guiBookOther.png");
     int guiWidth = 256;
@@ -16,7 +19,7 @@ public class GuiBookMagick extends GuiScreen { // TODO: 1/6/16 Implement getflux
     int middleX = (guiWidth / 2) - guiWidth;
     int middleY = (guiHeight / 2) - guiHeight;
 
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({ "unchecked" })
     @Override
     public void initGui() {
         this.guiWidth = 256;
@@ -52,6 +55,7 @@ public class GuiBookMagick extends GuiScreen { // TODO: 1/6/16 Implement getflux
                 }
             }
         });
+
     }
 
     @Override
@@ -78,6 +82,10 @@ public class GuiBookMagick extends GuiScreen { // TODO: 1/6/16 Implement getflux
     public void drawCenteredString(FontRenderer p_73732_1_, String p_73732_2_, int p_73732_3_, int p_73732_4_, int p_73732_5_) {
         p_73732_1_.drawString(p_73732_2_, p_73732_3_ - p_73732_1_.getStringWidth(p_73732_2_) / 2, p_73732_4_, p_73732_5_);
 
+    }
+
+    public List<GuiButton> getButtonList() {
+        return buttonList;
     }
 
 }

@@ -1,6 +1,8 @@
 package getfluxed.minemagicka.api.recipes;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 
 public class RecipeMagickInfusion {
 
@@ -16,6 +18,12 @@ public class RecipeMagickInfusion {
 
     public boolean canInfuse(ItemStack input, int currentLiquid) {
         return currentLiquid >= getLiquidUsed() && input.isItemEqual(getInput());
+    }
+    /*
+     * Called after the item has been crafted, use it to add nbt
+     */
+    public ItemStack onCraft(World world, ItemStack output, BlockPos pos){
+        return output;
     }
 
     public ItemStack getInput() {

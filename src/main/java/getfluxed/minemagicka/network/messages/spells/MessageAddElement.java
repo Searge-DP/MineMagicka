@@ -1,15 +1,15 @@
 package getfluxed.minemagicka.network.messages.spells;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.handlers.SpellHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageAddElement implements IMessage, IMessageHandler<MessageAddElement, IMessage> {
     private String element;

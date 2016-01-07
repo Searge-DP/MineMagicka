@@ -1,14 +1,11 @@
 package getfluxed.minemagicka.proxy;
 
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import getfluxed.minemagicka.client.render.RenderBall;
-import getfluxed.minemagicka.client.render.items.RenderItemTransparent;
 import getfluxed.minemagicka.entities.spells.base.EntityBall;
-import getfluxed.minemagicka.items.MMItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy implements IProxy {
 
@@ -24,8 +21,7 @@ public class ClientProxy implements IProxy {
 
     @Override
     public void registerRenderers() {
-        RenderingRegistry.registerEntityRenderingHandler(EntityBall.class, new RenderBall());
-        MinecraftForgeClient.registerItemRenderer(MMItems.bookMagick, new RenderItemTransparent());
+        RenderingRegistry.registerEntityRenderingHandler(EntityBall.class, new RenderBall(Minecraft.getMinecraft().getRenderManager()));
     }
 
 }

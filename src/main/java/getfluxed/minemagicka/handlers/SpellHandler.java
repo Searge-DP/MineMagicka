@@ -11,19 +11,19 @@ public class SpellHandler {
         ElementList currentElements = getElements(stack);
         currentElements.add(element, 1);
 
-        NBTTagCompound nbt = stack.stackTagCompound.getCompoundTag("MMTag");
+        NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("MMTag");
         currentElements.writeToNBT(nbt);
-        stack.stackTagCompound.setTag("MMTag", nbt);
+        stack.getTagCompound().setTag("MMTag", nbt);
     }
 
     public static ElementList getElements(ItemStack stack) {
-        NBTTagCompound nbt = stack.stackTagCompound.getCompoundTag("MMTag");
+        NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("MMTag");
         return (new ElementList()).readFromNBT(nbt);
     }
 
     public static void clearElements(ItemStack stack) {
-        NBTTagCompound nbt = stack.stackTagCompound.getCompoundTag("MMTag");
+        NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("MMTag");
         new ElementList().writeToNBT(nbt);
-        stack.stackTagCompound.setTag("MMTag", nbt);
+        stack.getTagCompound().setTag("MMTag", nbt);
     }
 }

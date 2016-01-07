@@ -1,10 +1,10 @@
 package getfluxed.minemagicka.api.compendium;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.gui.GuiButton;
-
 import java.util.List;
+
+import net.minecraft.client.gui.GuiButton;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * @author WireSegal

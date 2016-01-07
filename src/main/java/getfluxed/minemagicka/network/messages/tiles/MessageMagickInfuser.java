@@ -1,20 +1,19 @@
 package getfluxed.minemagicka.network.messages.tiles;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import getfluxed.minemagicka.tileentities.TileEntityMagickInfuser;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageMagickInfuser implements IMessage, IMessageHandler<MessageMagickInfuser, IMessage> {
 
-    private int x;
-    private int y;
-    private int z;
+    private BlockPos pos;
     private int infuserTime;
     private int infuserTimeMax;
     private int magick;
@@ -27,9 +26,7 @@ public class MessageMagickInfuser implements IMessage, IMessageHandler<MessageMa
 
     public MessageMagickInfuser(TileEntityMagickInfuser tile) {
 
-        this.x = tile.xCoord;
-        this.y = tile.yCoord;
-        this.z = tile.zCoord;
+        this.pos = tile.getPos();
         this.infuserTime = tile.infuserTimer;
         this.infuserTimeMax = tile.infuserTimerMax;
         this.magick = tile.currentMagick;
@@ -39,25 +36,20 @@ public class MessageMagickInfuser implements IMessage, IMessageHandler<MessageMa
 
     @Override
     public void fromBytes(ByteBuf buf) {
-
-        this.x = buf.readInt();
-        this.y = buf.readInt();
-        this.z = buf.readInt();
-
+        this.pos = new BlockPos(buf.readInt(), buf.readInt(), buf.readInt());
         this.infuserTime = buf.readInt();
         this.infuserTimeMax = buf.readInt();
         this.magick = buf.readInt();
         this.input = ByteBufUtils.readItemStack(buf);
         this.output = ByteBufUtils.readItemStack(buf);
-
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
 
-        buf.writeInt(this.x);
-        buf.writeInt(this.y);
-        buf.writeInt(this.z);
+        buf.writeInt(pos.getX());
+        buf.writeInt(pos.getY());
+        buf.writeInt(pos.getZ());
 
         buf.writeInt(infuserTime);
         buf.writeInt(infuserTimeMax);
@@ -70,7 +62,7 @@ public class MessageMagickInfuser implements IMessage, IMessageHandler<MessageMa
     @Override
     public IMessage onMessage(MessageMagickInfuser message, MessageContext ctx) {
 
-        TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
+        TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.pos);
 
         if (tileEntity instanceof TileEntityMagickInfuser) {
 

@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "minemagicka:magickInfuserOn" },
+        "facing=south": { "model": "minemagicka:magickInfuserOn", "y": 180 },
+        "facing=west":  { "model": "minemagicka:magickInfuserOn", "y": 270 },
+        "facing=east":  { "model": "minemagicka:magickInfuserOn", "y": 90 }
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "minemagicka:blocks/bricksEmbrane",
+        "front": "minemagicka:blocks/infuser_front_on",
+        "side": "minemagicka:blocks/bricksEmbrane"
+    }
+}
