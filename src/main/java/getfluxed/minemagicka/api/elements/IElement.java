@@ -34,6 +34,13 @@ public interface IElement {
     public ResourceLocation getTexture();
 
     /**
+     * Gets the glColor of the element.
+     *
+     * @return The color in 0xrrggbb form.
+     */
+    public int getColor();
+
+    /**
      * Is this a primary element? (Does a player need to combine elements to
      * create
      *

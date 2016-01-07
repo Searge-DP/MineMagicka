@@ -31,6 +31,11 @@ public class ElementArcane extends ElementBase {
     public ResourceLocation getTexture() {
         return new ResourceLocation(Reference.modid, "textures/gui/elements/arcane.png");
     }
+    
+    @Override
+    public int getColor() {
+        return 0xFFFFFF; // TODO: 1/7/16 Use colorization instead of texture colors 
+    }
 
     @Override
     public boolean isPrimary() {

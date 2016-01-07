@@ -33,6 +33,11 @@ public class ElementLife extends ElementBase {
     }
 
     @Override
+    public int getColor() {
+        return 0xFFFFFF; // TODO: 1/7/16 Use colorization instead of texture colors
+    }
+
+    @Override
     public boolean isPrimary() {
         return true;
     }

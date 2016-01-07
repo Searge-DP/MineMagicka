@@ -106,14 +106,13 @@ public class MagickEventHandler {
                         elY += 24;
                     }
                 }
-                for (IElement el : SpellHandler.getElements(staffStack).getModifierElements()) {
+                for (IElement el : SpellHandler.getElements(staffStack).getElements()) {
                     el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
                     if (xCount > 3) {
                         xCount = 0;
                         elY += 24;
                     }
                 }
-
                 GL11.glPopMatrix();
                 GL11.glDisable(GL11.GL_BLEND);
             }
