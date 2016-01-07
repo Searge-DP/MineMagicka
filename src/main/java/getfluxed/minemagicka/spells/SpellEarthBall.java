@@ -1,7 +1,6 @@
 package getfluxed.minemagicka.spells;
 
 import getfluxed.minemagicka.api.elements.ElementList;
-import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.api.spells.SpellBall;
 import getfluxed.minemagicka.entities.spells.base.EntityBall;
 import getfluxed.minemagicka.reference.ElementReference;
@@ -9,9 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class SpellEarthBall extends SpellBall {
 

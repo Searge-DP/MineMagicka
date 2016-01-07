@@ -5,8 +5,6 @@ import getfluxed.minemagicka.api.elements.IElement;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-import java.util.List;
-
 public class CastingInformation {
 
     public ElementList elements;

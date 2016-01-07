@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 public class MessageCastSpell implements IMessage, IMessageHandler<MessageCastSpell, IMessage> {
     private String spell;
     private double x, y, z;
+
     public MessageCastSpell() {
     }
 

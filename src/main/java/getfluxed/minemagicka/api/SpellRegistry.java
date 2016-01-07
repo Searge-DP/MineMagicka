@@ -1,10 +1,10 @@
 package getfluxed.minemagicka.api;
 
 import getfluxed.minemagicka.api.elements.ElementList;
-import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.api.spells.ISpell;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SpellRegistry {
 

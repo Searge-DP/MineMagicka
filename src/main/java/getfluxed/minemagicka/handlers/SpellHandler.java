@@ -1,15 +1,9 @@
 package getfluxed.minemagicka.handlers;
 
-import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.elements.IElement;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
-import net.minecraftforge.common.util.Constants.NBT;
-
-import java.util.LinkedList;
 
 public class SpellHandler {
 
