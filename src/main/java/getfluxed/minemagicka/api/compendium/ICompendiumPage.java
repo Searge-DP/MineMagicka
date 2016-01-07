@@ -5,7 +5,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * @author WireSegal
- *         <p/>
  *         Created at 7:05 PM on 1/6/16.
  *         <p/>
  *         Defines the interface a Compendium Page must have.

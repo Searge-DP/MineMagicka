@@ -4,7 +4,6 @@ import java.util.List;
 
 /**
  * @author WireSegal
- *         <p/>
  *         Created at 7:08 PM on 1/6/16.
  *         <p/>
  *         Defines the interface for a Compendium item.

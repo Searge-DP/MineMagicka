@@ -8,7 +8,6 @@ import java.util.List;
 
 /**
  * @author WireSegal
- *         <p/>
  *         Created at 7:16 PM on 1/6/16.
  *         <p/>
  *         An interface for the Compendium GUI. It's safe to cast this type to GuiScreen.
