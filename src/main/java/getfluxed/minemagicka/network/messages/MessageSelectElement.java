@@ -9,36 +9,36 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public class MessageSelectElement implements IMessage, IMessageHandler<MessageSelectElement, IMessage> {
-	public MessageSelectElement() {
-	}
+    private int selectedID;
 
-	private int selectedID;
+    public MessageSelectElement() {
+    }
 
-	public MessageSelectElement(int selectedID) {
-		this.selectedID = selectedID;
-	}
+    public MessageSelectElement(int selectedID) {
+        this.selectedID = selectedID;
+    }
 
-	@Override
-	public void toBytes(ByteBuf buf) {
-		buf.writeInt(selectedID);
-	}
+    @Override
+    public void toBytes(ByteBuf buf) {
+        buf.writeInt(selectedID);
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buf) {
-		this.selectedID = buf.readInt();
-	}
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        this.selectedID = buf.readInt();
+    }
 
-	@Override
-	public IMessage onMessage(MessageSelectElement message, MessageContext ctx) {
-		EntityPlayer entity = ctx.getServerHandler().playerEntity;
-		if (entity != null) {
-			ItemStack stack = entity.inventory.getCurrentItem();
-			if (stack != null) {
-				NBTHelper.initNBTTagCompound(stack);
-				NBTHelper.setInteger(stack, "MMSelectedElement", message.selectedID);
-			}
-		}
+    @Override
+    public IMessage onMessage(MessageSelectElement message, MessageContext ctx) {
+        EntityPlayer entity = ctx.getServerHandler().playerEntity;
+        if (entity != null) {
+            ItemStack stack = entity.inventory.getCurrentItem();
+            if (stack != null) {
+                NBTHelper.initNBTTagCompound(stack);
+                NBTHelper.setInteger(stack, "MMSelectedElement", message.selectedID);
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

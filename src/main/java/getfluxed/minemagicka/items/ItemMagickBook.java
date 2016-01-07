@@ -9,11 +9,11 @@ import net.minecraft.world.World;
 
 public class ItemMagickBook extends Item {
 
-	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (world.isRemote) {
-			Minecraft.getMinecraft().displayGuiScreen(new GuiBookMagick());
-		}
-		return stack;
-	}
+    @Override
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        if (world.isRemote) {
+            Minecraft.getMinecraft().displayGuiScreen(new GuiBookMagick());
+        }
+        return stack;
+    }
 }

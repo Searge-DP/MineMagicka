@@ -7,13 +7,13 @@ import getfluxed.minemagicka.spells.SpellFireBall;
 
 public class SpellReference {
 
-	public static ISpell fireball = new SpellFireBall();
-	public static ISpell earthball = new SpellEarthBall();
+    public static ISpell fireball = new SpellFireBall();
+    public static ISpell earthball = new SpellEarthBall();
 
-	public static void preInit(){
-		SpellRegistry.registerElement(fireball);
-		SpellRegistry.registerElement(earthball);
-		
-	}
+    public static void preInit() {
+        SpellRegistry.registerElement(fireball);
+        SpellRegistry.registerElement(earthball);
+
+    }
 
 }

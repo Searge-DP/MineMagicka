@@ -4,7 +4,6 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import fluxedCore.util.NBTHelper;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.handlers.SpellHandler;
@@ -13,34 +12,34 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public class MessageAddElement implements IMessage, IMessageHandler<MessageAddElement, IMessage> {
-	public MessageAddElement() {
-	}
+    private String element;
 
-	private String element;
+    public MessageAddElement() {
+    }
 
-	public MessageAddElement(IElement element) {
-		this.element = element.getUnlocalizedName();
-	}
+    public MessageAddElement(IElement element) {
+        this.element = element.getUnlocalizedName();
+    }
 
-	@Override
-	public void toBytes(ByteBuf buf) {
-		ByteBufUtils.writeUTF8String(buf, element);
-	}
+    @Override
+    public void toBytes(ByteBuf buf) {
+        ByteBufUtils.writeUTF8String(buf, element);
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buf) {
-		this.element = ByteBufUtils.readUTF8String(buf);
-	}
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        this.element = ByteBufUtils.readUTF8String(buf);
+    }
 
-	@Override
-	public IMessage onMessage(MessageAddElement message, MessageContext ctx) {
-		EntityPlayer entity = ctx.getServerHandler().playerEntity;
-		if (entity != null) {
-			ItemStack stack = entity.inventory.getCurrentItem();
-			if (stack != null)
-				SpellHandler.addElement(stack, ElementRegistry.getElementFromName(message.element));
-		}
+    @Override
+    public IMessage onMessage(MessageAddElement message, MessageContext ctx) {
+        EntityPlayer entity = ctx.getServerHandler().playerEntity;
+        if (entity != null) {
+            ItemStack stack = entity.inventory.getCurrentItem();
+            if (stack != null)
+                SpellHandler.addElement(stack, ElementRegistry.getElementFromName(message.element));
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

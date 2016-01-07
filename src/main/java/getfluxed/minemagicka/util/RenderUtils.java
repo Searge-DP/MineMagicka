@@ -1,9 +1,9 @@
 package getfluxed.minemagicka.util;
 
 public class RenderUtils {
-	
-	public static void renderElement(){
-		
-	}
+
+    public static void renderElement() {
+
+    }
 
 }

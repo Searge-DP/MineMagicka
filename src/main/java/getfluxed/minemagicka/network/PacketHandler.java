@@ -11,16 +11,16 @@ import getfluxed.minemagicka.reference.Reference;
 
 public class PacketHandler {
 
-	public static SimpleNetworkWrapper INSTANCE = new SimpleNetworkWrapper(Reference.modid);
-	public static int ID = 0;
+    public static SimpleNetworkWrapper INSTANCE = new SimpleNetworkWrapper(Reference.modid);
+    public static int ID = 0;
 
-	public static void preInit() {
-		INSTANCE.registerMessage(MessageSelectElement.class, MessageSelectElement.class, ID++, Side.SERVER);
-		INSTANCE.registerMessage(MessageAddElement.class, MessageAddElement.class, ID++, Side.SERVER);
-		INSTANCE.registerMessage(MessageCastSpell.class, MessageCastSpell.class, ID++, Side.SERVER);
-		INSTANCE.registerMessage(MessageClearElements.class, MessageClearElements.class, ID++, Side.SERVER);
-		INSTANCE.registerMessage(MessageMagickInfuser.class, MessageMagickInfuser.class, ID++, Side.CLIENT);
-		
-	}
+    public static void preInit() {
+        INSTANCE.registerMessage(MessageSelectElement.class, MessageSelectElement.class, ID++, Side.SERVER);
+        INSTANCE.registerMessage(MessageAddElement.class, MessageAddElement.class, ID++, Side.SERVER);
+        INSTANCE.registerMessage(MessageCastSpell.class, MessageCastSpell.class, ID++, Side.SERVER);
+        INSTANCE.registerMessage(MessageClearElements.class, MessageClearElements.class, ID++, Side.SERVER);
+        INSTANCE.registerMessage(MessageMagickInfuser.class, MessageMagickInfuser.class, ID++, Side.CLIENT);
+
+    }
 
 }

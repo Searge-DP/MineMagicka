@@ -9,26 +9,26 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public class MessageClearElements implements IMessage, IMessageHandler<MessageClearElements, IMessage> {
-	public MessageClearElements() {
-	}
+    public MessageClearElements() {
+    }
 
-	@Override
-	public void toBytes(ByteBuf buf) {
-	}
+    @Override
+    public void toBytes(ByteBuf buf) {
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buf) {
-	}
+    @Override
+    public void fromBytes(ByteBuf buf) {
+    }
 
-	@Override
-	public IMessage onMessage(MessageClearElements message, MessageContext ctx) {
-		EntityPlayer entity = ctx.getServerHandler().playerEntity;
-		if (entity != null) {
-			ItemStack stack = entity.inventory.getCurrentItem();
-			if (stack != null)
-				SpellHandler.clearElements(stack);
-		}
+    @Override
+    public IMessage onMessage(MessageClearElements message, MessageContext ctx) {
+        EntityPlayer entity = ctx.getServerHandler().playerEntity;
+        if (entity != null) {
+            ItemStack stack = entity.inventory.getCurrentItem();
+            if (stack != null)
+                SpellHandler.clearElements(stack);
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

@@ -4,15 +4,15 @@ import getfluxed.minemagicka.items.MMItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class CreativeTabMM extends CreativeTabs{
+public class CreativeTabMM extends CreativeTabs {
 
-	public CreativeTabMM() {
-		super("mm.tab.name");
-	}
+    public CreativeTabMM() {
+        super("mm.tab.name");
+    }
 
-	@Override
-	public Item getTabIconItem() {
-		return MMItems.staff;
-	}
+    @Override
+    public Item getTabIconItem() {
+        return MMItems.staff;
+    }
 
 }

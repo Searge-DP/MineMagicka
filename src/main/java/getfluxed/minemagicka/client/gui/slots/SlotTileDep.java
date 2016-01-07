@@ -6,18 +6,19 @@ import net.minecraft.item.ItemStack;
 
 public class SlotTileDep extends Slot {
 
-	private int slotMax;
-	public SlotTileDep(IInventory inventory, int number, int x, int y) {
-		super(inventory, number, x, y);
-		this.slotMax = inventory.getInventoryStackLimit();
-	}
+    private int slotMax;
 
-	public int getSlotStackLimit() {
-		return slotMax;
-	}
+    public SlotTileDep(IInventory inventory, int number, int x, int y) {
+        super(inventory, number, x, y);
+        this.slotMax = inventory.getInventoryStackLimit();
+    }
 
-	public boolean isItemValid(ItemStack stack) {
-		return inventory.isItemValidForSlot(this.slotNumber, stack);
-	}
-	
+    public int getSlotStackLimit() {
+        return slotMax;
+    }
+
+    public boolean isItemValid(ItemStack stack) {
+        return inventory.isItemValidForSlot(this.slotNumber, stack);
+    }
+
 }

@@ -20,6 +20,7 @@ public interface ICompendiumEntry {
 
     /**
      * Get a page by its index.
+     *
      * @param index - The index to search for.
      * @return The found page.
      */

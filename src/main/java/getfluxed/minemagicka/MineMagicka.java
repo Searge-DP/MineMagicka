@@ -1,9 +1,5 @@
 package getfluxed.minemagicka;
 
-import static getfluxed.minemagicka.reference.Reference.modid;
-import static getfluxed.minemagicka.reference.Reference.name;
-import static getfluxed.minemagicka.reference.Reference.version;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -28,43 +24,45 @@ import getfluxed.minemagicka.reference.SpellReference;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import static getfluxed.minemagicka.reference.Reference.*;
+
 @Mod(modid = modid, name = name, version = version)
 public class MineMagicka {
 
-	@SidedProxy(clientSide = "getfluxed.minemagicka.proxy.ClientProxy", serverSide = "getfluxed.minemagicka.proxy.ServerProxy")
-	public static IProxy proxy;
+    @SidedProxy(clientSide = "getfluxed.minemagicka.proxy.ClientProxy", serverSide = "getfluxed.minemagicka.proxy.ServerProxy")
+    public static IProxy proxy;
 
-	@Instance
-	public static MineMagicka INSTANCE;
+    @Instance
+    public static MineMagicka INSTANCE;
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent e) {
-		MMLiquids.preInit();
-		MMBlocks.preInit();
-		MMItems.preInit();
-		RecipeRegistry.registerMagickInfusionRecipe(new RecipeMagickInfusion(new ItemStack(Items.stick), new ItemStack(Items.diamond), 500));
-		ElementReference.preInit();
-		SpellReference.preInit();
-		BuffReference.preInit();
-		PacketHandler.preInit();
-		
-		
-		new GUIHandler();
-		EntityRegistry.registerModEntity(EntityBall.class, "ball", 0, INSTANCE, 30, 30, true);
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent e) {
+        MMLiquids.preInit();
+        MMBlocks.preInit();
+        MMItems.preInit();
+        RecipeRegistry.registerMagickInfusionRecipe(new RecipeMagickInfusion(new ItemStack(Items.stick), new ItemStack(Items.diamond), 500));
+        ElementReference.preInit();
+        SpellReference.preInit();
+        BuffReference.preInit();
+        PacketHandler.preInit();
 
-		proxy.registerRenderers();
-		new MagickEventHandler();
 
-	}
+        new GUIHandler();
+        EntityRegistry.registerModEntity(EntityBall.class, "ball", 0, INSTANCE, 30, 30, true);
 
-	@EventHandler
-	public void init(FMLInitializationEvent e) {
+        proxy.registerRenderers();
+        new MagickEventHandler();
 
-	}
+    }
 
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent e) {
+    @EventHandler
+    public void init(FMLInitializationEvent e) {
 
-	}
+    }
+
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent e) {
+
+    }
 
 }
