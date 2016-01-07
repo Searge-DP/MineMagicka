@@ -21,6 +21,14 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
         return new ElementList().add(this);
     }
 
+    public int size() {
+        return elements.size();
+    }
+
+    public int modifierSize() {
+        return modifiers.size();
+    }
+
     public IElement[] getElements() {
         IElement[] q = new IElement[1];
         return (IElement[]) this.elements.keySet().toArray(q);
@@ -171,6 +179,19 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
         return this;
     }
 
+    public boolean spellMatches(ElementList spellList) {
+        int elementsFound = 0;
+        for (IElement el : this.getElements()) {
+            if (spellList.getAmount(el) > 0)
+                elementsFound++;
+            if (this.getAmount(el) != spellList.getAmount(el))
+                return false;
+        }
+        if (elementsFound != spellList.size())
+            return false;
+        return true;
+    }
+
     public void readFromNBT(NBTTagCompound nbttagcompound) {
         readFromNBT(nbttagcompound, "elements");
     }
@@ -199,7 +220,6 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
 
     public void writeToNBT(NBTTagCompound nbttagcompound) {
         writeToNBT(nbttagcompound, "elements");
-
     }
 
     public void writeToNBT(NBTTagCompound nbttagcompound, String label) {
