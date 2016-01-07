@@ -3,6 +3,7 @@ package getfluxed.minemagicka.reference;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.elements.*;
+import getfluxed.minemagicka.handlers.SpellHandler;
 
 public class ElementReference {
 

@@ -18,6 +18,7 @@ import getfluxed.minemagicka.network.messages.spells.MessageAddElement;
 import getfluxed.minemagicka.network.messages.spells.MessageCastSpell;
 import getfluxed.minemagicka.network.messages.spells.MessageClearElements;
 import getfluxed.minemagicka.reference.Reference;
+import getfluxed.minemagicka.util.SpellHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -84,7 +85,7 @@ public class MagickEventHandler {
                 Minecraft.getMinecraft().ingameGUI.drawTexturedModalRect(selEmX, selEmY, 0, 24, 24, 24);
                 GL11.glPopMatrix();
                 GL11.glPushMatrix();
-                int[] xCoords = new int[]{0, 24, 48, 72};
+                int[] xCoords = new int[] { 0, 24, 48, 72 };
                 int xCount = 0;
                 int elY = 0;
                 for (int i = 0; i < ElementRegistry.getElements().size(); i++) {
@@ -99,18 +100,24 @@ public class MagickEventHandler {
                 if (spell != null) {
                     Minecraft.getMinecraft().ingameGUI.drawString(Minecraft.getMinecraft().fontRendererObj, spell.getName(), 6, elY + 28, 0xFFFFFF);
                 }
-                for (IElement el : SpellHandler.getElements(staffStack).getElements()) {
-                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
-                    if (xCount > 3) {
-                        xCount = 0;
-                        elY += 24;
+                // System.out.println(SpellHandler.getElements(staffStack));
+//                System.out.println(SpellHandler.getElements(staffStack).getElements().length);
+//                System.out.println(SpellHandler.getElements(staffStack).size());
+
+                if (SpellHandler.getElements(staffStack).size() > 0) {
+                    for (IElement el : SpellHandler.getElements(staffStack).getElements()) {
+                        el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
+                        if (xCount > 3) {
+                            xCount = 0;
+                            elY += 24;
+                        }
                     }
-                }
-                for (IElement el : SpellHandler.getElements(staffStack).getElements()) {
-                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
-                    if (xCount > 3) {
-                        xCount = 0;
-                        elY += 24;
+                    for (IElement el : SpellHandler.getElements(staffStack).getElements()) {
+                        el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
+                        if (xCount > 3) {
+                            xCount = 0;
+                            elY += 24;
+                        }
                     }
                 }
                 GL11.glPopMatrix();
@@ -137,8 +144,10 @@ public class MagickEventHandler {
                     PacketHandler.INSTANCE.sendToServer(new MessageSelectElement(selectedElement));
                 }
                 if (e.button == 0 && e.buttonstate) {
+                    System.out.println(ElementRegistry.getElements().get(selectedElement));
                     SpellHandler.addElement(staffStack, ElementRegistry.getElements().get(selectedElement));
                     PacketHandler.INSTANCE.sendToServer(new MessageAddElement(ElementRegistry.getElements().get(selectedElement)));
+                    System.out.println(SpellHandler.getElements(staffStack).size());
                 } else if (e.button == 1 && e.buttonstate) {
                     SpellHandler.clearElements(staffStack);
                     PacketHandler.INSTANCE.sendToServer(new MessageClearElements());

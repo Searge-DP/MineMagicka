@@ -18,6 +18,7 @@ public class SpellHandler {
 
     public static ElementList getElements(ItemStack stack) {
         NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("MMTag");
+        System.out.println(nbt);
         return (new ElementList()).readFromNBT(nbt);
     }
 
