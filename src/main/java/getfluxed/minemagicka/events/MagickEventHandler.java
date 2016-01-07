@@ -97,8 +97,7 @@ public class MagickEventHandler {
                 if (spell != null) {
                     Minecraft.getMinecraft().ingameGUI.drawString(Minecraft.getMinecraft().fontRenderer, spell.getName(), 6, elY + 28, 0xFFFFFF);
                 }
-                for (int i = 0; i < SpellHandler.getElements(staffStack).size(); i++) {
-                    IElement el = SpellHandler.getElements(staffStack).get(i);
+                for (IElement el : SpellHandler.getElements(staffStack).getElements()) {
                     el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
                     if (xCount > 3) {
                         xCount = 0;
