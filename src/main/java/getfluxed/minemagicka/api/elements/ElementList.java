@@ -144,17 +144,10 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
     }
 
     public ElementList add(ElementList in) {
-        IElement[] arr = this.getElements();
-        IElement[] arr2 = this.getModifierElements();
-        int len = arr.length;
-        int len2 = arr2.length;
-
-        for (int i = 0; i < len; ++i) {
-            IElement a = arr[i];
+        for (IElement a : in.getElements()) {
             this.add(a, in.getAmount(a));
         }
-        for (int i = 0; i < len2; ++i) {
-            IElement a = arr2[i];
+        for (IElement a : in.getModifierElements()) {
             this.addModifier(a, in.getAmount(a));
         }
 
@@ -162,17 +155,10 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
     }
 
     public ElementList merge(ElementList in) {
-        IElement[] arr = this.getElements();
-        IElement[] arr2 = this.getModifierElements();
-        int len = arr.length;
-        int len2 = arr2.length;
-
-        for (int i = 0; i < len; ++i) {
-            IElement a = arr[i];
+        for (IElement a : in.getElements()) {
             this.merge(a, in.getAmount(a));
         }
-        for (int i = 0; i < len2; ++i) {
-            IElement a = arr2[i];
+        for (IElement a : in.getModifierElements()) {
             this.mergeModifier(a, in.getAmount(a));
         }
 
@@ -187,9 +173,7 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
             if (this.getAmount(el) != spellList.getAmount(el))
                 return false;
         }
-        if (elementsFound != spellList.size())
-            return false;
-        return true;
+        return elementsFound == spellList.size();
     }
 
     public ElementList readFromNBT(NBTTagCompound nbttagcompound) {
@@ -200,8 +184,12 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
         this.elements.clear();
         this.modifiers.clear();
         NBTTagCompound tcomp = nbttagcompound.getCompoundTag(label);
-        NBTTagList telem = tcomp.getTagList("elements", 10);
-        NBTTagList tmods = tcomp.getTagList("modifiers", 10);
+        NBTTagList telem = new NBTTagList();
+        NBTTagList tmods = new NBTTagList();
+        if (tcomp.hasKey("elements"))
+            telem = tcomp.getTagList("elements", 10);
+        if (tcomp.hasKey("modifiers"))
+            tmods = tcomp.getTagList("modifiers", 10);
 
         for (int j = 0; j < telem.tagCount(); ++j) {
             NBTTagCompound rs = telem.getCompoundTagAt(j);
@@ -224,19 +212,17 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
     }
 
     public ElementList writeToNBT(NBTTagCompound nbttagcompound, String label) {
+        return writeToNBT(nbttagcompound, label, true);
+    }
+
+    public ElementList writeToNBT(NBTTagCompound nbttagcompound, String label, boolean modifiers) {
         NBTTagCompound tcomp = new NBTTagCompound();
         NBTTagList telem = new NBTTagList();
         NBTTagList tmods = new NBTTagList();
         tcomp.setTag("elements", telem);
-        tcomp.setTag("modifiers", tmods);
+        if (modifiers) tcomp.setTag("modifiers", tmods);
 
-        IElement[] arr = this.getElements();
-        IElement[] arr2 = this.getModifierElements();
-        int len = arr.length;
-        int len2 = arr2.length;
-
-        for (int i = 0; i < len; ++i) {
-            IElement el = arr[i];
+        for (IElement el : this.getElements()) {
             if (el != null) {
                 NBTTagCompound f = new NBTTagCompound();
                 f.setString("key", el.getUnlocalizedName());
@@ -244,13 +230,14 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
                 telem.appendTag(f);
             }
         }
-        for (int i = 0; i < len2; ++i) {
-            IElement el = arr2[i];
-            if (el != null) {
-                NBTTagCompound f = new NBTTagCompound();
-                f.setString("key", el.getUnlocalizedName());
-                f.setInteger("amount", this.getAmount(el));
-                tmods.appendTag(f);
+        if (modifiers) {
+            for (IElement el : this.getModifierElements()) {
+                if (el != null) {
+                    NBTTagCompound f = new NBTTagCompound();
+                    f.setString("key", el.getUnlocalizedName());
+                    f.setInteger("amount", this.getAmount(el));
+                    tmods.appendTag(f);
+                }
             }
         }
 

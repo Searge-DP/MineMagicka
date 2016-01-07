@@ -23,7 +23,7 @@ public class SpellHandler {
 
     public static void clearElements(ItemStack stack) {
         NBTTagCompound nbt = stack.stackTagCompound.getCompoundTag("MMTag");
-        nbt.setTag("elements", new NBTTagCompound());
+        new ElementList().writeToNBT(nbt);
         stack.stackTagCompound.setTag("MMTag", nbt);
     }
 }
