@@ -1,6 +1,7 @@
 package getfluxed.minemagicka.handlers;
 
 import getfluxed.minemagicka.api.ElementRegistry;
+import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.elements.IElement;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,28 +14,22 @@ import java.util.LinkedList;
 public class SpellHandler {
 
     public static void addElement(ItemStack stack, IElement element) {
+        ElementList currentElements = getElements(stack);
+        currentElements.add(element, 1);
+
         NBTTagCompound nbt = stack.stackTagCompound.getCompoundTag("MMTag");
-        NBTTagList currentElements = nbt.getTagList("MMCurrentElements", NBT.TAG_STRING);
-        currentElements.appendTag(new NBTTagString(element.getUnlocalizedName()));
-        nbt.setTag("MMCurrentElements", currentElements);
+        currentElements.writeToNBT(nbt);
         stack.stackTagCompound.setTag("MMTag", nbt);
     }
 
-    public static LinkedList<IElement> getElements(ItemStack stack) {
-        LinkedList<IElement> elements = new LinkedList<IElement>();
+    public static ElementList getElements(ItemStack stack) {
         NBTTagCompound nbt = stack.stackTagCompound.getCompoundTag("MMTag");
-        NBTTagList currentElements = nbt.getTagList("MMCurrentElements", NBT.TAG_STRING);
-
-        for (int i = 0; i < currentElements.tagCount(); i++) {
-            IElement el = ElementRegistry.getElementFromName(currentElements.getStringTagAt(i));
-            elements.add(el);
-        }
-        return elements;
+        return (new ElementList()).readFromNBT(nbt);
     }
 
     public static void clearElements(ItemStack stack) {
         NBTTagCompound nbt = stack.stackTagCompound.getCompoundTag("MMTag");
-        nbt.setTag("MMCurrentElements", new NBTTagList());
+        nbt.setTag("elements", new NBTTagCompound());
         stack.stackTagCompound.setTag("MMTag", nbt);
     }
 }

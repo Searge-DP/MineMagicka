@@ -1,5 +1,6 @@
 package getfluxed.minemagicka.spells;
 
+import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.api.spells.SpellBall;
 import getfluxed.minemagicka.entities.spells.base.EntityBall;
@@ -25,8 +26,8 @@ public class SpellEarthBall extends SpellBall {
     }
 
     @Override
-    public List<IElement> getElements() {
-        return Arrays.asList(new IElement[]{ElementReference.earth});
+    public ElementList getElements() {
+        return (new ElementList()).add(ElementReference.earth, 1);
     }
 
     @Override

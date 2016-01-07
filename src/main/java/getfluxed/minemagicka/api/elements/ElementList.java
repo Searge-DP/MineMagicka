@@ -18,7 +18,7 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
     }
 
     public ElementList copy() {
-        return new ElementList().add(this);
+        return (new ElementList()).add(this);
     }
 
     public int size() {
@@ -192,11 +192,11 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
         return true;
     }
 
-    public void readFromNBT(NBTTagCompound nbttagcompound) {
-        readFromNBT(nbttagcompound, "elements");
+    public ElementList readFromNBT(NBTTagCompound nbttagcompound) {
+        return readFromNBT(nbttagcompound, "elements");
     }
 
-    public void readFromNBT(NBTTagCompound nbttagcompound, String label) {
+    public ElementList readFromNBT(NBTTagCompound nbttagcompound, String label) {
         this.elements.clear();
         this.modifiers.clear();
         NBTTagCompound tcomp = nbttagcompound.getCompoundTag(label);
@@ -216,13 +216,14 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
             }
         }
 
+        return this;
     }
 
-    public void writeToNBT(NBTTagCompound nbttagcompound) {
-        writeToNBT(nbttagcompound, "elements");
+    public ElementList writeToNBT(NBTTagCompound nbttagcompound) {
+        return writeToNBT(nbttagcompound, "elements");
     }
 
-    public void writeToNBT(NBTTagCompound nbttagcompound, String label) {
+    public ElementList writeToNBT(NBTTagCompound nbttagcompound, String label) {
         NBTTagCompound tcomp = new NBTTagCompound();
         NBTTagList telem = new NBTTagList();
         NBTTagList tmods = new NBTTagList();
@@ -254,6 +255,7 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
         }
 
         nbttagcompound.setTag(label, tcomp);
+        return this;
 
     }
 }
