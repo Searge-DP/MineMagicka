@@ -1,8 +1,5 @@
 package getfluxed.minemagicka.events;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
 import getfluxed.minemagicka.MineMagicka;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.SpellRegistry;
@@ -18,14 +15,13 @@ import getfluxed.minemagicka.network.messages.spells.MessageAddElement;
 import getfluxed.minemagicka.network.messages.spells.MessageCastSpell;
 import getfluxed.minemagicka.network.messages.spells.MessageClearElements;
 import getfluxed.minemagicka.reference.Reference;
-import getfluxed.minemagicka.util.SpellHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -36,6 +32,8 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
 
 public class MagickEventHandler {
 
@@ -85,7 +83,7 @@ public class MagickEventHandler {
                 Minecraft.getMinecraft().ingameGUI.drawTexturedModalRect(selEmX, selEmY, 0, 24, 24, 24);
                 GL11.glPopMatrix();
                 GL11.glPushMatrix();
-                int[] xCoords = new int[] { 0, 24, 48, 72 };
+                int[] xCoords = new int[]{0, 24, 48, 72};
                 int xCount = 0;
                 int elY = 0;
                 for (int i = 0; i < ElementRegistry.getElements().size(); i++) {
@@ -112,7 +110,7 @@ public class MagickEventHandler {
                             elY += 24;
                         }
                     }
-                    for (IElement el : SpellHandler.getElements(staffStack).getElements()) {
+                    for (IElement el : SpellHandler.getElements(staffStack).getModifierElements()) {
                         el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
                         if (xCount > 3) {
                             xCount = 0;
