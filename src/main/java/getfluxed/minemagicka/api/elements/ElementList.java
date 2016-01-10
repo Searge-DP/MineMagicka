@@ -4,13 +4,14 @@ import getfluxed.minemagicka.api.ElementRegistry;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 /**
- * @author WireSegal
- *         Created at 8:09 PM on 1/6/16.
+ * @author WireSegal Created at 8:09 PM on 1/6/16.
  */
-public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectList
+public class ElementList { // A shameless steal of a lot of Thaumcraft's
+                           // AspectList
     private LinkedHashMap<IElement, Integer> elements = new LinkedHashMap();
     private LinkedHashMap<IElement, Integer> modifiers = new LinkedHashMap();
 
@@ -239,7 +240,7 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
             IElement el = arr[i];
             if (el != null) {
                 NBTTagCompound f = new NBTTagCompound();
-                f.setString("key", el.getUnlocalizedName());
+                f.setString("name", el.getUnlocalizedName());
                 f.setInteger("amount", this.getAmount(el));
                 telem.appendTag(f);
             }
@@ -248,7 +249,7 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
             IElement el = arr2[i];
             if (el != null) {
                 NBTTagCompound f = new NBTTagCompound();
-                f.setString("key", el.getUnlocalizedName());
+                f.setString("name", el.getUnlocalizedName());
                 f.setInteger("amount", this.getAmount(el));
                 tmods.appendTag(f);
             }
@@ -258,4 +259,10 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
         return this;
 
     }
+
+    @Override
+    public String toString() {
+        return "ElementList [elements=" + elements + ", modifiers=" + modifiers + ", size()=" + size() + ", modifierSize()=" + modifierSize() + ", getElements()=" + Arrays.toString(getElements()) + ", getModifierElements()=" + Arrays.toString(getModifierElements()) + "]";
+    }
+
 }
