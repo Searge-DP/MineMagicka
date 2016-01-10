@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import getfluxed.minemagicka.blocks.misc.BlockMagickBlock;
 import getfluxed.minemagicka.blocks.researchtable.BlockResearchTableBook;
+import getfluxed.minemagicka.blocks.trees.magick.BlockMagicLog;
+import getfluxed.minemagicka.blocks.trees.magick.BlockMagickLeaves;
 import getfluxed.minemagicka.items.MMItems;
 import getfluxed.minemagicka.reference.Reference;
 import getfluxed.minemagicka.tileentities.TileEntityMagickInfuser;
@@ -33,6 +36,11 @@ public class MMBlocks {
 
     public static Block researchTableBook = new BlockResearchTableBook();
 
+    public static Block logMagick = new BlockMagicLog();
+    public static Block leavesMagick = new BlockMagickLeaves();
+
+    public static Block magickBlock = new BlockMagickBlock();
+
     public static Map<String, Block> renderMap = new HashMap<String, Block>();
     public static Map<String, Block> renderFluidMap = new HashMap<String, Block>();
 
@@ -43,6 +51,10 @@ public class MMBlocks {
         registerBlock(bricksEmbrane, "embraneBricks", "bricksEmbrane");
         registerBlock(embraneOre, "embraneOre", "embrane_ore");
         registerBlock(researchTableBook, "researchTableBook", "researchTableBook", TileEntityResearchTableBook.class);
+        registerBlock(logMagick, "logMagick", "magick_log");
+        registerBlock(magickBlock, "magickBlock", "magick_block");
+        registerBlock(leavesMagick, "leavesMagick", "magick_leaves");
+        
 
     }
 

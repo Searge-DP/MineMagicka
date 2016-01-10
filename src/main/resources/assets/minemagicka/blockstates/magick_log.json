@@ -1,0 +1,34 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {},
+        "model": "minemagicka:magick_log"
+     },
+    
+    "variants": {
+    	
+        "normal": [
+        {
+   		 }
+   		 ],
+        "inventory": [{
+            "transform": {
+                "thirdperson": {
+                    "translation": [0, 0.09375, -0.171875],
+                    "rotation": [ { "y": -45}, {"x": 10}, {"z": 170} ],
+                    "scale": 0.375
+                },
+                "gui": {
+                    "rotation": [ {"y": 90} ]
+                }
+            }
+        }],
+        "axis": {
+            "y": { "model": "minemagicka:magick_log"},
+            "z": { "model": "minemagicka:magick_log_side" },
+            "x": { "model": "minemagicka:magick_log_side", "y": 90 },
+            "none": {"model": "minemagicka:magick_log"}
+        }
+    }
+}
+

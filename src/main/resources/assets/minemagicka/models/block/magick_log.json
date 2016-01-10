@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "minemagicka:blocks/magick_log_top",
+        "side": "minemagicka:blocks/magick_log"
+    }
+}

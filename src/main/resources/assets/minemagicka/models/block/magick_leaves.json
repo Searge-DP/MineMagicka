@@ -1,0 +1,7 @@
+{
+"ambientocclusion": false,
+    "parent": "block/leaves",
+    "textures": {
+        "all": "minemagicka:blocks/magick_leaves"
+    }
+}

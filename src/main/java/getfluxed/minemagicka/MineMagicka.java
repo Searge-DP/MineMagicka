@@ -27,8 +27,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-import static getfluxed.minemagicka.reference.Reference.*;
-
 @Mod(modid = modid, name = name, version = version)
 public class MineMagicka {
 
