@@ -92,8 +92,7 @@ public class MagickEventHandler {
                 int xCount = 0;
                 int elY = 0;
                 // Renders the spell bar
-                for (int i = 0; i < ElementRegistry.getElements().size(); i++) {
-                    IElement el = ElementRegistry.getElements().get(i);
+                for (IElement el : ElementRegistry.getElements().values()) {
                     el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], elY);
                     if (xCount > 3) {
                         xCount = 0;
@@ -152,8 +151,8 @@ public class MagickEventHandler {
                     PacketHandler.INSTANCE.sendToServer(new MessageSelectElement(selectedElement));
                 }
                 if (e.button == 0 && e.buttonstate) {
-                    SpellHandler.addElement(staffStack, ElementRegistry.getElements().get(selectedElement));
-                    PacketHandler.INSTANCE.sendToServer(new MessageAddElement(ElementRegistry.getElements().get(selectedElement)));
+                    SpellHandler.addElement(staffStack, ElementRegistry.getElementList()[selectedElement]);
+                    PacketHandler.INSTANCE.sendToServer(new MessageAddElement(ElementRegistry.getElementList()[selectedElement]));
                 } else if (e.button == 1 && e.buttonstate) {
                     SpellHandler.clearElements(staffStack);
                     PacketHandler.INSTANCE.sendToServer(new MessageClearElements());

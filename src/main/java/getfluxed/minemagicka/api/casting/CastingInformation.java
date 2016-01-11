@@ -14,7 +14,7 @@ public class CastingInformation {
     }
 
     public IElement getMainElement() {
-        //TODO you can never have more than 4 different elemenets without adding shield, which then defaults the casting type to shield
+        //TODO you can never have more than 4 different elements without adding shield, which then defaults the casting type to shield
         // when applying something with earth, it affects the entities around the hit point
         return null;
     }
