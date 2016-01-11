@@ -1,5 +1,8 @@
 package getfluxed.minemagicka.api.compendium;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -14,15 +17,45 @@ public class CompendiumHelper {
         unlocks.appendTag(newUnlock);
         setUnlockedResearches(stack, unlocks);
     }
-    
+
     public static void lockResearch(ItemStack stack, String research) {
         NBTTagList unlocks = getUnlockedResearches(stack);
-        NBTTagCompound newUnlock = new NBTTagCompound();
-        newUnlock.setString("name", research);
-        unlocks.appendTag(newUnlock);
+        for (int i = 0; i < unlocks.tagCount(); i++) {
+            NBTTagCompound tag = unlocks.getCompoundTagAt(i);
+            if (tag.getString("name").equals(research)) {
+                unlocks.removeTag(i);
+            }
+        }
         setUnlockedResearches(stack, unlocks);
     }
+
+    public static boolean isResearchUnlocked(ItemStack stack, String research) {
+
+        NBTTagList unlocks = getUnlockedResearches(stack);
+        for (int i = 0; i < unlocks.tagCount(); i++) {
+            NBTTagCompound tag = unlocks.getCompoundTagAt(i);
+            if (tag.getString("name").equals(research)) {
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
+    public static List<String> getUnlockedResearch(ItemStack stack) {
+        ArrayList<String> list = new ArrayList<String>();
+        NBTTagList unlocks = getUnlockedResearches(stack);
+        for (int i = 0; i < unlocks.tagCount(); i++) {
+            NBTTagCompound tag = unlocks.getCompoundTagAt(i);
+            list.add(tag.getString("name"));
+        }
+        return list;
+    }
     
+    public static void stripAllResearch(ItemStack stack){
+        setUnlockedResearches(stack, new NBTTagList());
+    }
 
     public static NBTTagCompound getResearchTag(ItemStack stack) {
         return stack.getTagCompound().getCompoundTag("MMResearch");

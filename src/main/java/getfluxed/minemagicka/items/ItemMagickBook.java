@@ -28,21 +28,21 @@ public class ItemMagickBook extends Item implements ICompendium {
 
     @Override
     public boolean isResearchUnlocked(ItemStack stack, String research) {
-        return false;
+        return CompendiumHelper.isResearchUnlocked(stack, research);
     }
 
     @Override
     public List<String> getUnlockedResearch(ItemStack stack) {
-        return null;
+        return CompendiumHelper.getUnlockedResearch(stack);
     }
 
     @Override
     public void unlockAllResearch(ItemStack stack) {
-
+        // TODO make research registry and get all the stuff from there
     }
 
     @Override
     public void stripAllResearch(ItemStack stack) {
-
+        CompendiumHelper.stripAllResearch(stack);
     }
 }
