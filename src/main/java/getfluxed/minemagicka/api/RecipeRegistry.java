@@ -1,16 +1,14 @@
 package getfluxed.minemagicka.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import getfluxed.minemagicka.api.recipes.RecipeMagickInfusion;
 import getfluxed.minemagicka.items.MMItems;
-import net.minecraft.client.Minecraft;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RecipeRegistry {
 
@@ -42,8 +40,6 @@ public class RecipeRegistry {
         registerMagickInfusionRecipe(new RecipeMagickInfusion(new ItemStack(Items.paper), new ItemStack(MMItems.pageLocked), 250){
             @Override
             public ItemStack onCraft(World world, ItemStack output, BlockPos pos) {
-                ItemStack retStack = output.copy();
-                
                 return super.onCraft(world, output, pos);
             }
         });
