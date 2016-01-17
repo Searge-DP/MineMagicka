@@ -1,9 +1,5 @@
 package getfluxed.minemagicka.blocks;
 
-import java.util.Random;
-
-import javax.swing.Icon;
-
 import getfluxed.minemagicka.MineMagicka;
 import getfluxed.minemagicka.items.MMItems;
 import getfluxed.minemagicka.network.PacketHandler;
@@ -28,12 +24,15 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.swing.*;
+import java.util.Random;
+
 public class BlockMagickInfuser extends Block implements ITileEntityProvider {
 
+    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
     public Icon frontOn;
     public Icon frontOff;
     public Icon other;
-    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
     public BlockMagickInfuser() {
         super(Material.iron);
@@ -111,7 +110,7 @@ public class BlockMagickInfuser extends Block implements ITileEntityProvider {
     }
 
     protected BlockState createBlockState() {
-        return new BlockState(this, new IProperty[] { FACING });
+        return new BlockState(this, new IProperty[]{FACING});
     }
 
     @Override

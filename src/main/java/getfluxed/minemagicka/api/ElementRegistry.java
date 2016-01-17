@@ -12,6 +12,7 @@ public class ElementRegistry {
     public static void registerElement(String key, IElement element) {
         elements.put(key, element);
     }
+
     public static void registerElement(IElement element) {
         registerElement(element.getUnlocalizedName(), element);
     }

@@ -5,8 +5,8 @@ import net.minecraft.block.material.Material;
 
 public class BlockMagickInfused extends Block {
 
-	protected BlockMagickInfused() {
-		super(Material.rock);
-	}
+    protected BlockMagickInfused() {
+        super(Material.rock);
+    }
 
 }

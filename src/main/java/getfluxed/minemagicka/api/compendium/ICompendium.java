@@ -14,7 +14,7 @@ public interface ICompendium {
     /**
      * Unlock a research key.
      *
-     * @param stack The compendium stack.
+     * @param stack    The compendium stack.
      * @param research - The key to unlock.
      */
     void unlockResearch(ItemStack stack, String research);
@@ -22,7 +22,7 @@ public interface ICompendium {
     /**
      * Check if a research key is unlocked.
      *
-     * @param stack The compendium stack.
+     * @param stack    The compendium stack.
      * @param research - The key to check.
      * @return Whether the key is unlocked.
      */

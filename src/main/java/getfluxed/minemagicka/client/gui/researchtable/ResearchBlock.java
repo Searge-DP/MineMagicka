@@ -1,9 +1,8 @@
 package getfluxed.minemagicka.client.gui.researchtable;
 
-import java.awt.Rectangle;
-
 import fluxedCore.util.CoordinatePair;
-import scala.annotation.meta.setter;
+
+import java.awt.*;
 
 public class ResearchBlock {
 
@@ -27,12 +26,12 @@ public class ResearchBlock {
         this.colour = colour;
     }
 
-    public void setColour(int colour) {
-        this.colour = colour;
-    }
-
     public int getColour() {
         return colour;
+    }
+
+    public void setColour(int colour) {
+        this.colour = colour;
     }
 
     public String getIdentifier() {

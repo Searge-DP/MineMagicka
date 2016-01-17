@@ -25,16 +25,16 @@ public class GUIHandler implements IGuiHandler {
         TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
         switch (ID) {
 
-        case 0:
-            if (te != null && te instanceof TileEntityMagickInfuser) {
-                return new ContainerMagickInfuser(player.inventory, (TileEntityMagickInfuser) te);
-            }
-            break;
-        case 1:
-            if (te != null && te instanceof TileEntityResearchTableBook) {
-                return new ContainerResearchTableBook(player.inventory, (TileEntityResearchTableBook) te);
-            }
-            break;
+            case 0:
+                if (te != null && te instanceof TileEntityMagickInfuser) {
+                    return new ContainerMagickInfuser(player.inventory, (TileEntityMagickInfuser) te);
+                }
+                break;
+            case 1:
+                if (te != null && te instanceof TileEntityResearchTableBook) {
+                    return new ContainerResearchTableBook(player.inventory, (TileEntityResearchTableBook) te);
+                }
+                break;
         }
 
         return null;
@@ -44,17 +44,17 @@ public class GUIHandler implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
         switch (ID) {
-        case 0:
-            if (te != null && te instanceof TileEntityMagickInfuser) {
-                return new GuiMagickInfuser(player.inventory, (TileEntityMagickInfuser) te);
-            }
-            break;
+            case 0:
+                if (te != null && te instanceof TileEntityMagickInfuser) {
+                    return new GuiMagickInfuser(player.inventory, (TileEntityMagickInfuser) te);
+                }
+                break;
 
-        case 1:
-            if (te != null && te instanceof TileEntityResearchTableBook) {
-                return new GuiResearchTable(player.inventory, (TileEntityResearchTableBook) te);
-            }
-            break;
+            case 1:
+                if (te != null && te instanceof TileEntityResearchTableBook) {
+                    return new GuiResearchTable(player.inventory, (TileEntityResearchTableBook) te);
+                }
+                break;
         }
         return null;
     }

@@ -1,12 +1,12 @@
 package getfluxed.minemagicka.api.compendium;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants.NBT;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CompendiumHelper {
 
@@ -52,8 +52,8 @@ public class CompendiumHelper {
         }
         return list;
     }
-    
-    public static void stripAllResearch(ItemStack stack){
+
+    public static void stripAllResearch(ItemStack stack) {
         setUnlockedResearches(stack, new NBTTagList());
     }
 

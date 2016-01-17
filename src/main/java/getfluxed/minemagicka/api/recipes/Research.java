@@ -1,8 +1,8 @@
 package getfluxed.minemagicka.api.recipes;
 
-import java.util.List;
-
 import getfluxed.minemagicka.client.gui.researchtable.ResearchBlock;
+
+import java.util.List;
 
 public class Research {
 

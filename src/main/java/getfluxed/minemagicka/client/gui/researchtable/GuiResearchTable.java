@@ -1,32 +1,29 @@
 package getfluxed.minemagicka.client.gui.researchtable;
 
-import java.awt.Color;
+import getfluxed.minemagicka.client.gui.researchtable.ResearchBlock.BlockType;
+import getfluxed.minemagicka.reference.Reference;
+import getfluxed.minemagicka.tileentities.researchtable.TileEntityResearchTableBook;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.lwjgl.opengl.GL11;
-
-import getfluxed.minemagicka.client.gui.researchtable.ResearchBlock.BlockType;
-import getfluxed.minemagicka.reference.Reference;
-import getfluxed.minemagicka.tileentities.researchtable.TileEntityResearchTableBook;
-import io.netty.util.internal.SystemPropertyUtil;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-
 public class GuiResearchTable extends GuiContainer {
 
-    private TileEntityResearchTableBook tile;
-    private InventoryPlayer invPlayer;
+    private static final ResourceLocation texture = new ResourceLocation(Reference.modid, "textures/gui/research_table.png");
     public int innerX;
     public int innerY;
     public int innerNodeX = 36;
     public int innerNodeY = 20;
-
-    private static final ResourceLocation texture = new ResourceLocation(Reference.modid, "textures/gui/research_table.png");
+    private TileEntityResearchTableBook tile;
+    private InventoryPlayer invPlayer;
     private List<ResearchBlock> researchBlocks = new ArrayList<ResearchBlock>();
     private ResearchBlock selectedBlock = null;
 
@@ -84,55 +81,55 @@ public class GuiResearchTable extends GuiContainer {
         ResearchBlock newRes;
         if (selectedBlock != null)
             switch (typedChar) {
-            case 'w':
-                canMove = true;
-                newRes = new ResearchBlock("tempBlock", selectedBlock.getX() / 9, (selectedBlock.getY() / 9) - 1, selectedBlock.getBlockType(), 0xFFFFFF);
-                for (ResearchBlock ress : researchBlocks) {
-                    if (!ress.equals(selectedBlock))
-                        if (ress.isCollided(newRes)) {
-                            canMove = false;
-                        }
-                }
-                if (canMove)
-                    selectedBlock.setY((selectedBlock.getY() / 9) - 1);
-                break;
-            case 's':
-                canMove = true;
-                newRes = new ResearchBlock("tempBlock", selectedBlock.getX() / 9, (selectedBlock.getY() / 9) + 1, selectedBlock.getBlockType(), 0xFFFFFF);
-                for (ResearchBlock ress : researchBlocks) {
-                    if (!ress.equals(selectedBlock))
-                        if (ress.isCollided(newRes)) {
-                            canMove = false;
-                        }
-                }
-                if (canMove)
-                    selectedBlock.setY((selectedBlock.getY() / 9) + 1);
-                break;
-            case 'd':
-                canMove = true;
-                newRes = new ResearchBlock("tempBlock", (selectedBlock.getX() / 9) + 1, selectedBlock.getY() / 9, selectedBlock.getBlockType(), 0xFFFFFF);
-                for (ResearchBlock ress : researchBlocks) {
-                    if (!ress.equals(selectedBlock))
-                        if (ress.isCollided(newRes)) {
-                            canMove = false;
-                        }
-                }
-                if (canMove)
-                    selectedBlock.setX((selectedBlock.getX() / 9) + 1);
-                break;
-            case 'a':
-                canMove = true;
-                newRes = new ResearchBlock("tempBlock", (selectedBlock.getX() / 9) - 1, selectedBlock.getY() / 9, selectedBlock.getBlockType(), 0xFFFFFF);
-                for (ResearchBlock ress : researchBlocks) {
-                    if (!ress.equals(selectedBlock))
-                        if (ress.isCollided(newRes)) {
-                            canMove = false;
-                        }
-                }
-                if (canMove) {
-                    selectedBlock.setX((selectedBlock.getX() / 9) - 1);
-                }
-                break;
+                case 'w':
+                    canMove = true;
+                    newRes = new ResearchBlock("tempBlock", selectedBlock.getX() / 9, (selectedBlock.getY() / 9) - 1, selectedBlock.getBlockType(), 0xFFFFFF);
+                    for (ResearchBlock ress : researchBlocks) {
+                        if (!ress.equals(selectedBlock))
+                            if (ress.isCollided(newRes)) {
+                                canMove = false;
+                            }
+                    }
+                    if (canMove)
+                        selectedBlock.setY((selectedBlock.getY() / 9) - 1);
+                    break;
+                case 's':
+                    canMove = true;
+                    newRes = new ResearchBlock("tempBlock", selectedBlock.getX() / 9, (selectedBlock.getY() / 9) + 1, selectedBlock.getBlockType(), 0xFFFFFF);
+                    for (ResearchBlock ress : researchBlocks) {
+                        if (!ress.equals(selectedBlock))
+                            if (ress.isCollided(newRes)) {
+                                canMove = false;
+                            }
+                    }
+                    if (canMove)
+                        selectedBlock.setY((selectedBlock.getY() / 9) + 1);
+                    break;
+                case 'd':
+                    canMove = true;
+                    newRes = new ResearchBlock("tempBlock", (selectedBlock.getX() / 9) + 1, selectedBlock.getY() / 9, selectedBlock.getBlockType(), 0xFFFFFF);
+                    for (ResearchBlock ress : researchBlocks) {
+                        if (!ress.equals(selectedBlock))
+                            if (ress.isCollided(newRes)) {
+                                canMove = false;
+                            }
+                    }
+                    if (canMove)
+                        selectedBlock.setX((selectedBlock.getX() / 9) + 1);
+                    break;
+                case 'a':
+                    canMove = true;
+                    newRes = new ResearchBlock("tempBlock", (selectedBlock.getX() / 9) - 1, selectedBlock.getY() / 9, selectedBlock.getBlockType(), 0xFFFFFF);
+                    for (ResearchBlock ress : researchBlocks) {
+                        if (!ress.equals(selectedBlock))
+                            if (ress.isCollided(newRes)) {
+                                canMove = false;
+                            }
+                    }
+                    if (canMove) {
+                        selectedBlock.setX((selectedBlock.getX() / 9) - 1);
+                    }
+                    break;
             }
 
     }

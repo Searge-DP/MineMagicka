@@ -30,7 +30,7 @@ public class SpellRegistry {
 
     public static ISpell getSpellFromElements(ElementList elements) {
         for (ISpell spell : getSpells().values()) {
-            if (elements.spellMatches(spell.getElements())) {
+            if (elements.equals(spell.getElements())) {
                 return spell;
             }
         }

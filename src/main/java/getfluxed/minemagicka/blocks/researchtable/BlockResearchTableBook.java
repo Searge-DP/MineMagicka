@@ -13,22 +13,22 @@ import net.minecraft.world.World;
 
 public class BlockResearchTableBook extends BlockContainer {
 
-	public BlockResearchTableBook() {
-		super(Material.wood);
-	}
+    public BlockResearchTableBook() {
+        super(Material.wood);
+    }
 
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote) {
-			player.openGui(MineMagicka.INSTANCE, 1, world, pos.getX(), pos.getY(), pos.getZ());
-		}
-		return true;
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote) {
+            player.openGui(MineMagicka.INSTANCE, 1, world, pos.getX(), pos.getY(), pos.getZ());
+        }
+        return true;
 
-	}
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityResearchTableBook();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileEntityResearchTableBook();
+    }
 
 }

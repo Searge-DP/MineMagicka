@@ -1,13 +1,5 @@
 package getfluxed.minemagicka.items;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-
 import getfluxed.minemagicka.blocks.MMBlocks;
 import getfluxed.minemagicka.items.pages.ItemPage;
 import getfluxed.minemagicka.items.pages.ItemPageLocked;
@@ -21,8 +13,13 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.util.*;
+
 public class MMItems {
-    public static CreativeTabs tab = new CreativeTabMM();;
+    public static CreativeTabs tab = new CreativeTabMM();
+    ;
 
     public static Item staff = new ItemStaff();
     public static Item bucketMagickLiquid = new ItemFluidBucket((BlockFluidBase) MMBlocks.blockLiquidMagick);

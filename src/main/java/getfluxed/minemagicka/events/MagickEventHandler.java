@@ -18,8 +18,6 @@ import getfluxed.minemagicka.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -88,7 +86,7 @@ public class MagickEventHandler {
                 Minecraft.getMinecraft().ingameGUI.drawTexturedModalRect(selEmX, selEmY, 0, 24, 24, 24);
                 GL11.glPopMatrix();
                 GL11.glPushMatrix();
-                int[] xCoords = new int[] { 0, 24, 48, 72 };
+                int[] xCoords = new int[]{0, 24, 48, 72};
                 int xCount = 0;
                 int elY = 0;
                 // Renders the spell bar
@@ -100,7 +98,7 @@ public class MagickEventHandler {
                     }
                 }
                 // Renders the spell name
-                ISpell spell = SpellRegistry.getSpellFromElements(SpellHandler.getElements(staffStack));
+                ISpell spell = SpellRegistry.getSpellFromElements(SpellHandler.getElements(staffStack).getElementList());
                 if (spell != null) {
                     Minecraft.getMinecraft().ingameGUI.drawString(Minecraft.getMinecraft().fontRendererObj, spell.getName(), 6, elY + 28, 0xFFFFFF);
                 }
@@ -160,7 +158,7 @@ public class MagickEventHandler {
                 cancel = true;
             }
             if (MineMagicka.proxy.getPlayer().getCurrentEquippedItem() != null && MineMagicka.proxy.getPlayer().getCurrentEquippedItem().isItemEqual(new ItemStack(MMItems.staff)) && !Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && e.button == 1 && e.buttonstate) {
-                ISpell spell = SpellRegistry.getSpellFromElements(SpellHandler.getElements(MineMagicka.proxy.getPlayer().getCurrentEquippedItem()));
+                ISpell spell = SpellRegistry.getSpellFromElements(SpellHandler.getElements(MineMagicka.proxy.getPlayer().getCurrentEquippedItem()).getElementList());
                 if (spell != null) {
                     PacketHandler.INSTANCE.sendToServer(new MessageCastSpell(spell, MineMagicka.proxy.getPlayer().posX, MineMagicka.proxy.getPlayer().posY, MineMagicka.proxy.getPlayer().posZ));
                 }

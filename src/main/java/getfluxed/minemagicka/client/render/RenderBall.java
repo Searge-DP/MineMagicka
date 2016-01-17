@@ -10,11 +10,11 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class RenderBall extends RenderEntity {
+    ModelBall ball = new ModelBall();
+
     public RenderBall(RenderManager renderManagerIn) {
         super(renderManagerIn);
     }
-
-    ModelBall ball = new ModelBall();
 
     @Override
     public void doRender(Entity entity, double x, double y, double z, float p_76986_8_, float p_76986_9_) {

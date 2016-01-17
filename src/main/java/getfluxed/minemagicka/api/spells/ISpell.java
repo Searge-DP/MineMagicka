@@ -7,14 +7,14 @@ import net.minecraft.world.World;
 
 public interface ISpell {
 
-    public CastingType type = null;
+    CastingType type = null;
 
-    public String getName();
+    String getName();
 
-    public String getUnlocalizedName();
+    String getUnlocalizedName();
 
-    public ElementList getElements();
+    ElementList getElements();
 
-    public void cast(World world, EntityPlayer player, double x, double y, double z);
+    void cast(World world, EntityPlayer player, double x, double y, double z);
 
 }

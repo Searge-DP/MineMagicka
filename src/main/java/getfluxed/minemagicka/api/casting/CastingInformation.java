@@ -1,15 +1,15 @@
 package getfluxed.minemagicka.api.casting;
 
-import getfluxed.minemagicka.api.elements.ElementList;
+import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.IElement;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public class CastingInformation {
 
-    public ElementList elements;
+    public ElementCompound elements;
 
-    public CastingInformation(ElementList elements) {
+    public CastingInformation(ElementCompound elements) {
         this.elements = elements;
     }
 

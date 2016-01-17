@@ -1,9 +1,5 @@
 package getfluxed.minemagicka;
 
-import static getfluxed.minemagicka.reference.Reference.modid;
-import static getfluxed.minemagicka.reference.Reference.name;
-import static getfluxed.minemagicka.reference.Reference.version;
-
 import getfluxed.minemagicka.api.RecipeRegistry;
 import getfluxed.minemagicka.api.recipes.RecipeMagickInfusion;
 import getfluxed.minemagicka.blocks.MMBlocks;
@@ -26,6 +22,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+
+import static getfluxed.minemagicka.reference.Reference.*;
 
 @Mod(modid = modid, name = name, version = version)
 public class MineMagicka {

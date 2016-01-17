@@ -110,32 +110,32 @@ public class TileEntityMagickInfuser extends TileEntityInventory implements IInv
 
     public int getField(int id) {
         switch (id) {
-        case 0:
-            return this.currentMagick;
-        case 1:
-            return this.maxMagick;
-        case 2:
-            return this.infuserTimer;
-        case 3:
-            return this.infuserTimerMax;
-        default:
-            return 0;
+            case 0:
+                return this.currentMagick;
+            case 1:
+                return this.maxMagick;
+            case 2:
+                return this.infuserTimer;
+            case 3:
+                return this.infuserTimerMax;
+            default:
+                return 0;
         }
     }
 
     public void setField(int id, int value) {
         switch (id) {
-        case 0:
-            this.currentMagick = value;
-            break;
-        case 1:
-            this.maxMagick = value;
-            break;
-        case 2:
-            this.infuserTimer = value;
-            break;
-        case 3:
-            this.infuserTimerMax = value;
+            case 0:
+                this.currentMagick = value;
+                break;
+            case 1:
+                this.maxMagick = value;
+                break;
+            case 2:
+                this.infuserTimer = value;
+                break;
+            case 3:
+                this.infuserTimerMax = value;
         }
     }
 

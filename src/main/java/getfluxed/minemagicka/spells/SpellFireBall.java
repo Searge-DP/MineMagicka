@@ -1,7 +1,5 @@
 package getfluxed.minemagicka.spells;
 
-import java.util.List;
-
 import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.spells.SpellBall;
 import getfluxed.minemagicka.entities.spells.base.EntityBall;
@@ -12,6 +10,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class SpellFireBall extends SpellBall {
 
@@ -38,27 +38,27 @@ public class SpellFireBall extends SpellBall {
     @Override
     public void onImpact(EntityBall ball, World world, MovingObjectPosition mop) {
 
-        if (!world.isRemote && world != null && mop != null) {
+        if (world != null && !world.isRemote && mop != null) {
             double x;
             double y;
             double z;
             switch (mop.typeOfHit) {
-            case BLOCK:
-                x = mop.getBlockPos().getX();
-                y = mop.getBlockPos().getY();
-                z = mop.getBlockPos().getZ();
-                break;
-            case ENTITY:
-                x = mop.entityHit.posX;
-                y = mop.entityHit.posY;
-                z = mop.entityHit.posZ;
+                case BLOCK:
+                    x = mop.getBlockPos().getX();
+                    y = mop.getBlockPos().getY();
+                    z = mop.getBlockPos().getZ();
+                    break;
+                case ENTITY:
+                    x = mop.entityHit.posX;
+                    y = mop.entityHit.posY;
+                    z = mop.entityHit.posZ;
 
-                break;
-            default:
-                x = 0;
-                y = 0;
-                z = 0;
-                break;
+                    break;
+                default:
+                    x = 0;
+                    y = 0;
+                    z = 0;
+                    break;
             }
             for (EntityLivingBase ent : (List<EntityLivingBase>) world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.fromBounds(x - 3, y - 2, z - 3, x + 3, y + 2, z + 3))) {
                 // BuffHelper.applyToEntity(world, ent, new

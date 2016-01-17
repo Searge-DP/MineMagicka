@@ -8,7 +8,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class LiquidMagick extends Fluid {
 
     public LiquidMagick() {
-        super("liquidMagick",new ResourceLocation("tanks", "liquidMagick"), new ResourceLocation("tanks", "liquidMagick"));
+        super("liquidMagick", new ResourceLocation("tanks", "liquidMagick"), new ResourceLocation("tanks", "liquidMagick"));
     }
 
     @Override

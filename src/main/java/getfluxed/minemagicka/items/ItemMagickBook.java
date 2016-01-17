@@ -1,7 +1,5 @@
 package getfluxed.minemagicka.items;
 
-import java.util.List;
-
 import getfluxed.minemagicka.api.compendium.CompendiumHelper;
 import getfluxed.minemagicka.api.compendium.ICompendium;
 import getfluxed.minemagicka.client.gui.book.GuiBookMagick;
@@ -10,6 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class ItemMagickBook extends Item implements ICompendium {
 

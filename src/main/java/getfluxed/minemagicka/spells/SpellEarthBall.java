@@ -34,20 +34,20 @@ public class SpellEarthBall extends SpellBall {
     @Override
     public void onImpact(EntityBall ball, World world, MovingObjectPosition mop) {
 
-		if (!world.isRemote && world != null && mop != null) {
-			double x;
-			double y;
-			double z;
-			switch (mop.typeOfHit) {
-				case BLOCK:
-					x = mop.getBlockPos().getX();
-					y = mop.getBlockPos().getY();
-					z = mop.getBlockPos().getZ();
-					break;
-				case ENTITY:
-					x = mop.entityHit.posX;
-					y = mop.entityHit.posY;
-					z = mop.entityHit.posZ;
+        if (!world.isRemote && world != null && mop != null) {
+            double x;
+            double y;
+            double z;
+            switch (mop.typeOfHit) {
+                case BLOCK:
+                    x = mop.getBlockPos().getX();
+                    y = mop.getBlockPos().getY();
+                    z = mop.getBlockPos().getZ();
+                    break;
+                case ENTITY:
+                    x = mop.entityHit.posX;
+                    y = mop.entityHit.posY;
+                    z = mop.entityHit.posZ;
                     break;
                 default:
                     x = 0;

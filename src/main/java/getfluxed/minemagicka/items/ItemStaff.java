@@ -17,12 +17,12 @@ public class ItemStaff extends Item {
     @Override
     public int getColorFromItemStack(ItemStack stack, int pass) {
         switch (pass) {
-        case 0:
-            return 0xFFFFFF;
-        case 1:
-            return ClientEventHandler.getColorInt();
-        default:
-            return 0xFFFFFF;
+            case 0:
+                return 0xFFFFFF;
+            case 1:
+                return ClientEventHandler.getColorInt();
+            default:
+                return 0xFFFFFF;
         }
     }
 

@@ -43,7 +43,7 @@ public class ElementBase implements IElement {
         GL11.glPushMatrix();
         Minecraft.getMinecraft().getTextureManager().bindTexture(getTexture());
         Color renderColor = new Color(this.getColor());
-        GL11.glColor3f(renderColor.getRed()/255F, renderColor.getGreen()/255F, renderColor.getBlue()/255F);
+        GL11.glColor3f(renderColor.getRed() / 255F, renderColor.getGreen() / 255F, renderColor.getBlue() / 255F);
         gui.drawScaledCustomSizeModalRect(x, y, 0, 0, 24, 24, 24, 24, 24, 24);
         GL11.glColor3f(1F, 1F, 1F);
         GL11.glPopMatrix();

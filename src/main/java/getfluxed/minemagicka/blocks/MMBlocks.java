@@ -1,9 +1,5 @@
 package getfluxed.minemagicka.blocks;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import getfluxed.minemagicka.blocks.misc.BlockMagickBlock;
 import getfluxed.minemagicka.blocks.researchtable.BlockResearchTableBook;
 import getfluxed.minemagicka.blocks.trees.magick.BlockMagicLog;
@@ -25,6 +21,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class MMBlocks {
     public static Block blockLiquidMagick = new BlockFluidMagick();
@@ -54,7 +54,7 @@ public class MMBlocks {
         registerBlock(logMagick, "logMagick", "magick_log");
         registerBlock(magickBlock, "magickBlock", "magick_block");
         registerBlock(leavesMagick, "leavesMagick", "magick_leaves");
-        
+
 
     }
 
@@ -84,12 +84,6 @@ public class MMBlocks {
         }
     }
 
-    public void fluidRender(Block block) {
-
-        final Block toRender = block;
-
-    }
-
     private static void registerBlockFluid(Block block, String name, String key) {
         block.setUnlocalizedName(key).setCreativeTab(MMItems.tab);
         renderFluidMap.put(key, block);
@@ -112,6 +106,12 @@ public class MMBlocks {
         renderMap.put(key, block);
         GameRegistry.registerBlock(block, key);
         GameRegistry.registerTileEntity(tile, key);
+    }
+
+    public void fluidRender(Block block) {
+
+        final Block toRender = block;
+
     }
 
 }
