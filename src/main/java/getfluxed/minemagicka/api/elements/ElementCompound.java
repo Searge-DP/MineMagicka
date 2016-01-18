@@ -102,9 +102,31 @@ public class ElementCompound { // A wrapper around ElementList.
         return this;
     }
 
+    public ElementCompound add(ElementList in) {
+       return add(in, false);
+    }
+    public ElementCompound add(ElementList in, boolean mod) {
+        if (mod)
+            modifiers.add(in);
+        else
+            elements.add(in);
+        return this;
+    }
+
     public ElementCompound merge(ElementCompound in) {
         elements.merge(in.getElementList());
         modifiers.merge(in.getModifierElementList());
+        return this;
+    }
+
+    public ElementCompound merge(ElementList in) {
+        return merge(in, false);
+    }
+    public ElementCompound merge(ElementList in, boolean mod) {
+        if (mod)
+            modifiers.merge(in);
+        else
+            elements.merge(in);
         return this;
     }
 

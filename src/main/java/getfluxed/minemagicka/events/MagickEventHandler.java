@@ -98,7 +98,7 @@ public class MagickEventHandler {
                     }
                 }
                 // Renders the spell name
-                ISpell spell = SpellRegistry.getSpellFromElements(SpellHandler.getElements(staffStack).getElementList());
+                ISpell spell = SpellRegistry.getSpellFromElements(SpellHandler.getElements(staffStack));
                 if (spell != null) {
                     Minecraft.getMinecraft().ingameGUI.drawString(Minecraft.getMinecraft().fontRendererObj, spell.getName(), 6, elY + 28, 0xFFFFFF);
                 }
@@ -140,7 +140,7 @@ public class MagickEventHandler {
                 ItemStaff staff = (ItemStaff) staffStack.getItem();
                 int selectedElement = staff.getSelectedElement(staffStack);
                 if (e.dwheel != 0) {
-                    cancel = true;
+                    e.setCanceled(true);
                     if (e.dwheel > 0 && selectedElement > 0) {
                         selectedElement--;
                     } else if (e.dwheel < 0 && selectedElement < 7) {
@@ -158,9 +158,9 @@ public class MagickEventHandler {
                 cancel = true;
             }
             if (MineMagicka.proxy.getPlayer().getCurrentEquippedItem() != null && MineMagicka.proxy.getPlayer().getCurrentEquippedItem().isItemEqual(new ItemStack(MMItems.staff)) && !Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && e.button == 1 && e.buttonstate) {
-                ISpell spell = SpellRegistry.getSpellFromElements(SpellHandler.getElements(MineMagicka.proxy.getPlayer().getCurrentEquippedItem()).getElementList());
+                ISpell spell = SpellRegistry.getSpellFromElements(SpellHandler.getElements(MineMagicka.proxy.getPlayer().getCurrentEquippedItem()));
                 if (spell != null) {
-                    PacketHandler.INSTANCE.sendToServer(new MessageCastSpell(spell, MineMagicka.proxy.getPlayer().posX, MineMagicka.proxy.getPlayer().posY, MineMagicka.proxy.getPlayer().posZ));
+                    PacketHandler.INSTANCE.sendToServer(new MessageCastSpell(spell, MineMagicka.proxy.getPlayer().posX, MineMagicka.proxy.getPlayer().posY, MineMagicka.proxy.getPlayer().posZ, SpellHandler.getElements(MineMagicka.proxy.getPlayer().getCurrentEquippedItem())));
                 }
             }
         }

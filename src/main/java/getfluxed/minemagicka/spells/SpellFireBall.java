@@ -1,7 +1,8 @@
 package getfluxed.minemagicka.spells;
 
+import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.ElementList;
-import getfluxed.minemagicka.api.spells.SpellBall;
+import getfluxed.minemagicka.api.spells.ISpellBall;
 import getfluxed.minemagicka.entities.spells.base.EntityBall;
 import getfluxed.minemagicka.reference.ElementReference;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,7 +14,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class SpellFireBall extends SpellBall {
+public class SpellFireBall implements ISpellBall {
 
     @Override
     public String getName() {
@@ -31,8 +32,13 @@ public class SpellFireBall extends SpellBall {
     }
 
     @Override
-    public void cast(World world, EntityPlayer player, double x, double y, double z) {
-        world.spawnEntityInWorld(new EntityBall(world, this, player));
+    public boolean spellMatches(ElementCompound elements) {
+        return elements.equals(getElements());
+    }
+
+    @Override
+    public void cast(World world, EntityPlayer player, ElementCompound elements, double x, double y, double z) {
+        world.spawnEntityInWorld(new EntityBall(world, this, elements, player));
     }
 
     @Override

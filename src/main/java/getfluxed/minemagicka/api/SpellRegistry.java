@@ -1,5 +1,6 @@
 package getfluxed.minemagicka.api;
 
+import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.spells.ISpell;
 
@@ -28,9 +29,9 @@ public class SpellRegistry {
         return null;
     }
 
-    public static ISpell getSpellFromElements(ElementList elements) {
+    public static ISpell getSpellFromElements(ElementCompound elements) {
         for (ISpell spell : getSpells().values()) {
-            if (elements.equals(spell.getElements())) {
+            if (spell.spellMatches(elements)) {
                 return spell;
             }
         }

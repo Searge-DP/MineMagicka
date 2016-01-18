@@ -1,53 +1,42 @@
 package getfluxed.minemagicka.network.messages.spells;
 
 import getfluxed.minemagicka.api.SpellRegistry;
+import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.spells.ISpell;
-import io.netty.buffer.ByteBuf;
+import getfluxed.minemagicka.network.messages.PlugNPlayMessage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageCastSpell implements IMessage, IMessageHandler<MessageCastSpell, IMessage> {
-    private String spell;
-    private double x, y, z;
+public class MessageCastSpell extends PlugNPlayMessage<MessageCastSpell> {
+    public String spellKey;
+    public double x;
+    public double y;
+    public double z;
+    public ElementCompound elements;
 
     public MessageCastSpell() {
+
     }
 
-    public MessageCastSpell(ISpell spell, double x, double y, double z) {
-        this.spell = spell.getUnlocalizedName();
+    public MessageCastSpell(ISpell spell, double x, double y, double z, ElementCompound elements) {
+        this.spellKey = spell.getUnlocalizedName();
         this.x = x;
         this.y = y;
         this.z = z;
+        this.elements = elements;
     }
 
-    @Override
-    public void toBytes(ByteBuf buf) {
-        ByteBufUtils.writeUTF8String(buf, spell);
-        buf.writeDouble(x);
-        buf.writeDouble(y);
-        buf.writeDouble(z);
 
-    }
 
     @Override
-    public void fromBytes(ByteBuf buf) {
-        this.spell = ByteBufUtils.readUTF8String(buf);
-        this.x = buf.readDouble();
-        this.y = buf.readDouble();
-        this.z = buf.readDouble();
-
-    }
-
-    @Override
-    public IMessage onMessage(MessageCastSpell message, MessageContext ctx) {
+    public IMessage handleMessage(MessageContext ctx) {
         EntityPlayer entity = ctx.getServerHandler().playerEntity;
         World world = ctx.getServerHandler().playerEntity.worldObj;
         if (entity != null) {
-            SpellRegistry.getSpellFromName(message.spell).cast(world, entity, message.x, message.y, message.z);
+            ISpell spell = SpellRegistry.getSpellFromName(spellKey);
+            if (spell != null) spell.cast(world, entity, elements, x, y, z);
         }
 
         return null;

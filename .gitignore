@@ -5,6 +5,7 @@
 *.ear
 /build
 /eclipse
+/run
 /bin
 /out
 

@@ -1,7 +1,8 @@
 package getfluxed.minemagicka.entities.spells.base;
 
 import getfluxed.minemagicka.api.SpellRegistry;
-import getfluxed.minemagicka.api.spells.SpellBall;
+import getfluxed.minemagicka.api.elements.ElementCompound;
+import getfluxed.minemagicka.api.spells.ISpellBall;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,15 +11,17 @@ import net.minecraft.world.World;
 
 public class EntityBall extends EntityThrowable {
 
-    public SpellBall ball;
-
-    public EntityBall(World world, SpellBall ball, EntityLivingBase entity) {
-        super(world, entity);
-        this.ball = ball;
-    }
+    public ISpellBall ball;
+    public ElementCompound elements;
 
     public EntityBall(World world) {
         super(world);
+    }
+
+    public EntityBall(World world, ISpellBall ball, ElementCompound elements, EntityLivingBase entity) {
+        super(world, entity);
+        this.ball = ball;
+        this.elements = elements;
     }
 
     @Override
@@ -37,13 +40,15 @@ public class EntityBall extends EntityThrowable {
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        this.ball = (SpellBall) SpellRegistry.getSpellFromName(nbt.getString("MMSpell"));
+        this.ball = (ISpellBall) SpellRegistry.getSpellFromName(nbt.getString("MMSpell"));
+        this.elements = (new ElementCompound()).readFromNBT(nbt);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         nbt.setString("MMSpell", this.ball.getUnlocalizedName());
+        this.elements.writeToNBT(nbt);
     }
 
 }
