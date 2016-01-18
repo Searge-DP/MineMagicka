@@ -4,7 +4,7 @@ import getfluxed.minemagicka.api.RecipeRegistry;
 import getfluxed.minemagicka.api.recipes.RecipeMagickInfusion;
 import getfluxed.minemagicka.blocks.MMBlocks;
 import getfluxed.minemagicka.client.GUIHandler;
-import getfluxed.minemagicka.entities.spells.base.EntityBall;
+import getfluxed.minemagicka.api.spells.EntityBall;
 import getfluxed.minemagicka.events.MagickEventHandler;
 import getfluxed.minemagicka.items.MMItems;
 import getfluxed.minemagicka.liquids.MMLiquids;
@@ -61,8 +61,7 @@ public class MineMagicka {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent e) {
-        RecipeRegistry.init();
-
+        RecipeRegistry.registerMagickInfusionRecipe(new RecipeMagickInfusion(new ItemStack(Items.paper), new ItemStack(MMItems.pageLocked), 250));
     }
 
 }

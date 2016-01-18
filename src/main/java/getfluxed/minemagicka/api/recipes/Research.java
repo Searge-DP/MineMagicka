@@ -1,35 +1,35 @@
 package getfluxed.minemagicka.api.recipes;
 
-import getfluxed.minemagicka.client.gui.researchtable.ResearchBlock;
+import net.minecraft.block.Block;
 
 import java.util.List;
 
 public class Research {
 
-    private ResearchBlock magickBlock;
-    private List<ResearchBlock> researchBlocks;
+    private Block magickBlock;
+    private List<Block> researchBlocks;
     //TODO have a research that gets unlocked
 //    private BookObject entryUnlock;
 
-    public Research(ResearchBlock magickBlock, List<ResearchBlock> researchBlocks) {
+    public Research(Block magickBlock, List<Block> researchBlocks) {
         super();
         this.magickBlock = magickBlock;
         this.researchBlocks = researchBlocks;
     }
 
-    public ResearchBlock getMagickBlock() {
+    public Block getMagickBlock() {
         return magickBlock;
     }
 
-    public void setMagickBlock(ResearchBlock magickBlock) {
+    public void setMagickBlock(Block magickBlock) {
         this.magickBlock = magickBlock;
     }
 
-    public List<ResearchBlock> getResearchBlocks() {
+    public List<Block> getResearchBlocks() {
         return researchBlocks;
     }
 
-    public void setResearchBlocks(List<ResearchBlock> researchBlocks) {
+    public void setResearchBlocks(List<Block> researchBlocks) {
         this.researchBlocks = researchBlocks;
     }
 

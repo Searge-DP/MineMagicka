@@ -3,7 +3,7 @@ package getfluxed.minemagicka.spells;
 import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.spells.ISpellBall;
-import getfluxed.minemagicka.entities.spells.base.EntityBall;
+import getfluxed.minemagicka.api.spells.EntityBall;
 import getfluxed.minemagicka.reference.ElementReference;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
