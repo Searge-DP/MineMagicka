@@ -73,6 +73,8 @@ public class SpellFireBall implements ISpellBall {
                 // TODO fix this
             }
             world.newExplosion(ball, x, y + 1, z, 0.8f, true, false);
+
+            ball.setDead();
         }
 
     }

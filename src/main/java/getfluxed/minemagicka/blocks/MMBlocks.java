@@ -5,6 +5,7 @@ import getfluxed.minemagicka.blocks.researchtable.BlockResearchTableBook;
 import getfluxed.minemagicka.blocks.trees.magick.BlockMagicLog;
 import getfluxed.minemagicka.blocks.trees.magick.BlockMagickLeaves;
 import getfluxed.minemagicka.items.MMItems;
+import getfluxed.minemagicka.items.blocks.ItemBlockMod;
 import getfluxed.minemagicka.reference.Reference;
 import getfluxed.minemagicka.tileentities.TileEntityMagickInfuser;
 import getfluxed.minemagicka.tileentities.researchtable.TileEntityResearchTableBook;
@@ -69,12 +70,7 @@ public class MMBlocks {
         for (Entry<String, Block> ent : renderFluidMap.entrySet()) {
             final Block toRender = ent.getValue();
             ModelBakery.addVariantName(Item.getItemFromBlock(toRender));
-            ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(toRender), new ItemMeshDefinition() {
-                @Override
-                public ModelResourceLocation getModelLocation(ItemStack stack) {
-                    return new ModelResourceLocation(Reference.modid + ":" + toRender.getClass().getSimpleName(), "fluid");
-                }
-            });
+            ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(toRender), stack -> new ModelResourceLocation(Reference.modid + ":" + toRender.getClass().getSimpleName(), "fluid"));
             ModelLoader.setCustomStateMapper(toRender, new StateMapperBase() {
                 @Override
                 protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
@@ -87,13 +83,13 @@ public class MMBlocks {
     private static void registerBlockFluid(Block block, String name, String key) {
         block.setUnlocalizedName(key).setCreativeTab(MMItems.tab);
         renderFluidMap.put(key, block);
-        GameRegistry.registerBlock(block, key);
+        GameRegistry.registerBlock(block, ItemBlockMod.class, key);
     }
 
     private static void registerBlock(Block block, String name, String key) {
         block.setUnlocalizedName(key).setCreativeTab(MMItems.tab);
         renderMap.put(key, block);
-        GameRegistry.registerBlock(block, key);
+        GameRegistry.registerBlock(block, ItemBlockMod.class, key);
     }
 
     private static void registerBlock(Block block, String name, String key, Class tile) {
@@ -104,7 +100,7 @@ public class MMBlocks {
     private static void registerBlock(Block block, String name, String key, Class tile, CreativeTabs tab) {
         block.setUnlocalizedName(key).setCreativeTab(tab);
         renderMap.put(key, block);
-        GameRegistry.registerBlock(block, key);
+        GameRegistry.registerBlock(block, ItemBlockMod.class, key);
         GameRegistry.registerTileEntity(tile, key);
     }
 

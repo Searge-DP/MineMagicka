@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemStaff extends Item {
+public class ItemStaff extends ModItem {
 
     public ItemStaff() {
         this.setMaxStackSize(1);

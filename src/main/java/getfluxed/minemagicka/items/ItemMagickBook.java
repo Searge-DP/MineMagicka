@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ItemMagickBook extends Item implements ICompendium {
+public class ItemMagickBook extends ModItem implements ICompendium {
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

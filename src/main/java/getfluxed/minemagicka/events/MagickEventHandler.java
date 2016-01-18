@@ -106,19 +106,23 @@ public class MagickEventHandler {
                 if (SpellHandler.getElements(staffStack).getElements().length > 0) {
                     if (Minecraft.getMinecraft().ingameGUI != null) {
                         for (IElement el : SpellHandler.getElements(staffStack).getElements()) {
-                            if (el != null)
-                                el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
-                            if (xCount > 3) {
-                                xCount = 0;
-                                elY += 24;
+                            for (int i = 0; i < SpellHandler.getElements(staffStack).getAmount(el); i++) {
+                                if (el != null)
+                                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
+                                if (xCount > 3) {
+                                    xCount = 0;
+                                    elY += 24;
+                                }
                             }
                         }
                         for (IElement el : SpellHandler.getElements(staffStack).getModifierElements()) {
-                            if (el != null)
-                                el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
-                            if (xCount > 3) {
-                                xCount = 0;
-                                elY += 24;
+                            for (int i = 0; i < SpellHandler.getElements(staffStack).getModifierAmount(el); i++) {
+                                if (el != null)
+                                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
+                                if (xCount > 3) {
+                                    xCount = 0;
+                                    elY += 24;
+                                }
                             }
                         }
                     }
