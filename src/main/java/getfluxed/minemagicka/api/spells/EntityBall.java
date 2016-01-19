@@ -1,4 +1,4 @@
-package getfluxed.minemagicka.entities.spells.base;
+package getfluxed.minemagicka.api.spells;
 
 import getfluxed.minemagicka.api.SpellRegistry;
 import getfluxed.minemagicka.api.elements.ElementCompound;

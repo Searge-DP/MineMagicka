@@ -1,7 +1,7 @@
 package getfluxed.minemagicka.proxy;
 
 import getfluxed.minemagicka.client.render.RenderBall;
-import getfluxed.minemagicka.entities.spells.base.EntityBall;
+import getfluxed.minemagicka.api.spells.EntityBall;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

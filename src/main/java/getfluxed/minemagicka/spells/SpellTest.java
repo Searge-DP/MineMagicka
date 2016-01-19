@@ -1,0 +1,49 @@
+package getfluxed.minemagicka.spells;
+
+import getfluxed.minemagicka.api.ElementRegistry;
+import getfluxed.minemagicka.api.elements.ElementCompound;
+import getfluxed.minemagicka.api.elements.ElementList;
+import getfluxed.minemagicka.api.elements.IElement;
+import getfluxed.minemagicka.api.spells.ISpell;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
+
+/**
+ * @author WireSegal
+ *         Created at 8:30 PM on 1/18/16.
+ */
+public class SpellTest implements ISpell {
+
+    public SpellTest() {
+
+    }
+
+    @Override
+    public String getUnlocalizedName() {
+        return "test";
+    }
+
+    @Override
+    public boolean spellMatches(ElementCompound elements) {
+        return elements.equals(getElements());
+    }
+
+    @Override
+    public ElementList getElements() {
+        ElementList castList = new ElementList();
+        for (IElement el : ElementRegistry.getElementList()) {
+            castList.add(el, 1);
+        }
+        return castList;
+    }
+
+    @Override
+    public String getName() {
+        return "Test spell";
+    }
+
+    @Override
+    public void cast(World world, EntityPlayer player, ElementCompound elements, double x, double y, double z) {
+        System.out.println(elements);
+    }
+}

@@ -118,11 +118,13 @@ public class MagickEventHandler {
                             }
                         }
                         for (IElement el : SpellHandler.getElements(staffStack).getModifierElements()) {
-                            if (el != null)
-                                el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
-                            if (xCount > 3) {
-                                xCount = 0;
-                                elY += 24;
+                            for (int i = 0; i < SpellHandler.getElements(staffStack).getModifierAmount(el); i++) {
+                                if (el != null)
+                                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
+                                if (xCount > 3) {
+                                    xCount = 0;
+                                    elY += 24;
+                                }
                             }
                         }
                     }

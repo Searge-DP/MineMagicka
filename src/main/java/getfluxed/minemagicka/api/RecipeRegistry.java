@@ -35,8 +35,4 @@ public class RecipeRegistry {
     public static int getLiquidMagickFromMeta(int metadata) {
         return 1000 / (metadata + 1);
     }
-
-    public static void init() {
-        registerMagickInfusionRecipe(new RecipeMagickInfusion(new ItemStack(Items.paper), new ItemStack(MMItems.pageLocked), 250));
-    }
 }

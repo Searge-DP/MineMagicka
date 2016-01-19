@@ -2,8 +2,8 @@ package getfluxed.minemagicka.spells;
 
 import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.ElementList;
+import getfluxed.minemagicka.api.spells.EntityBall;
 import getfluxed.minemagicka.api.spells.ISpellBall;
-import getfluxed.minemagicka.entities.spells.base.EntityBall;
 import getfluxed.minemagicka.reference.ElementReference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MovingObjectPosition;
@@ -40,7 +40,7 @@ public class SpellEarthBall implements ISpellBall {
     @Override
     public void onImpact(EntityBall ball, World world, MovingObjectPosition mop) {
 
-        if (!world.isRemote && world != null && mop != null) {
+        if (world != null && !world.isRemote && mop != null) {
             double x;
             double y;
             double z;

@@ -1,0 +1,20 @@
+itemGroup.mm.tab.name=MineMagicka
+
+tile.mm.liquidMagick.name=Liquid Magick
+tile.mm.magickInfuser.name=Magick Infuser
+tile.mm.bricksEmbrane.name=Embrane Bricks
+tile.mm.embrane_ore.name=Embrane Ore
+tile.mm.researchTableBook.name=Research Table
+tile.mm.magick_log.name=Magick Log
+tile.mm.magick_block.name=Magick Block
+tile.mm.magick_leaves.name=Magick Leaves
+
+item.mm.bucketmagickliquid.name=Bucket of Magick
+item.mm.bookMagick.name=The Compendium
+item.mm.embrane_ingot.name=Embrane Ingot
+item.mm.staff.name=Mage's Staff
+item.mm.page_magick.name=Compendium Page
+item.mm.page_magick_locked.name=Locked Compendium Page
+
+mm.spells.earthball.name=Sfaíra tis gis
+mm.spells.fireball.name=Volída

@@ -24,7 +24,7 @@ public class ElementBase implements IElement {
      * DO NOT USE THIS! It creates a primary element, and should only be used by MineMagika itself.
      */
     public ElementBase(String name, int color, ResourceLocation icon) {
-        this(name, color, icon, null, new ArrayList<IElement>());
+        this(name, color, icon, null, new ArrayList<>());
     }
 
     /**
@@ -89,4 +89,8 @@ public class ElementBase implements IElement {
         return ingredients;
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

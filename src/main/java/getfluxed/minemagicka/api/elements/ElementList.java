@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
  *         Created at 4:34 PM on 1/17/16.
  */
 public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectList.
-    private LinkedHashMap<IElement, Integer> elements = new LinkedHashMap<IElement, Integer>();
+    private LinkedHashMap<IElement, Integer> elements = new LinkedHashMap<>();
 
     public ElementList copy() {
         return (new ElementList()).add(this);
