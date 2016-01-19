@@ -4,6 +4,7 @@ import getfluxed.minemagicka.MineMagicka;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.SpellRegistry;
 import getfluxed.minemagicka.api.elements.IElement;
+import getfluxed.minemagicka.api.events.SelectElementEvent;
 import getfluxed.minemagicka.api.spells.ISpell;
 import getfluxed.minemagicka.blocks.MMBlocks;
 import getfluxed.minemagicka.handlers.SpellHandler;
@@ -14,6 +15,7 @@ import getfluxed.minemagicka.network.messages.MessageSelectElement;
 import getfluxed.minemagicka.network.messages.spells.MessageAddElement;
 import getfluxed.minemagicka.network.messages.spells.MessageCastSpell;
 import getfluxed.minemagicka.network.messages.spells.MessageClearElements;
+import getfluxed.minemagicka.reference.ElementReference;
 import getfluxed.minemagicka.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -86,7 +88,7 @@ public class MagickEventHandler {
                 Minecraft.getMinecraft().ingameGUI.drawTexturedModalRect(selEmX, selEmY, 0, 24, 24, 24);
                 GL11.glPopMatrix();
                 GL11.glPushMatrix();
-                int[] xCoords = new int[]{0, 24, 48, 72};
+                int[] xCoords = new int[] { 0, 24, 48, 72 };
                 int xCount = 0;
                 int elY = 0;
                 // Renders the spell bar
@@ -106,11 +108,13 @@ public class MagickEventHandler {
                 if (SpellHandler.getElements(staffStack).getElements().length > 0) {
                     if (Minecraft.getMinecraft().ingameGUI != null) {
                         for (IElement el : SpellHandler.getElements(staffStack).getElements()) {
-                            if (el != null)
-                                el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
-                            if (xCount > 3) {
-                                xCount = 0;
-                                elY += 24;
+                            for (int i = 0; i < SpellHandler.getElements(staffStack).getAmount(el); i++) {
+                                if (el != null)
+                                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY);
+                                if (xCount > 3) {
+                                    xCount = 0;
+                                    elY += 24;
+                                }
                             }
                         }
                         for (IElement el : SpellHandler.getElements(staffStack).getModifierElements()) {
@@ -187,6 +191,13 @@ public class MagickEventHandler {
                     evt.result = new ItemStack(MMItems.bucketMagickLiquid);
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void cast(SelectElementEvent e) {
+        if (e.element.equals(ElementReference.arcane)) {
+            System.out.println("goodbye");
         }
     }
 }

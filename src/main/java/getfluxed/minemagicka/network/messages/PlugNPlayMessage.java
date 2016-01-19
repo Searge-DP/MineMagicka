@@ -12,6 +12,14 @@
  */
 package getfluxed.minemagicka.network.messages;
 
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
+import java.util.HashMap;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.ElementList;
 import io.netty.buffer.ByteBuf;
@@ -22,18 +30,11 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.Arrays;
-import java.util.HashMap;
 
 public abstract class PlugNPlayMessage<REQ extends PlugNPlayMessage> implements Serializable, IMessage, IMessageHandler<REQ, IMessage> {
 
-    private static final HashMap<Class, Pair<Reader, Writer>> handlers = new HashMap<>();
-    private static final HashMap<Class, Field[]> fieldCache = new HashMap<>();
+    private static final HashMap<Class, Pair<Reader, Writer>> handlers = new HashMap<Class, Pair<Reader, Writer>>();
+    private static final HashMap<Class, Field[]> fieldCache = new HashMap<Class, Field[]>();
 
     static {
         map(byte.class, PlugNPlayMessage::readByte, PlugNPlayMessage::writeByte);
