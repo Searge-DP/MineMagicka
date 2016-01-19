@@ -2,9 +2,9 @@ package getfluxed.minemagicka;
 
 import getfluxed.minemagicka.api.RecipeRegistry;
 import getfluxed.minemagicka.api.recipes.RecipeMagickInfusion;
+import getfluxed.minemagicka.api.spells.EntityBall;
 import getfluxed.minemagicka.blocks.MMBlocks;
 import getfluxed.minemagicka.client.GUIHandler;
-import getfluxed.minemagicka.api.spells.EntityBall;
 import getfluxed.minemagicka.events.MagickEventHandler;
 import getfluxed.minemagicka.items.MMItems;
 import getfluxed.minemagicka.liquids.MMLiquids;
@@ -14,6 +14,7 @@ import getfluxed.minemagicka.reference.ElementReference;
 import getfluxed.minemagicka.reference.SpellReference;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -27,6 +28,8 @@ import static getfluxed.minemagicka.reference.Reference.*;
 
 @Mod(modid = modid, name = name, version = version)
 public class MineMagicka {
+
+    public static boolean isDevEnv = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 
     @SidedProxy(clientSide = "getfluxed.minemagicka.proxy.ClientProxy", serverSide = "getfluxed.minemagicka.proxy.ServerProxy")
     public static IProxy proxy;

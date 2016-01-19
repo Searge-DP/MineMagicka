@@ -1,9 +1,9 @@
 package getfluxed.minemagicka.api;
 
+import getfluxed.minemagicka.api.elements.IElement;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import getfluxed.minemagicka.api.elements.IElement;
 
 public class ElementRegistry {
 
@@ -23,7 +23,7 @@ public class ElementRegistry {
 
     public static IElement[] getElementList() {
         IElement[] q = new IElement[1];
-        return (IElement[]) elements.values().toArray(q);
+        return elements.values().toArray(q);
     }
 
     public static IElement getElementFromName(String name) {
