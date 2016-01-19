@@ -68,7 +68,8 @@ public interface IElement {
      * @param gui
      * @param x
      * @param y
+     * @param modifier
      */
-    public void render(Gui gui, int x, int y);
+    public void render(Gui gui, int x, int y, boolean modifier);
 
 }
