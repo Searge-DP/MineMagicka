@@ -2,6 +2,7 @@ package getfluxed.minemagicka.client.proxy;
 
 import getfluxed.minemagicka.client.render.RenderBall;
 import getfluxed.minemagicka.api.spells.EntityBall;
+import getfluxed.minemagicka.client.render.radial.RadialGUIHandler;
 import getfluxed.minemagicka.common.proxy.IProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +23,7 @@ public class ClientProxy implements IProxy {
 
     @Override
     public void registerRenderers() {
+        RadialGUIHandler.setup();
         RenderingRegistry.registerEntityRenderingHandler(EntityBall.class, new RenderBall(Minecraft.getMinecraft().getRenderManager()));
     }
 
