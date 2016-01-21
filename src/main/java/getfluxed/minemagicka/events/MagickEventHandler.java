@@ -81,8 +81,6 @@ public class MagickEventHandler {
                 int selEmY = 0;
                 if (selectedElement > 3) {
                     selEmY = 24;
-                } else {
-                    selEmY = 0;
                 }
                 Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Reference.modid, "textures/gui/guiElements.png"));
                 Minecraft.getMinecraft().ingameGUI.drawTexturedModalRect(selEmX, selEmY, 0, 24, 24, 24);
@@ -184,7 +182,7 @@ public class MagickEventHandler {
 
             Block bID = evt.world.getBlockState(pos).getBlock();
             if (bID == MMBlocks.blockLiquidMagick) {
-                if (evt.entityPlayer.capabilities.isCreativeMode) {
+                if (evt.entityPlayer != null && evt.entityPlayer.capabilities.isCreativeMode) {
                     evt.world.setBlockToAir(pos);
                 } else {
                     evt.world.setBlockToAir(pos);
