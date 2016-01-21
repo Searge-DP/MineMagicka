@@ -7,6 +7,7 @@ import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.api.spells.ISpell;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
 /**
@@ -47,5 +48,6 @@ public class SpellTest implements ISpell {
     @Override
     public void cast(World world, EntityPlayer player, ElementCompound elements, double x, double y, double z) {
         System.out.println(elements);
+        player.addChatMessage(new ChatComponentText(elements.toString()));
     }
 }
