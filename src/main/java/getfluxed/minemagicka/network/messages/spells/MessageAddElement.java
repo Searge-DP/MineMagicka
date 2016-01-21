@@ -13,12 +13,13 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageAddElement extends PlugNPlayMessage<MessageAddElement> {
     public String element;
-
+    public boolean modifier;
     public MessageAddElement() {
     }
 
-    public MessageAddElement(IElement element) {
+    public MessageAddElement(IElement element, boolean modifier) {
         this.element = element.getUnlocalizedName();
+        this.modifier = modifier;
     }
 
     @Override
@@ -28,10 +29,10 @@ public class MessageAddElement extends PlugNPlayMessage<MessageAddElement> {
             ItemStack stack = entity.inventory.getCurrentItem();
             if (stack != null) {
                 if (!MinecraftForge.EVENT_BUS.post(new SelectElementEvent(entity, stack, SpellHandler.getElements(stack), ElementRegistry.getElementFromName(element), false))) {
-                    System.out.println("hello");
+                    SpellHandler.addElement(stack, ElementRegistry.getElementFromName(element));
                 }
 
-                SpellHandler.addElement(stack, ElementRegistry.getElementFromName(element));
+                
             }
         }
 

@@ -1,5 +1,8 @@
 package getfluxed.minemagicka.events;
 
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
 import getfluxed.minemagicka.MineMagicka;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.SpellRegistry;
@@ -14,7 +17,6 @@ import getfluxed.minemagicka.network.PacketHandler;
 import getfluxed.minemagicka.network.messages.MessageSelectElement;
 import getfluxed.minemagicka.network.messages.spells.MessageAddElement;
 import getfluxed.minemagicka.network.messages.spells.MessageCastSpell;
-import getfluxed.minemagicka.network.messages.spells.MessageClearElements;
 import getfluxed.minemagicka.reference.ElementReference;
 import getfluxed.minemagicka.reference.Reference;
 import net.minecraft.block.Block;
@@ -35,8 +37,6 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
 
 public class MagickEventHandler {
 
@@ -114,17 +114,20 @@ public class MagickEventHandler {
                                 }
                             }
                         }
-                        for (IElement el : SpellHandler.getElements(staffStack).getModifierElements()) {
-                            for (int i = 0; i < SpellHandler.getElements(staffStack).getModifierAmount(el); i++) {
-                                if (el != null)
-                                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY, true);
-                                if (xCount > 3) {
-                                    xCount = 0;
-                                    elY += 24;
+                    }
+                    if (SpellHandler.getElements(staffStack).getModifierElements().length > 0)
+                        if (Minecraft.getMinecraft().ingameGUI != null) {
+                            for (IElement el : SpellHandler.getElements(staffStack).getModifierElements()) {
+                                for (int i = 0; i < SpellHandler.getElements(staffStack).getModifierAmount(el); i++) {
+                                    if (el != null)
+                                        el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY, true);
+                                    if (xCount > 3) {
+                                        xCount = 0;
+                                        elY += 24;
+                                    }
                                 }
                             }
                         }
-                    }
                 }
                 GL11.glDisable(GL11.GL_BLEND);
                 GL11.glPopMatrix();
@@ -153,10 +156,13 @@ public class MagickEventHandler {
                 }
                 if (e.button == 0 && e.buttonstate) {
                     SpellHandler.addElement(staffStack, ElementRegistry.getElementList()[selectedElement]);
-                    PacketHandler.INSTANCE.sendToServer(new MessageAddElement(ElementRegistry.getElementList()[selectedElement]));
+                    PacketHandler.INSTANCE.sendToServer(new MessageAddElement(ElementRegistry.getElementList()[selectedElement], false));
                 } else if (e.button == 1 && e.buttonstate) {
-                    SpellHandler.clearElements(staffStack);
-                    PacketHandler.INSTANCE.sendToServer(new MessageClearElements());
+                    SpellHandler.addModifierElement(staffStack, ElementRegistry.getElementList()[selectedElement]);
+                    PacketHandler.INSTANCE.sendToServer(new MessageAddElement(ElementRegistry.getElementList()[selectedElement], true));
+                    // SpellHandler.clearElements(staffStack);
+                    // PacketHandler.INSTANCE.sendToServer(new
+                    // MessageClearElements());
                 }
                 cancel = true;
             }

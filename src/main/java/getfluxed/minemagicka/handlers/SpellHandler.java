@@ -14,6 +14,14 @@ public class SpellHandler {
         currentElements.writeToNBT(nbt);
         stack.getTagCompound().setTag("MMTag", nbt);
     }
+    
+    public static void addModifierElement(ItemStack stack, IElement element){
+        ElementCompound currentElements = getElements(stack);
+        currentElements.addModifier(element, 1);
+        NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("MMTag");
+        currentElements.writeToNBT(nbt);
+        stack.getTagCompound().setTag("MMTag", nbt);
+    }
 
     public static ElementCompound getElements(ItemStack stack) {
         NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("MMTag");
