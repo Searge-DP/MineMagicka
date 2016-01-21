@@ -38,5 +38,5 @@ public enum CastingType {
      *
      * Example: Block exchanging (DESTROY, MOVE)
      */
-    WEAVE;
+    WEAVE
 }

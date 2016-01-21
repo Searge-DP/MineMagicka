@@ -11,7 +11,7 @@ public class SpellRegistry {
     private static Map<Integer, ISpell> spells = new HashMap<>();
     private static int id = 0;
 
-    public static void registerElement(ISpell spell) {
+    public static void registerSpell(ISpell spell) {
         getSpells().put(id++, spell);
     }
 
