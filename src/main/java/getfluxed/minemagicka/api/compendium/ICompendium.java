@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author WireSegal
  *         Created at 7:08 PM on 1/6/16.
- *         <p/>
+ *         <p>
  *         Defines the interface for a Compendium item.
  */
 public interface ICompendium {

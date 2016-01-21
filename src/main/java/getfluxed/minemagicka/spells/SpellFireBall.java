@@ -1,5 +1,6 @@
 package getfluxed.minemagicka.spells;
 
+import getfluxed.minemagicka.api.casting.CastingType;
 import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.spells.EntityBall;
@@ -13,6 +14,11 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class SpellFireBall implements ISpellBall {
+
+    @Override
+    public CastingType getType() {
+        return CastingType.CREATE;
+    }
 
     @Override
     public String getName() {

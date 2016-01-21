@@ -106,11 +106,11 @@ public class BlockMagickInfuser extends Block implements ITileEntityProvider {
      * Convert the BlockState into the correct metadata value
      */
     public int getMetaFromState(IBlockState state) {
-        return ((EnumFacing) state.getValue(FACING)).getIndex();
+        return state.getValue(FACING).getIndex();
     }
 
     protected BlockState createBlockState() {
-        return new BlockState(this, new IProperty[]{FACING});
+        return new BlockState(this, FACING);
     }
 
     @Override

@@ -12,33 +12,33 @@ public interface IElement {
      *
      * @return the name of the element
      */
-    public String getName();
+    String getName();
 
     /**
      * return the unlocalized name of the element
      */
-    public String getUnlocalizedName();
+    String getUnlocalizedName();
 
     /**
      * Gets the description of the element
      *
      * @return the description of the element
      */
-    public String getDescription();
+    String getDescription();
 
     /**
      * Gets the texture of the element.
      *
      * @return the texture of the element
      */
-    public ResourceLocation getTexture();
+    ResourceLocation getTexture();
 
     /**
      * Gets the glColor of the element.
      *
      * @return The color in 0xrrggbb form.
      */
-    public int getColor();
+    int getColor();
 
     /**
      * Is this a primary element? (Does a player need to combine elements to
@@ -46,21 +46,21 @@ public interface IElement {
      *
      * @return
      */
-    public boolean isPrimary();
+    boolean isPrimary();
 
     /**
      * Gets the opposite elements
      *
      * @return
      */
-    public List<IElement> getOpposites();
+    List<IElement> getOpposites();
 
     /**
      * If this isn't a primary element, this combination is used to create it. Can only include Primary Elements
      *
      * @return
      */
-    public Pair<IElement, IElement> getCombination();
+    Pair<IElement, IElement> getCombination();
 
     /**
      * Renders the element in the current gui
@@ -70,6 +70,6 @@ public interface IElement {
      * @param y
      * @param modifier
      */
-    public void render(Gui gui, int x, int y, boolean modifier);
+    void render(Gui gui, int x, int y, boolean modifier);
 
 }

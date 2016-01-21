@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ElementRegistry {
 
-    private static Map<String, IElement> elements = new LinkedHashMap<String, IElement>();
+    private static Map<String, IElement> elements = new LinkedHashMap<>();
 
     public static void registerElement(String key, IElement element) {
         elements.put(key, element);

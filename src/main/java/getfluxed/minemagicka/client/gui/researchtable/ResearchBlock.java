@@ -85,11 +85,17 @@ public class ResearchBlock {
     }
 
     public enum BlockType {
-        one(new CoordinatePair(176, 0), 1), two(new CoordinatePair(176, 9), 2), three(new CoordinatePair(176, 18), 3), four(new CoordinatePair(176, 27), 4), magickal(new CoordinatePair(176, 36), 1), end(new CoordinatePair(176, 45), 1), block(new CoordinatePair(176, 54), 1);
+        one(new CoordinatePair(176, 0), 1),
+        two(new CoordinatePair(176, 9), 2),
+        three(new CoordinatePair(176, 18), 3),
+        four(new CoordinatePair(176, 27), 4),
+        magickal(new CoordinatePair(176, 36), 1),
+        end(new CoordinatePair(176, 45), 1),
+        block(new CoordinatePair(176, 54), 1);
         public CoordinatePair pair;
         public int blocks;
 
-        private BlockType(CoordinatePair pair, int blocks) {
+        BlockType(CoordinatePair pair, int blocks) {
             this.pair = pair;
             this.blocks = blocks;
         }

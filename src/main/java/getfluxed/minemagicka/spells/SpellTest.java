@@ -1,6 +1,7 @@
 package getfluxed.minemagicka.spells;
 
 import getfluxed.minemagicka.api.ElementRegistry;
+import getfluxed.minemagicka.api.casting.CastingType;
 import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.elements.IElement;
@@ -14,8 +15,9 @@ import net.minecraft.world.World;
  */
 public class SpellTest implements ISpell {
 
-    public SpellTest() {
-
+    @Override
+    public CastingType getType() {
+        return CastingType.WEAVE;
     }
 
     @Override

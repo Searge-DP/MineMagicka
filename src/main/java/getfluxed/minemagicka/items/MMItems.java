@@ -19,7 +19,6 @@ import java.util.*;
 
 public class MMItems {
     public static CreativeTabs tab = new CreativeTabMM();
-    ;
 
     public static Item staff = new ItemStaff();
     public static Item bucketMagickLiquid = new ItemFluidBucket((BlockFluidBase) MMBlocks.blockLiquidMagick);

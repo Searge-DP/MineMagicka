@@ -42,7 +42,6 @@ public class MagickEventHandler {
 
     public MagickEventHandler() {
         MinecraftForge.EVENT_BUS.register(this);
-        FMLCommonHandler.instance().bus().register(this);
     }
 
     @EventHandler

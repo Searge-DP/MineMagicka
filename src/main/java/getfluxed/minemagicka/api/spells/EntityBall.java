@@ -2,7 +2,6 @@ package getfluxed.minemagicka.api.spells;
 
 import getfluxed.minemagicka.api.SpellRegistry;
 import getfluxed.minemagicka.api.elements.ElementCompound;
-import getfluxed.minemagicka.api.spells.ISpellBall;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;

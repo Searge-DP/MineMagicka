@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author WireSegal
  *         Created at 7:00 PM on 1/6/16.
- *         <p/>
+ *         <p>
  *         Defines the interface a Compendium Entry must have.
  */
 public interface ICompendiumEntry {

@@ -1,18 +1,14 @@
 package getfluxed.minemagicka.api;
 
+import getfluxed.minemagicka.api.recipes.RecipeMagickInfusion;
+import net.minecraft.item.ItemStack;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import getfluxed.minemagicka.api.recipes.RecipeMagickInfusion;
-import getfluxed.minemagicka.items.MMItems;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
-
 public class RecipeRegistry {
 
-    public static List<RecipeMagickInfusion> infusionRecipes = new ArrayList<RecipeMagickInfusion>();
+    public static List<RecipeMagickInfusion> infusionRecipes = new ArrayList<>();
 
     public static void registerMagickInfusionRecipe(RecipeMagickInfusion recipe) {
         infusionRecipes.add(recipe);

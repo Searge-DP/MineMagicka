@@ -6,7 +6,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * @author WireSegal
  *         Created at 7:05 PM on 1/6/16.
- *         <p/>
+ *         <p>
  *         Defines the interface a Compendium Page must have.
  */
 public interface ICompendiumPage {

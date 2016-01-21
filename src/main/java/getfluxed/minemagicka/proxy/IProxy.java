@@ -5,9 +5,9 @@ import net.minecraft.world.World;
 
 public interface IProxy {
 
-    public EntityPlayer getPlayer();
+    EntityPlayer getPlayer();
 
-    public World getWorld();
+    World getWorld();
 
-    public void registerRenderers();
+    void registerRenderers();
 }

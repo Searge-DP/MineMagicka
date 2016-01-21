@@ -12,14 +12,12 @@ import getfluxed.minemagicka.tileentities.researchtable.TileEntityResearchTableB
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -42,19 +40,19 @@ public class MMBlocks {
 
     public static Block magickBlock = new BlockMagickBlock();
 
-    public static Map<String, Block> renderMap = new HashMap<String, Block>();
-    public static Map<String, Block> renderFluidMap = new HashMap<String, Block>();
+    public static Map<String, Block> renderMap = new HashMap<>();
+    public static Map<String, Block> renderFluidMap = new HashMap<>();
 
     public static void preInit() {
-        registerBlockFluid(blockLiquidMagick, "blockLiquidMagick", "liquidMagick");
-        registerBlock(magickInfuser, "magickInfuser", "magickInfuser", TileEntityMagickInfuser.class);
-        registerBlock(magickInfuserOn, "magickInfuserOn", "magickInfuserOn", TileEntityMagickInfuser.class, null);
-        registerBlock(bricksEmbrane, "embraneBricks", "bricksEmbrane");
-        registerBlock(embraneOre, "embraneOre", "embrane_ore");
-        registerBlock(researchTableBook, "researchTableBook", "researchTableBook", TileEntityResearchTableBook.class);
-        registerBlock(logMagick, "logMagick", "magick_log");
-        registerBlock(magickBlock, "magickBlock", "magick_block");
-        registerBlock(leavesMagick, "leavesMagick", "magick_leaves");
+        registerBlockFluid(blockLiquidMagick, "liquidMagick");
+        registerBlock(magickInfuser, "magickInfuser", TileEntityMagickInfuser.class);
+        registerBlock(magickInfuserOn, "magickInfuserOn", TileEntityMagickInfuser.class, null);
+        registerBlock(bricksEmbrane, "bricksEmbrane");
+        registerBlock(embraneOre, "embrane_ore");
+        registerBlock(researchTableBook, "researchTableBook", TileEntityResearchTableBook.class);
+        registerBlock(logMagick, "magick_log");
+        registerBlock(magickBlock, "magick_block");
+        registerBlock(leavesMagick, "magick_leaves");
 
 
     }
@@ -69,7 +67,7 @@ public class MMBlocks {
 
         for (Entry<String, Block> ent : renderFluidMap.entrySet()) {
             final Block toRender = ent.getValue();
-            ModelBakery.addVariantName(Item.getItemFromBlock(toRender));
+            ModelBakery.registerItemVariants(Item.getItemFromBlock(toRender));
             ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(toRender), stack -> new ModelResourceLocation(Reference.modid + ":" + toRender.getClass().getSimpleName(), "fluid"));
             ModelLoader.setCustomStateMapper(toRender, new StateMapperBase() {
                 @Override
@@ -80,34 +78,28 @@ public class MMBlocks {
         }
     }
 
-    private static void registerBlockFluid(Block block, String name, String key) {
+    private static void registerBlockFluid(Block block, String key) {
         block.setUnlocalizedName(key).setCreativeTab(MMItems.tab);
         renderFluidMap.put(key, block);
         GameRegistry.registerBlock(block, ItemBlockMod.class, key);
     }
 
-    private static void registerBlock(Block block, String name, String key) {
+    private static void registerBlock(Block block, String key) {
         block.setUnlocalizedName(key).setCreativeTab(MMItems.tab);
         renderMap.put(key, block);
         GameRegistry.registerBlock(block, ItemBlockMod.class, key);
     }
 
-    private static void registerBlock(Block block, String name, String key, Class tile) {
-        registerBlock(block, name, key);
+    private static void registerBlock(Block block, String key, Class tile) {
+        registerBlock(block, key);
         GameRegistry.registerTileEntity(tile, key);
     }
 
-    private static void registerBlock(Block block, String name, String key, Class tile, CreativeTabs tab) {
+    private static void registerBlock(Block block, String key, Class tile, CreativeTabs tab) {
         block.setUnlocalizedName(key).setCreativeTab(tab);
         renderMap.put(key, block);
         GameRegistry.registerBlock(block, ItemBlockMod.class, key);
         GameRegistry.registerTileEntity(tile, key);
-    }
-
-    public void fluidRender(Block block) {
-
-        final Block toRender = block;
-
     }
 
 }

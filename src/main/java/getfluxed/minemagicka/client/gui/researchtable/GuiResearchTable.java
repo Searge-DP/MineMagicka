@@ -209,7 +209,7 @@ public class GuiResearchTable extends GuiContainer {
     }
 
     public List<ResearchBlock> getBlocksFromID(String id) {
-        List<ResearchBlock> retList = new ArrayList<ResearchBlock>();
+        List<ResearchBlock> retList = new ArrayList<>();
         for (ResearchBlock res : researchBlocks) {
             if (res.getIdentifier().equals(id)) {
                 retList.add(res);

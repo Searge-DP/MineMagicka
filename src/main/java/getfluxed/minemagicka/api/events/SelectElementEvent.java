@@ -9,10 +9,10 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 public class SelectElementEvent extends Event {
 
     public final EntityPlayer player;
+    public final boolean modifier;
     public ItemStack stack;
     public ElementCompound elements;
     public IElement element;
-    public final boolean modifier;
 
     public SelectElementEvent(EntityPlayer player, ItemStack stack, ElementCompound elements, IElement element, boolean modifier) {
         this.player = player;

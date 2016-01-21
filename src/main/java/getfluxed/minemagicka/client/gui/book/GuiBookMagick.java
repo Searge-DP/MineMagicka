@@ -9,8 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
 
-public class GuiBookMagick extends GuiScreen { // TODO: 1/6/16 Implement
-    // getfluxed.minemagicka.api.compendium.IGuiCompendium
+public class GuiBookMagick extends GuiScreen { // TODO: 1/6/16 Implement getfluxed.minemagicka.api.compendium.IGuiCompendium
     public static ResourceLocation texture = new ResourceLocation(Reference.modid, "textures/gui/guiBookMagick.png");
     public static ResourceLocation other = new ResourceLocation(Reference.modid, "textures/gui/guiBookOther.png");
     int guiWidth = 256;

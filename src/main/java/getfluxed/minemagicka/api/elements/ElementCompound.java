@@ -103,8 +103,9 @@ public class ElementCompound { // A wrapper around ElementList.
     }
 
     public ElementCompound add(ElementList in) {
-       return add(in, false);
+        return add(in, false);
     }
+
     public ElementCompound add(ElementList in, boolean mod) {
         if (mod)
             modifiers.add(in);
@@ -122,6 +123,7 @@ public class ElementCompound { // A wrapper around ElementList.
     public ElementCompound merge(ElementList in) {
         return merge(in, false);
     }
+
     public ElementCompound merge(ElementList in, boolean mod) {
         if (mod)
             modifiers.merge(in);

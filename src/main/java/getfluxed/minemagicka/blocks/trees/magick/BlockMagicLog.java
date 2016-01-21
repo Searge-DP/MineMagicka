@@ -41,7 +41,7 @@ public class BlockMagicLog extends BlockLog {
     public int getMetaFromState(IBlockState state) {
         int i = 0;
 
-        switch ((BlockLog.EnumAxis) state.getValue(LOG_AXIS)) {
+        switch (state.getValue(LOG_AXIS)) {
             case X:
                 i |= 4;
                 break;
@@ -56,6 +56,6 @@ public class BlockMagicLog extends BlockLog {
     }
 
     protected BlockState createBlockState() {
-        return new BlockState(this, new IProperty[]{LOG_AXIS});
+        return new BlockState(this, LOG_AXIS);
     }
 }

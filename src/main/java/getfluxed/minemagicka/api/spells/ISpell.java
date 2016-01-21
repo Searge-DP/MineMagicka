@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public interface ISpell {
 
-    CastingType type = null;
+    CastingType getType();
 
     String getName();
 
