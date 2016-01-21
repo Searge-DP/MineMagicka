@@ -15,7 +15,9 @@ public interface IRadialRender {
      * @param gui The current GUI.
      * @param x The X coordinate onscreen to render at.
      * @param y The Y coordinate onscreen to render at.
+     * @param xSize The width to render.
+     * @param ySize The height to render.
      * @param colorModifier The color to apply to the object. (Example: Blue when selected.)
      */
-    void render(Gui gui, int x, int y, Color colorModifier);
+    void render(Gui gui, int x, int y, int xSize, int ySize, Color colorModifier);
 }

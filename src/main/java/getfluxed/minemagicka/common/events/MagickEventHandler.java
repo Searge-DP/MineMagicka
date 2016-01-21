@@ -91,7 +91,7 @@ public class MagickEventHandler {
                 int elY = 0;
                 // Renders the spell bar
                 for (IElement el : ElementRegistry.getElements().values()) {
-                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], elY, null);
+                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], elY, 24, 24, null);
                     if (xCount > 3) {
                         xCount = 0;
                         elY = 24;
@@ -108,7 +108,7 @@ public class MagickEventHandler {
                         for (IElement el : SpellHandler.getElements(staffStack).getElements()) {
                             for (int i = 0; i < SpellHandler.getElements(staffStack).getAmount(el); i++) {
                                 if (el != null)
-                                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY, null);
+                                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY, 24, 24, null);
                                 if (xCount > 3) {
                                     xCount = 0;
                                     elY += 24;
@@ -121,7 +121,7 @@ public class MagickEventHandler {
                             for (IElement el : SpellHandler.getElements(staffStack).getModifierElements()) {
                                 for (int i = 0; i < SpellHandler.getElements(staffStack).getModifierAmount(el); i++) {
                                     if (el != null)
-                                        el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY, Color.black);
+                                        el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY, 24, 24, Color.black);
                                     if (xCount > 3) {
                                         xCount = 0;
                                         elY += 24;
