@@ -1,7 +1,7 @@
 package getfluxed.minemagicka.client.render;
 
 import getfluxed.minemagicka.client.render.models.ModelBall;
-import getfluxed.minemagicka.reference.Reference;
+import getfluxed.minemagicka.common.reference.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderEntity;
 import net.minecraft.client.renderer.entity.RenderManager;

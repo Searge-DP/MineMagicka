@@ -1,6 +1,6 @@
 package getfluxed.minemagicka.client.gui.book;
 
-import getfluxed.minemagicka.reference.Reference;
+import getfluxed.minemagicka.common.reference.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;

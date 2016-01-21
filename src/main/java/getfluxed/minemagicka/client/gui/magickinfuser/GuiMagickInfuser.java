@@ -1,7 +1,7 @@
 package getfluxed.minemagicka.client.gui.magickinfuser;
 
-import getfluxed.minemagicka.reference.Reference;
-import getfluxed.minemagicka.tileentities.TileEntityMagickInfuser;
+import getfluxed.minemagicka.common.reference.Reference;
+import getfluxed.minemagicka.common.tileentities.TileEntityMagickInfuser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
