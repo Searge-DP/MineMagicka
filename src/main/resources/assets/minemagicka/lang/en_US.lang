@@ -16,6 +16,15 @@ item.mm.staff.name=Mage's Staff
 item.mm.page_magick.name=Compendium Page
 item.mm.page_magick_locked.name=Locked Compendium Page
 
+mm.element.hydros.description=Water, Flow
+mm.element.zoia.description=Life, Birth
+mm.element.alexia.description=Shield, Protection
+mm.element.krio.description=Cold, Preservation
+mm.element.keranos.description=Lightning, Connection
+mm.element.magikos.description=&kMortals cannot understand&r
+mm.element.gio.description=Earth, Binding
+mm.element.floya.description=Fire, Emotion
+
 mm.spells.earthball.name=Sfaíra tis gis
 mm.spells.fireball.name=Volída
 mm.spells.heal.name=Pligés therapeía

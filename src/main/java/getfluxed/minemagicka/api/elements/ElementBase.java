@@ -67,7 +67,7 @@ public class ElementBase implements IElement {
 
     @Override
     public String getDescription() {
-        return StatCollector.translateToLocal("mm.element." + this.getUnlocalizedName() + ".description");
+        return StatCollector.translateToLocal("mm.element." + this.getUnlocalizedName() + ".description").replace('&', '\u00a7');
     }
 
     @Override
