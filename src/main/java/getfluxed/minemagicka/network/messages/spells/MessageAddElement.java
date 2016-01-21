@@ -29,7 +29,10 @@ public class MessageAddElement extends PlugNPlayMessage<MessageAddElement> {
             ItemStack stack = entity.inventory.getCurrentItem();
             if (stack != null) {
                 if (!MinecraftForge.EVENT_BUS.post(new SelectElementEvent(entity, stack, SpellHandler.getElements(stack), ElementRegistry.getElementFromName(element), false))) {
-                    SpellHandler.addElement(stack, ElementRegistry.getElementFromName(element));
+                    if (modifier)
+                        SpellHandler.addModifierElement(stack, ElementRegistry.getElementFromName(element));
+                    else
+                        SpellHandler.addElement(stack, ElementRegistry.getElementFromName(element));
                 }
 
                 

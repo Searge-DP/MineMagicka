@@ -55,6 +55,6 @@ public class SpellCure implements ISpell {
         if (extinguish)
             player.extinguish();
         if (gracePeriod)
-            player.addPotionEffect(new PotionEffect(Potion.resistance.id, 10, 2));
+            player.addPotionEffect(new PotionEffect(Potion.resistance.id, 100, 2));
     }
 }
