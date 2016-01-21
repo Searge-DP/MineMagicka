@@ -1,12 +1,13 @@
 package getfluxed.minemagicka.api.elements;
 
+import getfluxed.minemagicka.api.rendering.IRadialRender;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
-public interface IElement {
+public interface IElement extends IRadialRender {
     /**
      * Gets the localized name of the element
      *
@@ -61,15 +62,5 @@ public interface IElement {
      * @return
      */
     Pair<IElement, IElement> getCombination();
-
-    /**
-     * Renders the element in the current gui
-     *
-     * @param gui
-     * @param x
-     * @param y
-     * @param modifier
-     */
-    void render(Gui gui, int x, int y, boolean modifier);
 
 }

@@ -37,6 +37,8 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.awt.*;
+
 public class MagickEventHandler {
 
     public MagickEventHandler() {
@@ -89,7 +91,7 @@ public class MagickEventHandler {
                 int elY = 0;
                 // Renders the spell bar
                 for (IElement el : ElementRegistry.getElements().values()) {
-                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], elY, false);
+                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], elY, null);
                     if (xCount > 3) {
                         xCount = 0;
                         elY = 24;
@@ -106,7 +108,7 @@ public class MagickEventHandler {
                         for (IElement el : SpellHandler.getElements(staffStack).getElements()) {
                             for (int i = 0; i < SpellHandler.getElements(staffStack).getAmount(el); i++) {
                                 if (el != null)
-                                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY, false);
+                                    el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY, null);
                                 if (xCount > 3) {
                                     xCount = 0;
                                     elY += 24;
@@ -119,7 +121,7 @@ public class MagickEventHandler {
                             for (IElement el : SpellHandler.getElements(staffStack).getModifierElements()) {
                                 for (int i = 0; i < SpellHandler.getElements(staffStack).getModifierAmount(el); i++) {
                                     if (el != null)
-                                        el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY, true);
+                                        el.render(Minecraft.getMinecraft().ingameGUI, xCoords[xCount++], 36 + elY, Color.black);
                                     if (xCount > 3) {
                                         xCount = 0;
                                         elY += 24;

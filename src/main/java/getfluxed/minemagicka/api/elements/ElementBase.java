@@ -39,12 +39,16 @@ public class ElementBase implements IElement {
     }
 
     @SuppressWarnings("static-access")
-    public void render(Gui gui, int x, int y, boolean modifiers) {
+    @Override
+    public void render(Gui gui, int x, int y, Color colorModifier) {
         GL11.glPushMatrix();
         Minecraft.getMinecraft().getTextureManager().bindTexture(getTexture());
         Color renderColor = new Color(this.getColor());
-        if (modifiers)
-            renderColor = renderColor.darker().darker().darker();
+        if (colorModifier != null)
+            renderColor = new Color(
+                    (renderColor.getRed() + colorModifier.getRed())/2,
+                    (renderColor.getGreen() + colorModifier.getGreen())/2,
+                    (renderColor.getBlue() + colorModifier.getBlue())/2);
         GL11.glColor3f(renderColor.getRed() / 255F, renderColor.getGreen() / 255F, renderColor.getBlue() / 255F);
         gui.drawScaledCustomSizeModalRect(x, y, 0, 0, 24, 24, 24, 24, 24, 24);
         GL11.glColor3f(1F, 1F, 1F);
