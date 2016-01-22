@@ -26,7 +26,7 @@ public class RadialGUIHandler {
 
         @Override
         public int size() {
-            return 8;
+            return 4;
         }
 
         @Override
@@ -37,11 +37,6 @@ public class RadialGUIHandler {
         @Override
         public IRadialRender getOuterItem(int index) {
             return null;
-        }
-
-        @Override
-        public void onClick(boolean inner, int index) {
-
         }
     }
 
@@ -98,32 +93,34 @@ public class RadialGUIHandler {
             float x2;
             float y2;
 
-            GL11.glPushMatrix();
             GlStateManager.enableBlend();
             GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            GL11.glColor4f(0.0f,0.0f,0.0f,0.5f);
+            GlStateManager.color(0.0f,0.0f,0.0f,0.5f);
 
             GL11.glBegin(GL11.GL_TRIANGLE_FAN);
             GL11.glVertex2f(x1,y1);
 
+            int slice;
+            int oldSlice = 0;
+
             for (float angle=0f; angle <= 360; angle++) {
-                if (angle % (outerRad+1) == 0) {
-                    if (angle % (outerRad*2+1) != 0) {
-                        GL11.glColor4f(0.0f,0.0f,0.0f,0.5f);
-                    } else {
-                        GL11.glColor4f(0.2f,0.2f,0.2f,0.5f);
-                    }
+                slice = (int) angle/(outerRad+1);
+                if (slice != oldSlice) {
+                    oldSlice = slice;
+                    if (slice % 2 == 0)
+                        GlStateManager.color(0.0f,0.0f,0.0f,0.5f);
+                    else
+                        GlStateManager.color(0.5f,0.5f,0.5f,0.5f);
                 }
                 x2 = x1 + MathHelper.sin((float) (angle * Math.PI/180)) * radius;
                 y2 = y1 + MathHelper.cos((float) (angle * Math.PI/180)) * radius;
                 GL11.glVertex2f(x2,y2);
             }
 
-            GL11.glColor4f(1f,1f,1f,1f);
+            GlStateManager.color(1f,1f,1f,1f);
             GlStateManager.disableBlend();
 
             GL11.glEnd();
-            GL11.glPopMatrix();
 
             e.setCanceled(true);
         }
