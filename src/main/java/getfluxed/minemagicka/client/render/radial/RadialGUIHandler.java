@@ -1,6 +1,6 @@
 package getfluxed.minemagicka.client.render.radial;
 
-import getfluxed.minemagicka.api.rendering.IRadialRender;
+import getfluxed.minemagicka.api.rendering.IRadialItem;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -10,10 +10,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
+import java.awt.*;
+
 /**
  * @author WireSegal
  *         Created at 9:50 AM on 1/21/16.
  */
+@SideOnly(Side.CLIENT)
 public class RadialGUIHandler {
     private static boolean guiOn = false;
     private static IRadialGUI gui;
@@ -21,27 +24,27 @@ public class RadialGUIHandler {
     static class DummyGUI implements IRadialGUI {
         @Override
         public int innerSize() {
-            return 0;
-        }
-
-        @Override
-        public int size() {
             return 4;
         }
 
         @Override
-        public IRadialRender getInnerItem(int index) {
+        public int size() {
+            return 8;
+        }
+
+        @Override
+        public IRadialItem getInnerItem(int index) {
             return null;
         }
 
         @Override
-        public IRadialRender getOuterItem(int index) {
+        public IRadialItem getOuterItem(int index) {
             return null;
         }
     }
 
     private static RadialGUIHandler instance = new RadialGUIHandler();
-    @SideOnly(Side.CLIENT)
+
     public static void setup() {
         MinecraftForge.EVENT_BUS.register(instance);
 
@@ -75,62 +78,71 @@ public class RadialGUIHandler {
     }
 
     @SubscribeEvent
-    @SideOnly(Side.CLIENT)
     public void onRender(RenderGameOverlayEvent.Pre e) {
         if (e.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS && getGuiState()) {
 
-            final float transparency = 0.7f;
-
             int sections = getActiveGUI().size();
-            int outerRad = 360;
-            if (sections > 0) outerRad /= sections;
             int innerSections = getActiveGUI().innerSize();
-            int innerRad = 360;
-            if (innerSections > 0) innerRad /= sections;
 
             float radius = 100f;
 
             float x1 = e.resolution.getScaledWidth()/2;
             float y1 = e.resolution.getScaledHeight()/2;
-            float x2;
-            float y2;
-            float x3;
-            float y3;
 
-            GlStateManager.enableBlend();
-            GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            GlStateManager.color(0.0f,0.0f,0.0f,transparency);
-
-            GL11.glBegin(GL11.GL_TRIANGLE_FAN);
-
-
-            int slice;
-            int oldSlice = 0;
-
-            GL11.glVertex2f(x1, y1);
-
-            for (int angle = 0; angle <= 360; angle++) {
-                slice = Math.round((angle)/(outerRad+0.5f));
-                if (slice != oldSlice && angle != 360) {
-                    oldSlice = slice;
-                    if (slice % 2 == 0)
-                        GlStateManager.color(0.0f,0.0f,0.0f,transparency);
-                    else
-                        GlStateManager.color(0.5f,0.5f,0.5f,transparency);
-                }
-                x2 = MathHelper.sin((float) (angle * Math.PI/180)) * radius;
-                y2 = MathHelper.cos((float) (angle * Math.PI/180)) * radius;
-                x3 = x1+x2;
-                y3 = y1+y2;
-                GL11.glVertex2f(x3,y3);
-            }
-
-            GlStateManager.color(1f,1f,1f,1f);
-            GlStateManager.disableBlend();
-
-            GL11.glEnd();
+            renderCircle(x1, y1, radius, sections, new Color(0f, 0f, 0f, 0.7f));
 
             e.setCanceled(true);
         }
+    }
+
+    static void renderCircle(float x, float y, float radius, int sections, Color color) {
+
+        float r = color.getRed()/255F;
+        float g = color.getGreen()/255F;
+        float b = color.getBlue()/255F;
+        float a = color.getAlpha()/255F;
+
+        Color light = color.brighter().brighter();
+        float rl = light.getRed()/255F;
+        float gl = light.getGreen()/255F;
+        float bl = light.getBlue()/255F;
+
+        int outerRad = 360;
+        if (sections > 0) outerRad /= sections;
+
+        int angle;
+
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.color(r, g, b, a);
+        GL11.glBegin(GL11.GL_TRIANGLE_FAN);
+
+        float x2, y2, x3, y3;
+        if (sections > 1) {
+            GL11.glVertex2f(x, y);
+            for (int section = 0; section < sections; section++) {
+                angle = section * outerRad;
+                if (section % 2 == 0)
+                    GlStateManager.color(r, g, b, a);
+                else
+                    GlStateManager.color(rl, gl, bl, a);
+                x2 = x + MathHelper.sin((float) (angle * Math.PI / 180)) * radius;
+                y2 = y + MathHelper.cos((float) (angle * Math.PI / 180)) * radius;
+                x3 = x + MathHelper.sin((float) ((angle + outerRad / 2) * Math.PI / 180)) * radius;
+                y3 = y + MathHelper.cos((float) ((angle + outerRad / 2) * Math.PI / 180)) * radius;
+                GL11.glVertex2f(x2, y2);
+                GL11.glVertex2f(x3, y3);
+            }
+        } else if (sections == 1) {
+            GL11.glVertex2f(x, y);
+            GL11.glVertex2f(x+radius, y);
+            GL11.glVertex2f(x, y+radius);
+            GL11.glVertex2f(x-radius, y);
+            GL11.glVertex2f(x, y-radius);
+        }
+
+        GL11.glEnd();
+        GlStateManager.resetColor();
+        GlStateManager.disableBlend();
     }
 }

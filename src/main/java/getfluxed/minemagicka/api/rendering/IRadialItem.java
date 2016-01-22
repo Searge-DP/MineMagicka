@@ -8,7 +8,7 @@ import java.awt.*;
  * @author WireSegal
  *         Created at 9:53 AM on 1/21/16.
  */
-public interface IRadialRender {
+public interface IRadialItem {
     /**
      * Renders this object in the current gui.
      *

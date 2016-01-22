@@ -1,12 +1,10 @@
 package getfluxed.minemagicka.client.render.radial;
 
-import getfluxed.minemagicka.api.rendering.IRadialRender;
+import getfluxed.minemagicka.api.rendering.IRadialItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.IPerspectiveAwareModel;
 
 import java.awt.*;
 
@@ -14,7 +12,7 @@ import java.awt.*;
  * @author WireSegal
  *         Created at 7:16 PM on 1/21/16.
  */
-public class RadialStack implements IRadialRender {
+public class RadialStack implements IRadialItem {
 
     public ItemStack stack;
 

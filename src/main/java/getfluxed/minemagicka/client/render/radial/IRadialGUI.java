@@ -1,6 +1,6 @@
 package getfluxed.minemagicka.client.render.radial;
 
-import getfluxed.minemagicka.api.rendering.IRadialRender;
+import getfluxed.minemagicka.api.rendering.IRadialItem;
 
 /**
  * @author WireSegal
@@ -10,6 +10,6 @@ public interface IRadialGUI {
     int size();
     int innerSize();
 
-    IRadialRender getOuterItem(int index);
-    IRadialRender getInnerItem(int index);
+    IRadialItem getOuterItem(int index);
+    IRadialItem getInnerItem(int index);
 }

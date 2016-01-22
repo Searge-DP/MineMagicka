@@ -1,13 +1,12 @@
 package getfluxed.minemagicka.api.elements;
 
-import getfluxed.minemagicka.api.rendering.IRadialRender;
-import net.minecraft.client.gui.Gui;
+import getfluxed.minemagicka.api.rendering.IRadialItem;
 import net.minecraft.util.ResourceLocation;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
-public interface IElement extends IRadialRender {
+public interface IElement extends IRadialItem {
     /**
      * Gets the localized name of the element
      *
