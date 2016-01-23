@@ -1,5 +1,7 @@
 package getfluxed.minemagicka.common.events;
 
+import getfluxed.minemagicka.client.render.radial.ElementRadial;
+import getfluxed.minemagicka.client.render.radial.RadialGUIHandler;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -58,6 +60,8 @@ public class MagickEventHandler {
             EntityPlayer player = MineMagicka.proxy.getPlayer();
             GlStateManager.pushAttrib();
             if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().isItemEqual(new ItemStack(MMItems.staff))) {
+                if (!RadialGUIHandler.getGuiState())
+                    RadialGUIHandler.enableGui(new ElementRadial());
                 ItemStack staffStack = MineMagicka.proxy.getPlayer().getCurrentEquippedItem();
                 ItemStaff staff = (ItemStaff) staffStack.getItem();
                 int selectedElement = staff.getSelectedElement(staffStack);
@@ -133,9 +137,13 @@ public class MagickEventHandler {
                 GL11.glDisable(GL11.GL_BLEND);
                 GL11.glPopMatrix();
 
+            } else if (RadialGUIHandler.getActiveGUI() instanceof ElementRadial) {
+                RadialGUIHandler.disableGui();
             }
             GlStateManager.popAttrib();
         }
+
+
     }
 
     @SubscribeEvent

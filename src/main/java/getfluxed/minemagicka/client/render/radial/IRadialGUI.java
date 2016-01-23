@@ -12,4 +12,6 @@ public interface IRadialGUI {
 
     IRadialItem getOuterItem(int index);
     IRadialItem getInnerItem(int index);
+
+    void onClick();
 }

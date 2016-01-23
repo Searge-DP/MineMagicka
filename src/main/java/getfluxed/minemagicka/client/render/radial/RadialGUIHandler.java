@@ -41,14 +41,17 @@ public class RadialGUIHandler {
         public IRadialItem getOuterItem(int index) {
             return null;
         }
+
+        @Override
+        public void onClick() {
+
+        }
     }
 
     private static RadialGUIHandler instance = new RadialGUIHandler();
 
     public static void setup() {
         MinecraftForge.EVENT_BUS.register(instance);
-
-        enableGui(new DummyGUI());
     }
 
     public static boolean enableGui(IRadialGUI renderer) {
@@ -84,12 +87,13 @@ public class RadialGUIHandler {
             int sections = getActiveGUI().size();
             int innerSections = getActiveGUI().innerSize();
 
-            float radius = 100f;
+            float radius = e.resolution.getScaledHeight()/4;
 
             float x1 = e.resolution.getScaledWidth()/2;
             float y1 = e.resolution.getScaledHeight()/2;
 
             renderCircle(x1, y1, radius, sections, new Color(0f, 0f, 0f, 0.7f));
+            renderCircle(x1, y1, radius/2, innerSections, new Color(0x1E1E1E));
 
             e.setCanceled(true);
         }
@@ -102,10 +106,9 @@ public class RadialGUIHandler {
         float b = color.getBlue()/255F;
         float a = color.getAlpha()/255F;
 
-        Color light = color.brighter().brighter();
-        float rl = light.getRed()/255F;
-        float gl = light.getGreen()/255F;
-        float bl = light.getBlue()/255F;
+        float rl = (r + .25f)/2;
+        float gl = (g + .25f)/2;
+        float bl = (b + .25f)/2;
 
         int outerRad = 360;
         if (sections > 0) outerRad /= sections;
@@ -115,23 +118,22 @@ public class RadialGUIHandler {
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GlStateManager.color(r, g, b, a);
+
         GL11.glBegin(GL11.GL_TRIANGLE_FAN);
 
         float x2, y2, x3, y3;
         if (sections > 1) {
             GL11.glVertex2f(x, y);
-            for (int section = 0; section < sections; section++) {
+            for (int section = 0; section <= sections; section++) {
                 angle = section * outerRad;
-                if (section % 2 == 0)
-                    GlStateManager.color(r, g, b, a);
-                else
-                    GlStateManager.color(rl, gl, bl, a);
+                if (section % 2 == 0) GlStateManager.color(r, g, b, a);
+                else GlStateManager.color(rl, gl, bl, a);
                 x2 = x + MathHelper.sin((float) (angle * Math.PI / 180)) * radius;
                 y2 = y + MathHelper.cos((float) (angle * Math.PI / 180)) * radius;
                 x3 = x + MathHelper.sin((float) ((angle + outerRad / 2) * Math.PI / 180)) * radius;
                 y3 = y + MathHelper.cos((float) ((angle + outerRad / 2) * Math.PI / 180)) * radius;
                 GL11.glVertex2f(x2, y2);
-                GL11.glVertex2f(x3, y3);
+                if (section != sections) GL11.glVertex2f(x3, y3);
             }
         } else if (sections == 1) {
             GL11.glVertex2f(x, y);
