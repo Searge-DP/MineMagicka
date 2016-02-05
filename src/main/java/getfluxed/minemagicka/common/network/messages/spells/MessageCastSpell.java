@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
+@SuppressWarnings("serial")
 public class MessageCastSpell extends PlugNPlayMessage<MessageCastSpell> {
     public String spellKey;
     public double x;

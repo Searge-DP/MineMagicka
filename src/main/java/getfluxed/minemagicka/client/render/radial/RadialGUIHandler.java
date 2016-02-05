@@ -86,7 +86,6 @@ public class RadialGUIHandler {
 
             int sections = getActiveGUI().size();
             int innerSections = getActiveGUI().innerSize();
-
             float radius = e.resolution.getScaledHeight()/4;
 
             float x1 = e.resolution.getScaledWidth()/2;
@@ -94,7 +93,7 @@ public class RadialGUIHandler {
 
             renderCircle(x1, y1, radius, sections, new Color(0f, 0f, 0f, 0.7f));
             renderCircle(x1, y1, radius/2, innerSections, new Color(0x1E1E1E));
-
+            
             e.setCanceled(true);
         }
     }

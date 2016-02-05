@@ -8,7 +8,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-
+@SuppressWarnings("serial")
 public class MessageMagickInfuser extends PlugNPlayMessage<MessageMagickInfuser> {
 
     public BlockPos pos;

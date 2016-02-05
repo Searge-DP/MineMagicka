@@ -4,8 +4,7 @@ import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.rendering.IRadialItem;
 
 /**
- * @author WireSegal
- *         Created at 9:44 PM on 1/22/16.
+ * @author WireSegal Created at 9:44 PM on 1/22/16.
  */
 public class ElementRadial implements IRadialGUI {
     @Override
@@ -30,6 +29,5 @@ public class ElementRadial implements IRadialGUI {
 
     @Override
     public void onClick() {
-
     }
 }

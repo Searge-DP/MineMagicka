@@ -68,7 +68,7 @@ public class MMBlocks {
         for (Entry<String, Block> ent : renderFluidMap.entrySet()) {
             final Block toRender = ent.getValue();
             ModelBakery.registerItemVariants(Item.getItemFromBlock(toRender));
-            ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(toRender), stack -> new ModelResourceLocation(Reference.modid + ":" + toRender.getClass().getSimpleName(), "fluid"));
+            ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(toRender), stack -> new ModelResourceLocation(Reference.modid + ":" + ent.getKey(), "fluid"));
             ModelLoader.setCustomStateMapper(toRender, new StateMapperBase() {
                 @Override
                 protected ModelResourceLocation getModelResourceLocation(IBlockState state) {

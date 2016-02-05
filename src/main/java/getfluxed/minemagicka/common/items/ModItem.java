@@ -4,8 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
- * @author WireSegal
- *         Created at 2:10 PM on 1/18/16.
+ * @author WireSegal Created at 2:10 PM on 1/18/16.
  */
 public class ModItem extends Item {
     @Override

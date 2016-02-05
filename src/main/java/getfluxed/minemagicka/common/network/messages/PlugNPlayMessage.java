@@ -30,7 +30,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-
+@SuppressWarnings("serial")
 public abstract class PlugNPlayMessage<REQ extends PlugNPlayMessage> implements Serializable, IMessage, IMessageHandler<REQ, IMessage> {
 
     private static final HashMap<Class, Pair<Reader, Writer>> handlers = new HashMap<Class, Pair<Reader, Writer>>();

@@ -1,14 +1,14 @@
 package getfluxed.minemagicka.common.items;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.BlockFluidBase;
 
 public class ItemFluidBucket extends ItemBucket {
 
-    public BlockFluidBase set;
+    public Block set;
 
-    public ItemFluidBucket(BlockFluidBase set) {
+    public ItemFluidBucket(Block set) {
         super(set);
         this.set = set;
 

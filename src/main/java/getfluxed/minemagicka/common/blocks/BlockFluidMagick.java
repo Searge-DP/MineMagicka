@@ -1,24 +1,34 @@
 package getfluxed.minemagicka.common.blocks;
 
 import getfluxed.minemagicka.common.reference.Reference;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.BlockFluidClassic;
+import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-public class BlockFluidMagick extends BlockFluidClassic {
+public class BlockFluidMagick extends BlockFluidFinite {
+
+    public static final Material materialMagick = new MaterialLiquid(MapColor.magentaColor);
 
     private static Fluid magick = new FluidMagick();
 
     public BlockFluidMagick() {
-        super(magick, Material.water);
-
+        super(magick, materialMagick);
         magick.setBlock(this);
+        setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, 8));
+    }
+
+    @Override
+    public boolean isBlockSolid(IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
+        return false;
     }
 
     public static Fluid getMagick() {

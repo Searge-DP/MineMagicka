@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-
+@SuppressWarnings("serial")
 public class MessageAddElement extends PlugNPlayMessage<MessageAddElement> {
     public String element;
     public boolean modifier;

@@ -1,10 +1,13 @@
 package getfluxed.minemagicka.common.spells;
 
+import fluxedCore.buffs.BuffEffect;
+import fluxedCore.buffs.BuffHelper;
 import getfluxed.minemagicka.api.casting.CastingType;
 import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.spells.EntityBall;
 import getfluxed.minemagicka.api.spells.ISpellBall;
+import getfluxed.minemagicka.common.reference.BuffReference;
 import getfluxed.minemagicka.common.reference.ElementReference;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -71,10 +74,7 @@ public class SpellFireBall implements ISpellBall {
                     break;
             }
             for (EntityLivingBase ent : world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.fromBounds(x - 3, y - 2, z - 3, x + 3, y + 2, z + 3))) {
-                // BuffHelper.applyToEntity(world, ent, new
-                // BuffEffect(BuffReference.burning, 80 +
-                // (world.rand.nextInt(30) + 1), 1));
-                // TODO fix this
+                BuffHelper.applyToEntity(world, ent, new BuffEffect(BuffReference.burning, 80 + (world.rand.nextInt(30) + 1), 1));
             }
             world.newExplosion(ball, x, y + 1, z, 0.8f, true, false);
 
