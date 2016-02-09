@@ -39,7 +39,6 @@ public class ElementBase implements IElement {
     }
 
     @SuppressWarnings("static-access")
-    @Override
     public void render(Gui gui, int x, int y, int width, int height, Color colorModifier) {
         GL11.glPushMatrix();
         Minecraft.getMinecraft().getTextureManager().bindTexture(getTexture());
@@ -53,6 +52,11 @@ public class ElementBase implements IElement {
         gui.drawScaledCustomSizeModalRect(x, y, 0, 0, 24, 24, width, height, width, height);
         GL11.glColor3f(1F, 1F, 1F);
         GL11.glPopMatrix();
+    }
+
+    @Override
+    public void render(Color colorModifier) {
+        //TODO
     }
 
     @Override

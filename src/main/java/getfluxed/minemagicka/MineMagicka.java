@@ -15,7 +15,7 @@ import getfluxed.minemagicka.common.events.MagickEventHandler;
 import getfluxed.minemagicka.common.items.MMItems;
 import getfluxed.minemagicka.common.liquids.MMLiquids;
 import getfluxed.minemagicka.common.network.PacketHandler;
-import getfluxed.minemagicka.common.proxy.IProxy;
+import getfluxed.minemagicka.common.proxy.CommonProxy;
 import getfluxed.minemagicka.common.reference.BuffReference;
 import getfluxed.minemagicka.common.reference.ElementReference;
 import getfluxed.minemagicka.common.reference.SpellReference;
@@ -39,8 +39,8 @@ public class MineMagicka {
 
     public static boolean isDevEnv = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 
-    @SidedProxy(clientSide = "getfluxed.minemagicka.client.proxy.ClientProxy", serverSide = "getfluxed.minemagicka.common.proxy.ServerProxy")
-    public static IProxy proxy;
+    @SidedProxy(clientSide = "getfluxed.minemagicka.client.proxy.ClientProxy", serverSide = "getfluxed.minemagicka.common.proxy.CommonProxy")
+    public static CommonProxy proxy;
 
     @Instance
     public static MineMagicka INSTANCE;

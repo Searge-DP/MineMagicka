@@ -1,16 +1,12 @@
 package getfluxed.minemagicka.common.events;
 
-import getfluxed.minemagicka.client.render.radial.ElementRadial;
-import getfluxed.minemagicka.client.render.radial.RadialGUIHandler;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
 import getfluxed.minemagicka.MineMagicka;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.SpellRegistry;
 import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.api.events.SelectElementEvent;
 import getfluxed.minemagicka.api.spells.ISpell;
+import getfluxed.minemagicka.client.render.ring.ElementHalo;
 import getfluxed.minemagicka.common.blocks.MMBlocks;
 import getfluxed.minemagicka.common.handlers.SpellHandler;
 import getfluxed.minemagicka.common.items.ItemStaff;
@@ -28,6 +24,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.MouseEvent;
@@ -38,6 +35,8 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
@@ -60,10 +59,15 @@ public class MagickEventHandler {
             EntityPlayer player = MineMagicka.proxy.getPlayer();
             GlStateManager.pushAttrib();
             if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().isItemEqual(new ItemStack(MMItems.staff))) {
-                if (!RadialGUIHandler.getGuiState() && player.isUsingItem())
-                    RadialGUIHandler.enableGui(new ElementRadial());
+                if (MineMagicka.proxy.ringHandler.getActiveGui() == null && player.isUsingItem())
+                    MineMagicka.proxy.ringHandler.setGui(new ElementHalo() {
+                        @Override
+                        public void onSegmentClicked(int seg) {
+                            player.addChatMessage(new ChatComponentText(getSegment(seg).toString()));
+                        }
+                    }, player);
                 else if (!player.isUsingItem())
-                    RadialGUIHandler.disableGui();
+                    MineMagicka.proxy.ringHandler.clearGui();
 
                 ItemStack staffStack = MineMagicka.proxy.getPlayer().getCurrentEquippedItem();
                 ItemStaff staff = (ItemStaff) staffStack.getItem();
