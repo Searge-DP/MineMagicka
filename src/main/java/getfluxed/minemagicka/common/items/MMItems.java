@@ -9,8 +9,10 @@ import java.util.Map;
 import java.util.Scanner;
 
 import getfluxed.minemagicka.MineMagicka;
+import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.nature.TreeSap;
 import getfluxed.minemagicka.common.blocks.MMBlocks;
+import getfluxed.minemagicka.common.items.magick.ItemMagickSolid;
 import getfluxed.minemagicka.common.items.nature.ItemSapExtractor;
 import getfluxed.minemagicka.common.items.nature.ItemTreeSap;
 import getfluxed.minemagicka.common.items.pages.ItemPage;
@@ -37,6 +39,9 @@ public class MMItems {
     public static Item treeSapMagick = new ItemTreeSap(new TreeSap("Magick Sap", 0xFF55FF));
 
     public static Item sapExtractor = new ItemSapExtractor();
+
+    public static Item magickSolid = new ItemMagickSolid();
+
     public static Map<String, Item> renderMap = new HashMap<String, Item>();
 
     public static void preInit() {
@@ -48,16 +53,20 @@ public class MMItems {
         registerItem(pageLocked, "pageLocked", "page_magick_locked");
         registerItem(treeSap, "treeSap", "tree_sap");
         registerItem(treeSapMagick, "treeSapMagick", "tree_sap_magick");
-        registerItem(sapExtractor, "sapExtractor", "sapExtractor");
+        registerItemMeta(sapExtractor, "sapExtractor", "sap_extractor");
+        registerItem(magickSolid, "magick_solid", "magick_solid");
+
     }
 
     public static void init() {
 
         RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-
         for (Map.Entry<String, Item> ent : renderMap.entrySet()) {
             renderItem.getItemModelMesher().register(ent.getValue(), 0, new ModelResourceLocation(Reference.modid + ":" + ent.getKey(), "inventory"));
         }
+        renderItem.getItemModelMesher().register(sapExtractor, 0, new ModelResourceLocation(Reference.modid + ":" + "sap_extractor", "inventory"));
+        for (int i = 0; i < ElementRegistry.getElementList().length; i++)
+            renderItem.getItemModelMesher().register(magickSolid, i, new ModelResourceLocation(Reference.modid + ":" + "magick_solid", "inventory"));
 
     }
 
@@ -70,10 +79,18 @@ public class MMItems {
         GameRegistry.registerItem(item, key);
     }
 
+    public static void registerItemMeta(Item item, String name, String key) {
+        if (MineMagicka.isDevEnv)
+            writeFile(item, key);
+        item.setCreativeTab(tab);
+        renderMap.put(key, item);
+
+        GameRegistry.registerItem(item, key);
+    }
+
     public static void registerItem(Item item, String name, String key, String texture) {
         writeFile(item, key);
         item.setUnlocalizedName(key).setCreativeTab(tab);
-        renderMap.put(texture, item);
 
         GameRegistry.registerItem(item, key);
     }

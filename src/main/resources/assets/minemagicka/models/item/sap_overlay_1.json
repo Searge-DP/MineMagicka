@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "minemagicka:items/sapExtractor"
+        "layer0": "minemagicka:items/magic_staff_hilt"
     },
     "display": {
         "thirdperson": {

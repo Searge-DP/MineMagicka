@@ -47,7 +47,6 @@ public class SpellTest implements ISpell {
 
     @Override
     public void cast(World world, EntityPlayer player, ElementCompound elements, double x, double y, double z) {
-        System.out.println(elements);
         player.addChatMessage(new ChatComponentText(elements.toString()));
     }
 }
