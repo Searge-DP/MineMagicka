@@ -24,18 +24,17 @@ public class ElementBase implements IElement {
      * DO NOT USE THIS! It creates a primary element, and should only be used by MineMagika itself.
      */
     public ElementBase(String name, int color, ResourceLocation icon) {
-        this(name, color, icon, null, new ArrayList<>());
+        this(name, color, icon, null);
     }
 
     /**
      * DO NOT PASS NULL TO INGREDIENTS! This creates a primary element, and should only be used by MineMagika itself.
      */
-    public ElementBase(String name, int color, ResourceLocation icon, Pair<IElement, IElement> ingredients, List<IElement> opposites) {
+    public ElementBase(String name, int color, ResourceLocation icon, Pair<IElement, IElement> ingredients) {
         this.name = name;
         this.color = color;
         this.icon = icon;
         this.ingredients = ingredients;
-        this.opposites = opposites;
     }
 
     @SuppressWarnings("static-access")
@@ -52,11 +51,6 @@ public class ElementBase implements IElement {
         gui.drawScaledCustomSizeModalRect(x, y, 0, 0, 24, 24, width, height, width, height);
         GL11.glColor3f(1F, 1F, 1F);
         GL11.glPopMatrix();
-    }
-
-    @Override
-    public void render(Color colorModifier) {
-        //TODO
     }
 
     @Override
@@ -87,11 +81,6 @@ public class ElementBase implements IElement {
     @Override
     public boolean isPrimary() {
         return ingredients == null;
-    }
-
-    @Override
-    public List<IElement> getOpposites() {
-        return opposites;
     }
 
     @Override

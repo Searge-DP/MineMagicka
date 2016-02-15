@@ -6,7 +6,6 @@ import getfluxed.minemagicka.api.SpellRegistry;
 import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.api.events.SelectElementEvent;
 import getfluxed.minemagicka.api.spells.ISpell;
-import getfluxed.minemagicka.client.render.ring.ElementHalo;
 import getfluxed.minemagicka.common.blocks.MMBlocks;
 import getfluxed.minemagicka.common.handlers.SpellHandler;
 import getfluxed.minemagicka.common.items.ItemStaff;
@@ -24,7 +23,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.MouseEvent;
@@ -40,7 +38,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-public class MagickEventHandler {
+public class MagickEventHandler { // TODO nuke this class from orbit
 
     public MagickEventHandler() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -59,15 +57,6 @@ public class MagickEventHandler {
             EntityPlayer player = MineMagicka.proxy.getPlayer();
             GlStateManager.pushAttrib();
             if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().isItemEqual(new ItemStack(MMItems.staff))) {
-                if (MineMagicka.proxy.ringHandler.getActiveGui() == null && player.isUsingItem())
-                    MineMagicka.proxy.ringHandler.setGui(new ElementHalo() {
-                        @Override
-                        public void onSegmentClicked(int seg) {
-                            player.addChatMessage(new ChatComponentText(getSegment(seg).toString()));
-                        }
-                    }, player);
-                else if (!player.isUsingItem())
-                    MineMagicka.proxy.ringHandler.clearGui();
 
                 ItemStack staffStack = MineMagicka.proxy.getPlayer().getCurrentEquippedItem();
                 ItemStaff staff = (ItemStaff) staffStack.getItem();
