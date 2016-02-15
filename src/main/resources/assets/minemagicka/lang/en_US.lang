@@ -28,3 +28,9 @@ mm.element.floya.description=Fire, Emotion
 mm.spells.earthball.name=Sfaíra tis gis
 mm.spells.fireball.name=Volída
 mm.spells.heal.name=Pligés therapeía
+
+mm.spellcasting.failed.badelement=The word %1$s seemed too strange to shout...
+mm.spellcasting.failed.channelfailed=You shouted %1$s, but your %2$s refused to budge...
+mm.spellcasting.failed.sleepingstaff=Your %1$s is unresponsive to your shout...
+
+mm.spellcasting.success=Spell cast:

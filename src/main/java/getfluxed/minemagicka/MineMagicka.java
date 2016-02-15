@@ -11,7 +11,8 @@ import getfluxed.minemagicka.api.recipes.RecipeMagickInfusion;
 import getfluxed.minemagicka.api.spells.EntityBall;
 import getfluxed.minemagicka.client.GUIHandler;
 import getfluxed.minemagicka.common.blocks.MMBlocks;
-import getfluxed.minemagicka.common.events.MagickEventHandler;
+import getfluxed.minemagicka.common.events.BucketEventHandler;
+import getfluxed.minemagicka.common.events.StaffEventHandler;
 import getfluxed.minemagicka.common.items.MMItems;
 import getfluxed.minemagicka.common.liquids.MMLiquids;
 import getfluxed.minemagicka.common.network.PacketHandler;
@@ -61,7 +62,8 @@ public class MineMagicka {
         new GUIHandler();
         EntityRegistry.registerModEntity(EntityBall.class, "ball", 0, INSTANCE, 30, 30, true);
 
-        new MagickEventHandler();
+        new BucketEventHandler();
+        new StaffEventHandler();
 
     }
 

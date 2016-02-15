@@ -2,13 +2,15 @@ package getfluxed.minemagicka.common.items;
 
 import fluxedCore.handlers.ClientEventHandler;
 import fluxedCore.util.NBTHelper;
+import getfluxed.minemagicka.api.elements.ElementCompound;
+import getfluxed.minemagicka.api.spells.ICasterItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemStaff extends ModItem {
+public class ItemStaff extends ModItem implements ICasterItem {
 
     public ItemStaff() {
         this.setMaxStackSize(1);
@@ -30,6 +32,21 @@ public class ItemStaff extends ModItem {
     {
         playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
         return itemStackIn;
+    }
+
+    @Override
+    public boolean canCast(ItemStack stack, EntityPlayer player, ElementCompound comp) {
+        return true;
+    }
+
+    @Override
+    public boolean isActive(ItemStack stack, EntityPlayer player) {
+        return true;
+    }
+
+    @Override
+    public void onCast(ItemStack stack, EntityPlayer player, ElementCompound comp) {
+        // NO-OP
     }
 
     @Override
