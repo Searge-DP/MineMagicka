@@ -1,7 +1,5 @@
 package getfluxed.minemagicka.common.world;
 
-import java.util.Random;
-
 import getfluxed.minemagicka.common.blocks.MMBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
@@ -10,21 +8,23 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
+import java.util.Random;
+
 public class GenerationHandler implements IWorldGenerator {
     public boolean gen = true;
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         switch (world.provider.getDimensionId()) {
-        case -1:
-            generateNether(world, random, chunkX * 16, chunkZ * 16);
-            break;
-        case 0:
-            generateSurface(world, random, chunkX * 16, chunkZ * 16);
-            break;
-        case 1:
-            generateEnd(world, random, chunkX * 16, chunkZ * 16);
-            break;
+            case -1:
+                generateNether(world, random, chunkX * 16, chunkZ * 16);
+                break;
+            case 0:
+                generateSurface(world, random, chunkX * 16, chunkZ * 16);
+                break;
+            case 1:
+                generateEnd(world, random, chunkX * 16, chunkZ * 16);
+                break;
         }
     }
 
@@ -53,7 +53,7 @@ public class GenerationHandler implements IWorldGenerator {
                     return;
                 }
 
-                EnumFacing[] dirs = new EnumFacing[] { EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST };
+                EnumFacing[] dirs = new EnumFacing[]{EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST};
                 for (EnumFacing dir : dirs) {
                     world.setBlockState(pos.up(2).offset(dir), MMBlocks.leavesMagick.getDefaultState());
                 }
@@ -76,9 +76,9 @@ public class GenerationHandler implements IWorldGenerator {
                 for (int i = 0; i < 3; i++)
                     for (EnumFacing dir : dirs) {
                         for (EnumFacing dire : dirs) {
-                            world.setBlockState(pos.up(7+i).offset(dir).offset(dire), MMBlocks.leavesMagick.getDefaultState());
+                            world.setBlockState(pos.up(7 + i).offset(dir).offset(dire), MMBlocks.leavesMagick.getDefaultState());
                         }
-                        world.setBlockState(pos.up(7+i).offset(dir), MMBlocks.leavesMagick.getDefaultState());
+                        world.setBlockState(pos.up(7 + i).offset(dir), MMBlocks.leavesMagick.getDefaultState());
                     }
                 for (EnumFacing dir : dirs) {
                     world.setBlockState(pos.up(10).offset(dir), MMBlocks.leavesMagick.getDefaultState());

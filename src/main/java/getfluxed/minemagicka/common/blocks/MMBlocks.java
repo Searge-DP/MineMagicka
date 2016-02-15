@@ -90,13 +90,13 @@ public class MMBlocks {
         GameRegistry.registerBlock(block, ItemBlockMod.class, key);
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private static void registerBlock(Block block, String key, Class tile) {
         registerBlock(block, key);
         GameRegistry.registerTileEntity(tile, key);
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private static void registerBlock(Block block, String key, Class tile, CreativeTabs tab) {
         block.setUnlocalizedName(key).setCreativeTab(tab);
         renderMap.put(key, block);

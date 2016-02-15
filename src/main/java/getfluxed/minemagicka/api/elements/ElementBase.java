@@ -9,7 +9,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ElementBase implements IElement {
@@ -44,9 +43,9 @@ public class ElementBase implements IElement {
         Color renderColor = new Color(this.getColor());
         if (colorModifier != null)
             renderColor = new Color(
-                    (renderColor.getRed() + colorModifier.getRed())/2,
-                    (renderColor.getGreen() + colorModifier.getGreen())/2,
-                    (renderColor.getBlue() + colorModifier.getBlue())/2);
+                    (renderColor.getRed() + colorModifier.getRed()) / 2,
+                    (renderColor.getGreen() + colorModifier.getGreen()) / 2,
+                    (renderColor.getBlue() + colorModifier.getBlue()) / 2);
         GL11.glColor3f(renderColor.getRed() / 255F, renderColor.getGreen() / 255F, renderColor.getBlue() / 255F);
         gui.drawScaledCustomSizeModalRect(x, y, 0, 0, 24, 24, width, height, width, height);
         GL11.glColor3f(1F, 1F, 1F);

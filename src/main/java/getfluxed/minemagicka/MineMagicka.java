@@ -1,9 +1,5 @@
 package getfluxed.minemagicka;
 
-import static getfluxed.minemagicka.common.reference.Reference.modid;
-import static getfluxed.minemagicka.common.reference.Reference.name;
-import static getfluxed.minemagicka.common.reference.Reference.version;
-
 import getfluxed.minemagicka.api.RecipeRegistry;
 import getfluxed.minemagicka.api.nature.NatureRegistry;
 import getfluxed.minemagicka.api.nature.TreeSap;
@@ -34,6 +30,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import static getfluxed.minemagicka.common.reference.Reference.*;
 
 @Mod(modid = modid, name = name, version = version)
 public class MineMagicka {

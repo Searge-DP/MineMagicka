@@ -1,33 +1,24 @@
 package getfluxed.minemagicka.common.events;
 
-import getfluxed.minemagicka.MineMagicka;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.SpellRegistry;
 import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.api.spells.ICasterItem;
 import getfluxed.minemagicka.api.spells.ISpell;
-import getfluxed.minemagicka.common.handlers.SpellHandler;
-import getfluxed.minemagicka.common.items.ItemStaff;
-import getfluxed.minemagicka.common.items.MMItems;
-import getfluxed.minemagicka.common.reference.Reference;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.S45PacketTitle;
-import net.minecraft.util.*;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import org.lwjgl.opengl.GL11;
 
-import java.awt.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -35,6 +26,9 @@ import java.util.regex.Pattern;
  *         Created at 2:33 PM on 2/15/16.
  */
 public class StaffEventHandler {
+    Pattern casting = Pattern.compile("([a-z]+\\s+)*([a-z]+)(,\\s+([a-z]+\\s+)*([a-z]+))?!");
+    Pattern empty = Pattern.compile("\\s*");
+
     public StaffEventHandler() {
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -45,9 +39,6 @@ public class StaffEventHandler {
             e.toolTip.add("mm.item.countTime" + e.itemStack.getTagCompound().getInteger("MMItemTime"));
         }
     }
-
-    Pattern casting = Pattern.compile("([a-z]+\\s+)*([a-z]+)(,\\s+([a-z]+\\s+)*([a-z]+))?!");
-    Pattern empty = Pattern.compile("\\s*");
 
     @SubscribeEvent
     public void onChat(ServerChatEvent e) {
@@ -104,7 +95,7 @@ public class StaffEventHandler {
                             greenComp.getChatStyle().setColor(EnumChatFormatting.GREEN);
                             S45PacketTitle titlePacket = new S45PacketTitle(S45PacketTitle.Type.TITLE, greenComp, 10, 60, 20);
                             ((EntityPlayerMP) player).playerNetServerHandler.sendPacket(titlePacket);
-                            titlePacket = new S45PacketTitle(S45PacketTitle.Type.SUBTITLE, new ChatComponentText(spell.getName()+"!"), 10, 60, 20);
+                            titlePacket = new S45PacketTitle(S45PacketTitle.Type.SUBTITLE, new ChatComponentText(spell.getName() + "!"), 10, 60, 20);
                             ((EntityPlayerMP) player).playerNetServerHandler.sendPacket(titlePacket);
                         } else {
                             IChatComponent nameComp = new ChatComponentText(spell.getName());

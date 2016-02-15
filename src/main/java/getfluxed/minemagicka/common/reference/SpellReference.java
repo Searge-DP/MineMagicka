@@ -3,11 +3,7 @@ package getfluxed.minemagicka.common.reference;
 import getfluxed.minemagicka.MineMagicka;
 import getfluxed.minemagicka.api.SpellRegistry;
 import getfluxed.minemagicka.api.spells.ISpell;
-import getfluxed.minemagicka.common.spells.SpellCure;
-import getfluxed.minemagicka.common.spells.SpellEarthBall;
-import getfluxed.minemagicka.common.spells.SpellFireBall;
-import getfluxed.minemagicka.common.spells.SpellSolidify;
-import getfluxed.minemagicka.common.spells.SpellTest;
+import getfluxed.minemagicka.common.spells.*;
 
 public class SpellReference {
 

@@ -30,7 +30,6 @@ public class MessageCastSpell extends PlugNPlayMessage<MessageCastSpell> {
     }
 
 
-
     @Override
     public IMessage handleMessage(MessageContext ctx) {
         EntityPlayer entity = ctx.getServerHandler().playerEntity;

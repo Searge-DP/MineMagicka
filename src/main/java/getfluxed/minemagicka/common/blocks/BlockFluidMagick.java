@@ -26,13 +26,13 @@ public class BlockFluidMagick extends BlockFluidFinite {
         setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, 8));
     }
 
+    public static Fluid getMagick() {
+        return magick;
+    }
+
     @Override
     public boolean isBlockSolid(IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
         return false;
-    }
-
-    public static Fluid getMagick() {
-        return magick;
     }
 
     @Override

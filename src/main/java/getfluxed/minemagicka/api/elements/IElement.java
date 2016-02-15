@@ -57,11 +57,12 @@ public interface IElement {
 
     /**
      * Render the element in the current gui.
-     * @param gui The current gui.
-     * @param x The x position in the gui.
-     * @param y The y position in the gui.
-     * @param width The width to render with.
-     * @param height The height to render with.
+     *
+     * @param gui           The current gui.
+     * @param x             The x position in the gui.
+     * @param y             The y position in the gui.
+     * @param width         The width to render with.
+     * @param height        The height to render with.
      * @param colorModifier The color to render with.
      */
     void render(Gui gui, int x, int y, int width, int height, Color colorModifier);

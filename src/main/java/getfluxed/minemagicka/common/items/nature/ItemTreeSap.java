@@ -7,14 +7,14 @@ import net.minecraft.item.ItemStack;
 public class ItemTreeSap extends ModItem {
 
     public TreeSap sap;
-    
-    @Override
-    public int getColorFromItemStack(ItemStack stack, int renderPass) {
-        return sap.getColour();
-    }
 
     public ItemTreeSap(TreeSap sap) {
         this.sap = sap;
+    }
+
+    @Override
+    public int getColorFromItemStack(ItemStack stack, int renderPass) {
+        return sap.getColour();
     }
 
     @Override

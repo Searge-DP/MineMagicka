@@ -1,13 +1,5 @@
 package getfluxed.minemagicka.common.items;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-
 import getfluxed.minemagicka.MineMagicka;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.nature.TreeSap;
@@ -25,6 +17,10 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.util.*;
 
 public class MMItems {
     public static CreativeTabs tab = new CreativeTabMM();
