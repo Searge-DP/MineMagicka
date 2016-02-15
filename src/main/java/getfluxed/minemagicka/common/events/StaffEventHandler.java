@@ -102,6 +102,8 @@ public class StaffEventHandler {
                             nameComp.getChatStyle().setItalic(true);
                             player.addChatComponentMessage(new ChatComponentTranslation("mm.spellcasting.failed.channelfailed", nameComp, held.getChatComponent()));
                         }
+                    } else {
+                        player.addChatComponentMessage(new ChatComponentTranslation("mm.spellcasting.failed.nospell"));
                     }
                 } else {
                     player.addChatComponentMessage(new ChatComponentTranslation("mm.spellcasting.failed.sleepingstaff", held.getChatComponent()));
