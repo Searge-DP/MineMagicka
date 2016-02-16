@@ -49,21 +49,13 @@ public class SpellHydrate implements ISpellBall {
     }
 
     @Override
-    public CastingType getType() {
-        return CastingType.CREATE;
-    }
-
-    @Override
     public ElementList getElements() {
         return (new ElementList()).add(ElementReference.earth, 1).add(ElementReference.water, 1);
     }
+
     @Override
     public String getUnlocalizedName() {
         return "waterball";
     }
 
-    @Override
-    public void cast(World world, EntityPlayer player, ElementCompound elements, double x, double y, double z) {
-        world.spawnEntityInWorld(new EntityBall(world, this, elements, player));
-    }
 }

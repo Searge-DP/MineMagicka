@@ -14,11 +14,6 @@ import net.minecraft.world.World;
 public class SpellEarthBall implements ISpellBall {
 
     @Override
-    public CastingType getType() {
-        return CastingType.CREATE;
-    }
-
-    @Override
     public String getUnlocalizedName() {
         return "earthball";
     }
@@ -26,11 +21,6 @@ public class SpellEarthBall implements ISpellBall {
     @Override
     public ElementList getElements() {
         return (new ElementList()).add(ElementReference.earth, 1);
-    }
-
-    @Override
-    public void cast(World world, EntityPlayer player, ElementCompound elements, double x, double y, double z) {
-        world.spawnEntityInWorld(new EntityBall(world, this, elements, player));
     }
 
     @Override

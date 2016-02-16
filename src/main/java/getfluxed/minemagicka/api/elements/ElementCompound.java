@@ -1,13 +1,16 @@
 package getfluxed.minemagicka.api.elements;
 
+import getfluxed.minemagicka.api.ElementRegistry;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+
+import java.util.LinkedHashMap;
 
 /**
  * @author WireSegal Created at 8:09 PM on 1/6/16.
  */
-public class ElementCompound { // A wrapper around ElementList.
-    private ElementList elements = new ElementList();
-    private ElementList modifiers = new ElementList();
+public class ElementCompound extends ElementList {
+    LinkedHashMap<IElement, Integer> modifiers = new LinkedHashMap<>();
 
     public ElementCompound() {
     }
@@ -16,58 +19,44 @@ public class ElementCompound { // A wrapper around ElementList.
         return (new ElementCompound()).add(this);
     }
 
-    public int size() {
-        return elements.size();
-    }
-
     public int modifierSize() {
         return modifiers.size();
     }
 
-    public IElement[] getElements() {
-        return elements.getElements();
-    }
-
     public ElementList getElementList() {
-        return elements.copy();
+        return ElementList.fromHashMap(elements);
     }
 
     public IElement[] getModifierElements() {
-        return modifiers.getElements();
+        IElement[] q = new IElement[1];
+        return this.modifiers.keySet().toArray(q);
     }
 
     public ElementList getModifierElementList() {
-        return modifiers.copy();
-    }
-
-    public int getAmount(IElement key) {
-        return elements.getAmount(key);
+        return ElementList.fromHashMap(modifiers);
     }
 
     public int getModifierAmount(IElement key) {
-        return modifiers.getAmount(key);
-    }
-
-    public boolean reduce(IElement key, int amount) {
-        return elements.reduce(key, amount);
+        return this.modifiers.get(key) == null ? 0 : this.modifiers.get(key);
     }
 
     public boolean reduceModifier(IElement key, int amount) {
-        return modifiers.reduce(key, amount);
-    }
-
-    public ElementCompound remove(IElement key, int amount) {
-        elements.remove(key, amount);
-        return this;
+        if (this.getModifierAmount(key) >= amount) {
+            int am = this.getModifierAmount(key) - amount;
+            this.modifiers.put(key, am);
+            return true;
+        }
+        return false;
     }
 
     public ElementCompound removeModifiers(IElement key, int amount) {
-        modifiers.remove(key, amount);
-        return this;
-    }
+        int am = this.getModifierAmount(key) - amount;
+        if (am <= 0) {
+            this.modifiers.remove(key);
+        } else {
+            this.modifiers.put(key, am);
+        }
 
-    public ElementCompound remove(IElement key) {
-        this.elements.remove(key);
         return this;
     }
 
@@ -76,29 +65,35 @@ public class ElementCompound { // A wrapper around ElementList.
         return this;
     }
 
-    public ElementCompound add(IElement element, int amount) {
-        elements.add(element, amount);
-        return this;
-    }
-
     public ElementCompound addModifier(IElement element, int amount) {
-        modifiers.add(element, amount);
-        return this;
-    }
+        if (this.modifiers.containsKey(element)) {
+            int oldamount = this.modifiers.get(element);
+            amount += oldamount;
+        }
 
-    public ElementCompound merge(IElement element, int amount) {
-        elements.merge(element, amount);
+        this.modifiers.put(element, amount);
         return this;
     }
 
     public ElementCompound mergeModifier(IElement element, int amount) {
-        modifiers.merge(element, amount);
+        if (this.modifiers.containsKey(element)) {
+            int oldamount = this.modifiers.get(element);
+            if (amount < oldamount) {
+                amount = oldamount;
+            }
+        }
+
+        this.modifiers.put(element, amount);
         return this;
     }
 
     public ElementCompound add(ElementCompound in) {
-        elements.add(in.getElementList());
-        modifiers.add(in.getModifierElementList());
+        for (IElement a : in.getElements()) {
+            this.add(a, in.getAmount(a));
+        }
+        for (IElement a : in.getModifierElements()) {
+            this.addModifier(a, in.getModifierAmount(a));
+        }
         return this;
     }
 
@@ -108,15 +103,23 @@ public class ElementCompound { // A wrapper around ElementList.
 
     public ElementCompound add(ElementList in, boolean mod) {
         if (mod)
-            modifiers.add(in);
+            for (IElement a : in.getElements()) {
+                this.addModifier(a, in.getAmount(a));
+            }
         else
-            elements.add(in);
+            for (IElement a : in.getElements()) {
+                this.add(a, in.getAmount(a));
+            }
         return this;
     }
 
     public ElementCompound merge(ElementCompound in) {
-        elements.merge(in.getElementList());
-        modifiers.merge(in.getModifierElementList());
+        for (IElement a : in.getElements()) {
+            this.merge(a, in.getAmount(a));
+        }
+        for (IElement a : in.getModifierElements()) {
+            this.mergeModifier(a, in.getModifierAmount(a));
+        }
         return this;
     }
 
@@ -126,18 +129,14 @@ public class ElementCompound { // A wrapper around ElementList.
 
     public ElementCompound merge(ElementList in, boolean mod) {
         if (mod)
-            modifiers.merge(in);
+            for (IElement a : in.getElements()) {
+                this.mergeModifier(a, in.getAmount(a));
+            }
         else
-            elements.merge(in);
+            for (IElement a : in.getElements()) {
+                this.add(a, in.getAmount(a));
+            }
         return this;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof ElementList || obj instanceof ElementCompound) {
-            return elements.equals(obj);
-        }
-        return super.equals(obj);
     }
 
     public ElementCompound readFromNBT(NBTTagCompound nbttagcompound) {
@@ -146,8 +145,18 @@ public class ElementCompound { // A wrapper around ElementList.
 
     public ElementCompound readFromNBT(NBTTagCompound nbttagcompound, String label) {
         NBTTagCompound tcomp = nbttagcompound.getCompoundTag(label);
-        this.elements.readFromNBT(tcomp, "elements");
-        this.modifiers.readFromNBT(tcomp, "modifiers");
+        super.readFromNBT(tcomp, "elements");
+
+        this.modifiers.clear();
+        NBTTagList telem = tcomp.getTagList("modifiers", 10);
+
+        for (int j = 0; j < telem.tagCount(); ++j) {
+            NBTTagCompound rs = telem.getCompoundTagAt(j);
+            if (rs.hasKey("name")) {
+                this.addModifier(ElementRegistry.getElementFromName(rs.getString("name")), rs.getInteger("amount"));
+            }
+        }
+
         return this;
     }
 
@@ -157,9 +166,22 @@ public class ElementCompound { // A wrapper around ElementList.
 
     public ElementCompound writeToNBT(NBTTagCompound nbttagcompound, String label) {
         NBTTagCompound tcomp = new NBTTagCompound();
-        elements.writeToNBT(tcomp, "elements");
-        modifiers.writeToNBT(tcomp, "modifiers");
+        super.writeToNBT(tcomp, "elements");
+
+        NBTTagList telem = new NBTTagList();
+
+        for (IElement el : this.getModifierElements()) {
+            if (el != null) {
+                NBTTagCompound f = new NBTTagCompound();
+                f.setString("name", el.getUnlocalizedName());
+                f.setInteger("amount", this.getModifierAmount(el));
+                telem.appendTag(f);
+            }
+        }
+
+        nbttagcompound.setTag("modifiers", telem);
         nbttagcompound.setTag(label, tcomp);
+
         return this;
 
     }
