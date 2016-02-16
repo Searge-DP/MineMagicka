@@ -21,6 +21,14 @@ public class EntityBall extends EntityThrowable {
         super(world, entity);
         this.ball = ball;
         this.elements = elements;
+
+        dataWatcher.updateObject(28, ball.getUnlocalizedName());
+    }
+
+    @Override
+    protected void entityInit() {
+        dataWatcher.addObject(28, "");
+        dataWatcher.setObjectWatched(28);
     }
 
     @Override
@@ -40,6 +48,8 @@ public class EntityBall extends EntityThrowable {
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         this.ball = (ISpellBall) SpellRegistry.getSpellFromName(nbt.getString("MMSpell"));
+        if (this.ball != null)
+            dataWatcher.updateObject(28, this.ball.getUnlocalizedName());
         this.elements = (new ElementCompound()).readFromNBT(nbt);
     }
 
