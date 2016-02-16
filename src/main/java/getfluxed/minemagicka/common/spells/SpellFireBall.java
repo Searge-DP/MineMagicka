@@ -84,6 +84,11 @@ public class SpellFireBall implements ISpellBall {
     }
 
     @Override
+    public int getColor(EntityBall ball, World world) {
+        return 0xC15D22;
+    }
+
+    @Override
     public void onEntityUpdate(EntityBall ball, World world) {
         ball.setFire(1);
     }

@@ -9,4 +9,6 @@ public interface ISpellBall extends ISpell {
 
     void onEntityUpdate(EntityBall ball, World world);
 
+    int getColor(EntityBall ball, World world);
+
 }

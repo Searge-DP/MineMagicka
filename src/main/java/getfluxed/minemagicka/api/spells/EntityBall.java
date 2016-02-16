@@ -50,4 +50,9 @@ public class EntityBall extends EntityThrowable {
         this.elements.writeToNBT(nbt);
     }
 
+    @Override
+    public String toString() {
+        return "EntityBall [ ball=" + (ball == null ? "null" : ball.getName()) + " elements=" + (elements == null ? "null" : elements.toString()) + " ]";
+    }
+
 }

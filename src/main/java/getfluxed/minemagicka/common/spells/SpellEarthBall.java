@@ -75,6 +75,11 @@ public class SpellEarthBall implements ISpellBall {
     }
 
     @Override
+    public int getColor(EntityBall ball, World world) {
+        return 0x964B00;
+    }
+
+    @Override
     public void onEntityUpdate(EntityBall ball, World world) {
         // TODO Auto-generated method stub
 
