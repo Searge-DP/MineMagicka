@@ -19,11 +19,6 @@ public class SpellEarthBall implements ISpellBall {
     }
 
     @Override
-    public String getName() {
-        return StatCollector.translateToLocal("mm.spells.earthball.name");
-    }
-
-    @Override
     public String getUnlocalizedName() {
         return "earthball";
     }
@@ -31,11 +26,6 @@ public class SpellEarthBall implements ISpellBall {
     @Override
     public ElementList getElements() {
         return (new ElementList()).add(ElementReference.earth, 1);
-    }
-
-    @Override
-    public boolean spellMatches(ElementCompound elements) {
-        return elements.equals(getElements());
     }
 
     @Override
@@ -77,12 +67,6 @@ public class SpellEarthBall implements ISpellBall {
     @Override
     public int getColor(EntityBall ball, World world) {
         return 0x964B00;
-    }
-
-    @Override
-    public void onEntityUpdate(EntityBall ball, World world) {
-        // TODO Auto-generated method stub
-
     }
 
 }

@@ -24,11 +24,6 @@ public class SpellFireBall implements ISpellBall {
     }
 
     @Override
-    public String getName() {
-        return StatCollector.translateToLocal("mm.spells.fireball.name");
-    }
-
-    @Override
     public String getUnlocalizedName() {
         return "fireball";
     }
@@ -36,11 +31,6 @@ public class SpellFireBall implements ISpellBall {
     @Override
     public ElementList getElements() {
         return (new ElementList()).add(ElementReference.fire, 1).add(ElementReference.earth, 1);
-    }
-
-    @Override
-    public boolean spellMatches(ElementCompound elements) {
-        return elements.equals(getElements());
     }
 
     @Override

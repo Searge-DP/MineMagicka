@@ -24,11 +24,6 @@ public class SpellSolidify implements ISpell {
     }
 
     @Override
-    public String getName() {
-        return "solidify";
-    }
-
-    @Override
     public String getUnlocalizedName() {
         return "solidify";
     }
@@ -40,11 +35,6 @@ public class SpellSolidify implements ISpell {
         castList.add(ElementReference.water, 1);
         castList.add(ElementReference.life, 1);
         return castList;
-    }
-
-    @Override
-    public boolean spellMatches(ElementCompound elements) {
-        return elements.equals(getElements());
     }
 
     @Override

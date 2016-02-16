@@ -22,18 +22,8 @@ public class SpellCure implements ISpell {
     }
 
     @Override
-    public boolean spellMatches(ElementCompound elements) {
-        return elements.equals(getElements());
-    }
-
-    @Override
     public ElementList getElements() {
         return (new ElementList()).add(ElementReference.life, 1);
-    }
-
-    @Override
-    public String getName() {
-        return StatCollector.translateToLocal("mm.spells.heal.name");
     }
 
     @Override

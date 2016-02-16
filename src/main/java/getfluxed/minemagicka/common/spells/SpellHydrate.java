@@ -26,11 +26,6 @@ public class SpellHydrate implements ISpellBall {
     }
 
     @Override
-    public void onEntityUpdate(EntityBall ball, World world) {
-
-    }
-
-    @Override
     public void onImpact(EntityBall ball, World world, MovingObjectPosition mop) {
         int x = (int)ball.posX;
         int y = (int)ball.posY;
@@ -54,11 +49,6 @@ public class SpellHydrate implements ISpellBall {
     }
 
     @Override
-    public boolean spellMatches(ElementCompound elements) {
-        return elements.equals(getElements());
-    }
-
-    @Override
     public CastingType getType() {
         return CastingType.CREATE;
     }
@@ -67,12 +57,6 @@ public class SpellHydrate implements ISpellBall {
     public ElementList getElements() {
         return (new ElementList()).add(ElementReference.earth, 1).add(ElementReference.water, 1);
     }
-
-    @Override
-    public String getName() {
-        return StatCollector.translateToLocal("mm.spells.waterball.name");
-    }
-
     @Override
     public String getUnlocalizedName() {
         return "waterball";
