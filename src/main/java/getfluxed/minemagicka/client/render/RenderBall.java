@@ -1,18 +1,16 @@
 package getfluxed.minemagicka.client.render;
 
+import java.awt.Color;
+
+import org.lwjgl.opengl.GL11;
+
 import getfluxed.minemagicka.api.spells.EntityBall;
 import getfluxed.minemagicka.api.spells.ISpellBall;
 import getfluxed.minemagicka.client.render.models.ModelBall;
 import getfluxed.minemagicka.common.reference.Reference;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderEntity;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-
-import java.awt.*;
 
 public class RenderBall extends Render<EntityBall> {
     ModelBall ball = new ModelBall();

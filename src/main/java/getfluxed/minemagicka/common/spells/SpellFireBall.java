@@ -2,18 +2,14 @@ package getfluxed.minemagicka.common.spells;
 
 import fluxedCore.buffs.BuffEffect;
 import fluxedCore.buffs.BuffHelper;
-import getfluxed.minemagicka.api.casting.CastingType;
-import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.spells.EntityBall;
 import getfluxed.minemagicka.api.spells.ISpellBall;
 import getfluxed.minemagicka.common.reference.BuffReference;
 import getfluxed.minemagicka.common.reference.ElementReference;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class SpellFireBall implements ISpellBall {
