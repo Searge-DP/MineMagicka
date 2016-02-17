@@ -1,7 +1,5 @@
 package getfluxed.minemagicka.common.spells;
 
-import java.util.List;
-
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.casting.CastingType;
 import getfluxed.minemagicka.api.elements.ElementCompound;
@@ -16,16 +14,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class SpellSolidify implements ISpell {
 
     @Override
     public CastingType getType() {
         return CastingType.CREATE;
-    }
-
-    @Override
-    public String getName() {
-        return "solidify";
     }
 
     @Override
@@ -40,11 +35,6 @@ public class SpellSolidify implements ISpell {
         castList.add(ElementReference.water, 1);
         castList.add(ElementReference.life, 1);
         return castList;
-    }
-
-    @Override
-    public boolean spellMatches(ElementCompound elements) {
-        return elements.equals(getElements());
     }
 
     @Override

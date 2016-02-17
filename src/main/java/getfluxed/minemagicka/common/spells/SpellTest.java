@@ -27,11 +27,6 @@ public class SpellTest implements ISpell {
     }
 
     @Override
-    public boolean spellMatches(ElementCompound elements) {
-        return elements.equals(getElements());
-    }
-
-    @Override
     public ElementList getElements() {
         ElementList castList = new ElementList();
         for (IElement el : ElementRegistry.getElementList()) {

@@ -5,13 +5,20 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * @author WireSegal
  *         Created at 4:34 PM on 1/17/16.
  */
 public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectList.
-    private LinkedHashMap<IElement, Integer> elements = new LinkedHashMap<>();
+    LinkedHashMap<IElement, Integer> elements = new LinkedHashMap<>();
+
+    public static ElementList fromHashMap(Map<IElement, Integer> map) {
+        ElementList l = new ElementList();
+        l.elements = new LinkedHashMap<>(map);
+        return l;
+    }
 
     public ElementList copy() {
         return (new ElementList()).add(this);
@@ -78,14 +85,14 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
     }
 
     public ElementList add(ElementList in) {
-        for (IElement a : this.getElements()) {
+        for (IElement a : in.getElements()) {
             this.add(a, in.getAmount(a));
         }
         return this;
     }
 
     public ElementList merge(ElementList in) {
-        for (IElement a : this.getElements()) {
+        for (IElement a : in.getElements()) {
             this.merge(a, in.getAmount(a));
         }
         return this;

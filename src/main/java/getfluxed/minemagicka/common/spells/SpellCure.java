@@ -8,7 +8,6 @@ import getfluxed.minemagicka.common.reference.ElementReference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 /**
@@ -22,18 +21,8 @@ public class SpellCure implements ISpell {
     }
 
     @Override
-    public boolean spellMatches(ElementCompound elements) {
-        return elements.equals(getElements());
-    }
-
-    @Override
     public ElementList getElements() {
         return (new ElementList()).add(ElementReference.life, 1);
-    }
-
-    @Override
-    public String getName() {
-        return StatCollector.translateToLocal("mm.spells.heal.name");
     }
 
     @Override

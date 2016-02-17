@@ -1,9 +1,5 @@
 package getfluxed.minemagicka;
 
-import static getfluxed.minemagicka.common.reference.Reference.modid;
-import static getfluxed.minemagicka.common.reference.Reference.name;
-import static getfluxed.minemagicka.common.reference.Reference.version;
-
 import getfluxed.minemagicka.api.RecipeRegistry;
 import getfluxed.minemagicka.api.nature.NatureRegistry;
 import getfluxed.minemagicka.api.nature.TreeSap;
@@ -11,7 +7,8 @@ import getfluxed.minemagicka.api.recipes.RecipeMagickInfusion;
 import getfluxed.minemagicka.api.spells.EntityBall;
 import getfluxed.minemagicka.client.GUIHandler;
 import getfluxed.minemagicka.common.blocks.MMBlocks;
-import getfluxed.minemagicka.common.events.MagickEventHandler;
+import getfluxed.minemagicka.common.events.BucketEventHandler;
+import getfluxed.minemagicka.common.events.StaffEventHandler;
 import getfluxed.minemagicka.common.items.MMItems;
 import getfluxed.minemagicka.common.liquids.MMLiquids;
 import getfluxed.minemagicka.common.network.PacketHandler;
@@ -33,6 +30,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import static getfluxed.minemagicka.common.reference.Reference.*;
 
 @Mod(modid = modid, name = name, version = version)
 public class MineMagicka {
@@ -61,7 +60,8 @@ public class MineMagicka {
         new GUIHandler();
         EntityRegistry.registerModEntity(EntityBall.class, "ball", 0, INSTANCE, 30, 30, true);
 
-        new MagickEventHandler();
+        new BucketEventHandler();
+        new StaffEventHandler();
 
     }
 

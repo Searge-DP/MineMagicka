@@ -2,7 +2,6 @@ package getfluxed.minemagicka.api.nature;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

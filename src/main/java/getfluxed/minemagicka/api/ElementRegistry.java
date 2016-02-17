@@ -4,7 +4,6 @@ import getfluxed.minemagicka.api.elements.IElement;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class ElementRegistry {
 
@@ -30,12 +29,13 @@ public class ElementRegistry {
     public static IElement getElementFromName(String name) {
         return elements.get(name);
     }
-    public static int getIdFromElement(IElement el){
+
+    public static int getIdFromElement(IElement el) {
         int ret = 0;
-        for(String set : elements.keySet()){
-            if(getElementFromName(set).equals(el)){
+        for (String set : elements.keySet()) {
+            if (getElementFromName(set).equals(el)) {
                 return ret;
-            }else{
+            } else {
                 ret++;
             }
         }

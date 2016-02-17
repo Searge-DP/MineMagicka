@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+
 @SuppressWarnings("serial")
 public class MessageClearElements extends PlugNPlayMessage<MessageClearElements> {
     public MessageClearElements() {

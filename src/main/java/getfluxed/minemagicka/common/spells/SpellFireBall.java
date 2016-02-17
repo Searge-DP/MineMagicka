@@ -2,31 +2,17 @@ package getfluxed.minemagicka.common.spells;
 
 import fluxedCore.buffs.BuffEffect;
 import fluxedCore.buffs.BuffHelper;
-import getfluxed.minemagicka.api.casting.CastingType;
-import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.spells.EntityBall;
 import getfluxed.minemagicka.api.spells.ISpellBall;
 import getfluxed.minemagicka.common.reference.BuffReference;
 import getfluxed.minemagicka.common.reference.ElementReference;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class SpellFireBall implements ISpellBall {
-
-    @Override
-    public CastingType getType() {
-        return CastingType.CREATE;
-    }
-
-    @Override
-    public String getName() {
-        return StatCollector.translateToLocal("mm.spells.fireball.name");
-    }
 
     @Override
     public String getUnlocalizedName() {
@@ -36,16 +22,6 @@ public class SpellFireBall implements ISpellBall {
     @Override
     public ElementList getElements() {
         return (new ElementList()).add(ElementReference.fire, 1).add(ElementReference.earth, 1);
-    }
-
-    @Override
-    public boolean spellMatches(ElementCompound elements) {
-        return elements.equals(getElements());
-    }
-
-    @Override
-    public void cast(World world, EntityPlayer player, ElementCompound elements, double x, double y, double z) {
-        world.spawnEntityInWorld(new EntityBall(world, this, elements, player));
     }
 
     @Override
@@ -81,6 +57,11 @@ public class SpellFireBall implements ISpellBall {
             ball.setDead();
         }
 
+    }
+
+    @Override
+    public int getColor(EntityBall ball, World world) {
+        return 0xC15D22;
     }
 
     @Override

@@ -2,13 +2,15 @@ package getfluxed.minemagicka.common.items;
 
 import fluxedCore.handlers.ClientEventHandler;
 import fluxedCore.util.NBTHelper;
+import getfluxed.minemagicka.api.elements.ElementCompound;
+import getfluxed.minemagicka.api.spells.ICasterItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemStaff extends ModItem {
+public class ItemStaff extends ModItem implements ICasterItem {
 
     public ItemStaff() {
         this.setMaxStackSize(1);
@@ -16,20 +18,18 @@ public class ItemStaff extends ModItem {
     }
 
     @Override
-    public EnumAction getItemUseAction(ItemStack stack) {
-        return EnumAction.BOW;
+    public boolean canCast(ItemStack stack, EntityPlayer player, ElementCompound comp) {
+        return true; // TODO: 2/16/16 implement casting cost 
     }
 
     @Override
-    public int getMaxItemUseDuration(ItemStack stack) {
-        return 72000;
+    public boolean isActive(ItemStack stack, EntityPlayer player) {
+        return true; // TODO: 2/16/16 implement cooldown 
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
-    {
-        playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
-        return itemStackIn;
+    public void onCast(ItemStack stack, EntityPlayer player, ElementCompound comp) {
+        // TODO: 2/16/16 implement casting cost 
     }
 
     @Override
@@ -42,17 +42,5 @@ public class ItemStaff extends ModItem {
             default:
                 return 0xFFFFFF;
         }
-    }
-
-    @Override
-    public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean par5) {
-        if (stack.getTagCompound() == null) {
-            NBTHelper.initNBTTagCompound(stack);
-            NBTHelper.setInteger(stack, "MMSelectedElement", 0);
-        }
-    }
-
-    public int getSelectedElement(ItemStack stack) {
-        return NBTHelper.getInt(stack, "MMSelectedElement");
     }
 }

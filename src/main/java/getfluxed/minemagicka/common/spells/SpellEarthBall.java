@@ -1,27 +1,13 @@
 package getfluxed.minemagicka.common.spells;
 
-import getfluxed.minemagicka.api.casting.CastingType;
-import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.spells.EntityBall;
 import getfluxed.minemagicka.api.spells.ISpellBall;
 import getfluxed.minemagicka.common.reference.ElementReference;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class SpellEarthBall implements ISpellBall {
-
-    @Override
-    public CastingType getType() {
-        return CastingType.CREATE;
-    }
-
-    @Override
-    public String getName() {
-        return StatCollector.translateToLocal("mm.spells.earthball.name");
-    }
 
     @Override
     public String getUnlocalizedName() {
@@ -31,16 +17,6 @@ public class SpellEarthBall implements ISpellBall {
     @Override
     public ElementList getElements() {
         return (new ElementList()).add(ElementReference.earth, 1);
-    }
-
-    @Override
-    public boolean spellMatches(ElementCompound elements) {
-        return elements.equals(getElements());
-    }
-
-    @Override
-    public void cast(World world, EntityPlayer player, ElementCompound elements, double x, double y, double z) {
-        world.spawnEntityInWorld(new EntityBall(world, this, elements, player));
     }
 
     @Override
@@ -75,9 +51,8 @@ public class SpellEarthBall implements ISpellBall {
     }
 
     @Override
-    public void onEntityUpdate(EntityBall ball, World world) {
-        // TODO Auto-generated method stub
-
+    public int getColor(EntityBall ball, World world) {
+        return 0x964B00;
     }
 
 }
