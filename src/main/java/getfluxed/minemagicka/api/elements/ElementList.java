@@ -63,6 +63,8 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
     }
 
     public ElementList add(IElement element, int amount) {
+        if (amount == 0) return this;
+
         if (this.elements.containsKey(element)) {
             int oldamount = this.elements.get(element);
             amount += oldamount;
@@ -73,6 +75,8 @@ public class ElementList { // A shameless steal of a lot of Thaumcraft's AspectL
     }
 
     public ElementList merge(IElement element, int amount) {
+        if (amount == 0) return this;
+
         if (this.elements.containsKey(element)) {
             int oldamount = this.elements.get(element);
             if (amount < oldamount) {

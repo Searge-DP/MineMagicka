@@ -38,6 +38,8 @@ public class MMItems {
 
     public static Item magickSolid = new ItemMagickSolid();
 
+    public static Item magicResource = new ItemMagicResource();
+
     public static Map<String, Item> renderMap = new HashMap<String, Item>();
 
     public static void preInit() {
@@ -51,6 +53,7 @@ public class MMItems {
         registerItem(treeSapMagick, "treeSapMagick", "tree_sap_magick");
         registerItemMeta(sapExtractor, "sapExtractor", "sap_extractor");
         registerItem(magickSolid, "magick_solid", "magick_solid");
+        registerItem(magicResource, "magic_resource", "magic_resource");
 
     }
 

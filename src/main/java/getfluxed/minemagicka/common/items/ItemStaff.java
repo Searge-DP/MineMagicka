@@ -3,6 +3,7 @@ package getfluxed.minemagicka.common.items;
 import fluxedCore.handlers.ClientEventHandler;
 import fluxedCore.util.NBTHelper;
 import getfluxed.minemagicka.api.elements.ElementCompound;
+import getfluxed.minemagicka.api.spells.ElementProviderHelper;
 import getfluxed.minemagicka.api.spells.ICasterItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +20,7 @@ public class ItemStaff extends ModItem implements ICasterItem {
 
     @Override
     public boolean canCast(ItemStack stack, EntityPlayer player, ElementCompound comp) {
-        return true; // TODO: 2/16/16 implement casting cost 
+        return ElementProviderHelper.requestElements(player, comp, false);
     }
 
     @Override
@@ -29,7 +30,7 @@ public class ItemStaff extends ModItem implements ICasterItem {
 
     @Override
     public void onCast(ItemStack stack, EntityPlayer player, ElementCompound comp) {
-        // TODO: 2/16/16 implement casting cost 
+        ElementProviderHelper.requestElements(player, comp, true);
     }
 
     @Override
