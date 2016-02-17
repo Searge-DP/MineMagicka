@@ -15,6 +15,7 @@ import java.awt.*;
 
 public class RenderBall extends Render<EntityBall> {
     ModelBall ball = new ModelBall();
+    private ResourceLocation location = new ResourceLocation(Reference.modid, "textures/models/modelBall.png");
 
     public RenderBall(RenderManager renderManagerIn) {
         super(renderManagerIn);
@@ -42,8 +43,6 @@ public class RenderBall extends Render<EntityBall> {
             }
         }
     }
-
-    private ResourceLocation location = new ResourceLocation(Reference.modid, "textures/models/modelBall.png");
 
     @Override
     protected ResourceLocation getEntityTexture(EntityBall entity) {

@@ -22,21 +22,21 @@ public class SpellHydrate implements ISpellBall {
 
     @Override
     public void onImpact(EntityBall ball, World world, MovingObjectPosition mop) {
-        int x = (int)ball.posX;
-        int y = (int)ball.posY;
-        int z = (int)ball.posZ;
+        int x = (int) ball.posX;
+        int y = (int) ball.posY;
+        int z = (int) ball.posZ;
 
         BlockPos pos = new BlockPos(x, y, z);
 
         pos = pos.down();
         IBlockState state = world.getBlockState(pos);
 
-        if(state.getBlock().isAir(world, pos) || state.getBlock().isReplaceable(world, pos))
+        if (state.getBlock().isAir(world, pos) || state.getBlock().isReplaceable(world, pos))
             world.setBlockState(pos, Blocks.flowing_water.getDefaultState());
         else {
             pos = pos.up();
             state = world.getBlockState(pos);
-            if(state.getBlock().isAir(world, pos) || state.getBlock().isReplaceable(world, pos))
+            if (state.getBlock().isAir(world, pos) || state.getBlock().isReplaceable(world, pos))
                 world.setBlockState(pos, Blocks.flowing_water.getDefaultState());
         }
 
