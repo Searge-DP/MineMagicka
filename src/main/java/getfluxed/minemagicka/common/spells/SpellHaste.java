@@ -37,9 +37,5 @@ public class SpellHaste implements ISpell {
             player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, time, Math.max(elements.getModifierAmount(ElementReference.earth), 3)));
         }
         player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, time, 0));
-<<<<<<< HEAD
-=======
-
->>>>>>> 94c94518da4b25aa03c784bbdcf96019b3b9636c
     }
 }

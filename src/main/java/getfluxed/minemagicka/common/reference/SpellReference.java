@@ -14,10 +14,7 @@ public class SpellReference {
     public static ISpell waterball = new SpellHydrate();
     public static ISpell stoptime = new SpellStopTime();
     public static ISpell haste = new SpellHaste();
-<<<<<<< HEAD
     public static ISpell dig = new SpellDig();
-=======
->>>>>>> 94c94518da4b25aa03c784bbdcf96019b3b9636c
 
     public static ISpell test = new SpellTest();
 
@@ -29,10 +26,7 @@ public class SpellReference {
         SpellRegistry.registerSpell(waterball);
         SpellRegistry.registerSpell(stoptime);
         SpellRegistry.registerSpell(haste);
-<<<<<<< HEAD
         SpellRegistry.registerSpell(dig);
-=======
->>>>>>> 94c94518da4b25aa03c784bbdcf96019b3b9636c
 
         if (MineMagicka.isDevEnv)
             SpellRegistry.registerSpell(test);
