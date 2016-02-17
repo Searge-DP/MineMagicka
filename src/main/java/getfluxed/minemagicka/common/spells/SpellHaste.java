@@ -32,7 +32,7 @@ public class SpellHaste implements ISpell {
 
     @Override
     public void cast(World world, EntityPlayer player, ElementCompound elements, double x, double y, double z) {
-        int time = Math.max(elements.getModifierElements().length, 8) * 20 + 40;
+        int time = Math.min(elements.getModifierElements().length, 8) * 40 + 80;
         if (elements.getModifierAmount(ElementReference.earth) > 0) {
             player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, time, Math.max(elements.getModifierAmount(ElementReference.earth), 3)));
         }
