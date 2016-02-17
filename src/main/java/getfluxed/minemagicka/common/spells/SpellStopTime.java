@@ -36,9 +36,9 @@ public class SpellStopTime implements ISpell {
         int time = Math.max(elements.getModifierAmount(ElementReference.cold), 2) * 20 + 20;
 
         entities.stream().filter(entity -> entity != player).forEach(entity -> {
-            entity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), time, 1));
+            entity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, time, 1));
             if (elements.getModifierAmount(ElementReference.earth) > 0) {
-                entity.addPotionEffect(new PotionEffect(Potion.digSlowdown.getId(), time, 1));
+                entity.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, time, 1));
             }
         });
     }
