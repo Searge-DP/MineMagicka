@@ -71,4 +71,25 @@ public class ElementProviderHelper {
         }
         return list;
     }
+
+    public static ElementList getElements(EntityPlayer player) {
+        IInventory mainInv = player.inventory;
+
+        ElementList list = new ElementList();
+
+        int invSize = mainInv.getSizeInventory();
+
+        for(int i = 0; i < invSize; i++) {
+            ItemStack stackInSlot = mainInv.getStackInSlot(i);
+
+            if(stackInSlot != null && stackInSlot.getItem() instanceof IElementProvider) {
+                IElementProvider elementItem = (IElementProvider) stackInSlot.getItem();
+                ElementList els = elementItem.getElements(player, stackInSlot);
+                if(els.size() != 0) {
+                    list.add(elementItem.getElements(player, stackInSlot));
+                }
+            }
+        }
+        return list;
+    }
 }
