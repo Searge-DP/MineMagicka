@@ -35,17 +35,17 @@ public class ItemStaff extends ModItem implements ICasterItem {
 
     @Override
     public boolean canCast(ItemStack stack, EntityPlayer player, ElementCompound comp) {
-        return true;
+        return true; // TODO: 2/16/16 implement casting cost 
     }
 
     @Override
     public boolean isActive(ItemStack stack, EntityPlayer player) {
-        return true;
+        return true; // TODO: 2/16/16 implement cooldown 
     }
 
     @Override
     public void onCast(ItemStack stack, EntityPlayer player, ElementCompound comp) {
-        // NO-OP
+        // TODO: 2/16/16 implement casting cost 
     }
 
     @Override
