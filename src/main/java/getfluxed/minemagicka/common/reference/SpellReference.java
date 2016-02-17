@@ -13,6 +13,7 @@ public class SpellReference {
     public static ISpell solidify = new SpellSolidify();
     public static ISpell waterball = new SpellHydrate();
     public static ISpell stoptime = new SpellStopTime();
+    public static ISpell haste = new SpellHaste();
 
     public static ISpell test = new SpellTest();
 
@@ -23,6 +24,7 @@ public class SpellReference {
         SpellRegistry.registerSpell(solidify);
         SpellRegistry.registerSpell(waterball);
         SpellRegistry.registerSpell(stoptime);
+        SpellRegistry.registerSpell(haste);
 
         if (MineMagicka.isDevEnv)
             SpellRegistry.registerSpell(test);
