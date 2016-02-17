@@ -18,22 +18,6 @@ public class ItemStaff extends ModItem implements ICasterItem {
     }
 
     @Override
-    public EnumAction getItemUseAction(ItemStack stack) {
-        return EnumAction.BOW;
-    }
-
-    @Override
-    public int getMaxItemUseDuration(ItemStack stack) {
-        return 72000;
-    }
-
-    @Override
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-        playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
-        return itemStackIn;
-    }
-
-    @Override
     public boolean canCast(ItemStack stack, EntityPlayer player, ElementCompound comp) {
         return true; // TODO: 2/16/16 implement casting cost 
     }
@@ -58,17 +42,5 @@ public class ItemStaff extends ModItem implements ICasterItem {
             default:
                 return 0xFFFFFF;
         }
-    }
-
-    @Override
-    public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean par5) {
-        if (stack.getTagCompound() == null) {
-            NBTHelper.initNBTTagCompound(stack);
-            NBTHelper.setInteger(stack, "MMSelectedElement", 0);
-        }
-    }
-
-    public int getSelectedElement(ItemStack stack) {
-        return NBTHelper.getInt(stack, "MMSelectedElement");
     }
 }
