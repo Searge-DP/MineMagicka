@@ -23,6 +23,15 @@ public interface ISpell {
         return elements.equals(getElements());
     }
 
+    /**
+     * Called when the spell is cast
+     * @param world World the spell is called from
+     * @param player The player casting the spell
+     * @param elements The elements in the casting tool
+     * @param x X co-ord where the spell is cast
+     * @param y Y co-ord where the spell is cast
+     * @param z Z co-ord where the spell is cast
+     */
     void cast(World world, EntityPlayer player, ElementCompound elements, double x, double y, double z);
 
 }
