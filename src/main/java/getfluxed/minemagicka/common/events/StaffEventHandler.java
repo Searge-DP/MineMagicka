@@ -87,7 +87,8 @@ public class StaffEventHandler {
                     ISpell spell = SpellRegistry.getSpellFromElements(comp);
 
                     if (spell != null) {
-                        if (((ICasterItem) held.getItem()).canCast(held, player, comp)) {
+                        int purity = ((ICasterItem) held.getItem()).getPurity(held, player);
+                        if (((ICasterItem) held.getItem()).canCast(held, player, comp) && (purity == -1 || purity >= spell.getPurity())) {
                             ((ICasterItem) held.getItem()).onCast(held, player, comp);
                             spell.cast(player.worldObj, player, comp, player.posX, player.posY, player.posZ);
 

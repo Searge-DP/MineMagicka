@@ -14,4 +14,6 @@ public interface ICasterItem {
     boolean canCast(ItemStack stack, EntityPlayer player, ElementCompound comp);
 
     void onCast(ItemStack stack, EntityPlayer player, ElementCompound comp);
+
+    int getPurity(ItemStack stack, EntityPlayer player);
 }

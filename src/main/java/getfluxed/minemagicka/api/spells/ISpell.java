@@ -34,4 +34,6 @@ public interface ISpell {
      */
     void cast(World world, EntityPlayer player, ElementCompound elements, double x, double y, double z);
 
+    int getPurity();
+
 }

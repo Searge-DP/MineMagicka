@@ -15,6 +15,12 @@ import net.minecraft.world.World;
  *         Created at 9:28 PM on 1/20/16.
  */
 public class SpellCure implements ISpell {
+
+    @Override
+    public int getPurity() {
+        return 2;
+    }
+
     @Override
     public CastingType getType() {
         return CastingType.CHANGE;

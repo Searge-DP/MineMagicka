@@ -3,7 +3,6 @@ package getfluxed.minemagicka.common.spells;
 import getfluxed.minemagicka.api.casting.CastingType;
 import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.ElementList;
-import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.api.spells.ISpell;
 import getfluxed.minemagicka.common.reference.ElementReference;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +14,12 @@ import net.minecraft.world.World;
  * Created by Alex on 17/02/2016 at 16:37.
  */
 public class SpellHaste implements ISpell {
+
+    @Override
+    public int getPurity() {
+        return 1;
+    }
+
     @Override
     public CastingType getType() {
         return CastingType.CHANGE;

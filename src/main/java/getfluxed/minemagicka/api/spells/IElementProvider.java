@@ -12,4 +12,6 @@ public interface IElementProvider {
     ElementList getElements(EntityPlayer player, ItemStack stack);
 
     ItemStack consumeElements(EntityPlayer player, ItemStack stack, ElementList list, boolean doit);
+
+    int getPurity(EntityPlayer player, ItemStack stack);
 }

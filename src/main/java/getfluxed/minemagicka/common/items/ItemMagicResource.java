@@ -1,11 +1,10 @@
 package getfluxed.minemagicka.common.items;
 
-import fluxedCore.handlers.ClientEventHandler;
+import fluxedCore.util.NBTHelper;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.api.spells.IElementProvider;
-import getfluxed.minemagicka.common.util.ItemNBTHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -22,20 +21,20 @@ public class ItemMagicResource extends ModItem implements IElementProvider {
 
     public static ItemStack ofElement(String element) {
         ItemStack stack = new ItemStack(MMItems.magicResource);
-        ItemNBTHelper.setString(stack, "element", element);
+        NBTHelper.setString(stack, "element", element);
         return stack;
     }
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        IElement el = ElementRegistry.getElementFromName(ItemNBTHelper.getString(stack, "element", ""));
+        IElement el = ElementRegistry.getElementFromName(NBTHelper.getString(stack, "element"));
         if (el == null) return StatCollector.translateToLocal("item.mm.magic_resource.empty");
         return StatCollector.translateToLocalFormatted("item.mm.magic_resource.name", el.getName());
     }
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        IElement el = ElementRegistry.getElementFromName(ItemNBTHelper.getString(stack, "element", ""));
+        IElement el = ElementRegistry.getElementFromName(NBTHelper.getString(stack, "element"));
         if (el != null)
             tooltip.add(el.getDescription());
     }
@@ -43,7 +42,7 @@ public class ItemMagicResource extends ModItem implements IElementProvider {
     @Override
     public ElementList getElements(EntityPlayer player, ItemStack stack) {
         ElementList list = new ElementList();
-        IElement el = ElementRegistry.getElementFromName(ItemNBTHelper.getString(stack, "element", ""));
+        IElement el = ElementRegistry.getElementFromName(NBTHelper.getString(stack, "element"));
         if (el != null) list.add(el, stack.stackSize);
         return list;
     }
@@ -57,18 +56,23 @@ public class ItemMagicResource extends ModItem implements IElementProvider {
 
     @Override
     public ItemStack consumeElements(EntityPlayer player, ItemStack stack, ElementList list, boolean doit) {
-        IElement el = ElementRegistry.getElementFromName(ItemNBTHelper.getString(stack, "element", ""));
+        IElement el = ElementRegistry.getElementFromName(NBTHelper.getString(stack, "element"));
         if (el != null) {
             int amount = list.getAmount(el);
             list.remove(el, stack.stackSize);
             if (doit)
-                stack.stackSize = Math.max(stack.stackSize-amount, 0);
+                stack.stackSize = Math.max(stack.stackSize - amount, 0);
         }
         return stack;
     }
 
+    @Override
+    public int getPurity(EntityPlayer player, ItemStack stack) {
+        return 0;
+    }
+
     public int color(ItemStack stack) {
-        IElement el = ElementRegistry.getElementFromName(ItemNBTHelper.getString(stack, "element", ""));
+        IElement el = ElementRegistry.getElementFromName(NBTHelper.getString(stack, "element"));
         if (el != null)
             return el.getColor();
         return 0xFFFFFF;

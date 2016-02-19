@@ -1,15 +1,13 @@
 package getfluxed.minemagicka.common.items;
 
 import fluxedCore.handlers.ClientEventHandler;
-import fluxedCore.util.NBTHelper;
+import getfluxed.minemagicka.api.SpellRegistry;
 import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.spells.ElementProviderHelper;
 import getfluxed.minemagicka.api.spells.ICasterItem;
-import net.minecraft.entity.Entity;
+import getfluxed.minemagicka.api.spells.ISpell;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class ItemStaff extends ModItem implements ICasterItem {
 
@@ -20,7 +18,12 @@ public class ItemStaff extends ModItem implements ICasterItem {
 
     @Override
     public boolean canCast(ItemStack stack, EntityPlayer player, ElementCompound comp) {
-        return ElementProviderHelper.requestElements(player, comp, false);
+        ISpell spell = SpellRegistry.getSpellFromElements(comp);
+        int purityRequired = 0;
+        if (spell != null) {
+            purityRequired = spell.getPurity();
+        }
+        return ElementProviderHelper.requestElements(player, comp, purityRequired, false);
     }
 
     @Override
@@ -30,7 +33,17 @@ public class ItemStaff extends ModItem implements ICasterItem {
 
     @Override
     public void onCast(ItemStack stack, EntityPlayer player, ElementCompound comp) {
-        ElementProviderHelper.requestElements(player, comp, true);
+        ISpell spell = SpellRegistry.getSpellFromElements(comp);
+        int purityRequired = 0;
+        if (spell != null) {
+            purityRequired = spell.getPurity();
+        }
+        ElementProviderHelper.requestElements(player, comp, purityRequired, true);
+    }
+
+    @Override
+    public int getPurity(ItemStack stack, EntityPlayer player) {
+        return -1; // Maximum
     }
 
     @Override

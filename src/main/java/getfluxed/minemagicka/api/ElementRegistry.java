@@ -2,6 +2,7 @@ package getfluxed.minemagicka.api;
 
 import getfluxed.minemagicka.api.elements.IElement;
 
+import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -26,14 +27,17 @@ public class ElementRegistry {
         return elements.values().toArray(q);
     }
 
-    public static IElement getElementFromName(String name) {
+    public static
+    @Nullable
+    IElement getElementFromName(String name) {
         return elements.get(name);
     }
 
     public static int getIdFromElement(IElement el) {
         int ret = 0;
         for (String set : elements.keySet()) {
-            if (getElementFromName(set).equals(el)) {
+            IElement key = getElementFromName(set);
+            if (key != null && key.equals(el)) {
                 return ret;
             } else {
                 ret++;

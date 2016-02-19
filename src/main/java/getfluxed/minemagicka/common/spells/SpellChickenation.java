@@ -14,6 +14,12 @@ import net.minecraft.world.World;
  * Created by Alex on 17/02/2016 at 21:03.
  */
 public class SpellChickenation implements ISpellBall {
+
+    @Override
+    public int getPurity() {
+        return 2;
+    }
+
     @Override
     public void onImpact(EntityBall ball, World world, MovingObjectPosition mop) {
         Entity entity = mop.entityHit;

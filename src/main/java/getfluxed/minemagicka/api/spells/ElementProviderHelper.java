@@ -12,30 +12,31 @@ import net.minecraft.item.ItemStack;
  */
 public class ElementProviderHelper {
 
-    public static boolean requestElements(EntityPlayer player, ElementCompound comp, boolean doit) {
-        return requestElements(player, comp.getElementList().add(comp.getModifierElementList()), doit);
+    public static boolean requestElements(EntityPlayer player, ElementCompound comp, int purityRequired, boolean doit) {
+        return requestElements(player, comp.getElementList().add(comp.getModifierElementList()), purityRequired, doit);
     }
 
-    public static boolean requestElements(EntityPlayer player, ElementList list, boolean doit) {
+    public static boolean requestElements(EntityPlayer player, ElementList list, int purityRequired, boolean doit) {
         if (player.capabilities.isCreativeMode) return true;
 
         IInventory mainInv = player.inventory;
 
         int invSize = mainInv.getSizeInventory();
 
-        for(int i = 0; i < invSize; i++) {
+        for (int i = 0; i < invSize; i++) {
             ItemStack stackInSlot = mainInv.getStackInSlot(i);
 
-            if(stackInSlot != null && stackInSlot.getItem() instanceof IElementProvider) {
+            if (stackInSlot != null && stackInSlot.getItem() instanceof IElementProvider) {
                 IElementProvider elementItem = (IElementProvider) stackInSlot.getItem();
+                if (elementItem.getPurity(player, stackInSlot) < purityRequired) continue;
                 ElementList els = elementItem.getElements(player, stackInSlot);
-                if(els.size() != 0) {
+                if (els.size() != 0) {
                     ItemStack newStack = elementItem.consumeElements(player, stackInSlot, list, doit);
                     if (newStack.stackSize <= 0)
                         mainInv.setInventorySlotContents(i, null);
                     else
                         mainInv.setInventorySlotContents(i, newStack);
-                    
+
                     if (list.size() == 0)
                         return true;
                 }
@@ -45,24 +46,25 @@ public class ElementProviderHelper {
     }
 
 
-    public static ElementList checkElements(EntityPlayer player, ElementCompound comp) {
-        return checkElements(player, comp.getElementList().add(comp.getModifierElementList()));
+    public static ElementList checkElements(EntityPlayer player, ElementCompound comp, int purityRequired) {
+        return checkElements(player, comp.getElementList().add(comp.getModifierElementList()), purityRequired);
     }
 
-    public static ElementList checkElements(EntityPlayer player, ElementList list) {
+    public static ElementList checkElements(EntityPlayer player, ElementList list, int purityRequired) {
         if (player.capabilities.isCreativeMode) return new ElementList();
 
         IInventory mainInv = player.inventory;
 
         int invSize = mainInv.getSizeInventory();
 
-        for(int i = 0; i < invSize; i++) {
+        for (int i = 0; i < invSize; i++) {
             ItemStack stackInSlot = mainInv.getStackInSlot(i);
 
-            if(stackInSlot != null && stackInSlot.getItem() instanceof IElementProvider) {
+            if (stackInSlot != null && stackInSlot.getItem() instanceof IElementProvider) {
                 IElementProvider elementItem = (IElementProvider) stackInSlot.getItem();
+                if (elementItem.getPurity(player, stackInSlot) < purityRequired) continue;
                 ElementList els = elementItem.getElements(player, stackInSlot);
-                if(els.size() != 0) {
+                if (els.size() != 0) {
                     elementItem.consumeElements(player, stackInSlot, list, false);
                     if (list.size() == 0)
                         return list;
@@ -72,20 +74,21 @@ public class ElementProviderHelper {
         return list;
     }
 
-    public static ElementList getElements(EntityPlayer player) {
+    public static ElementList getElements(EntityPlayer player, int purityRequired) {
         IInventory mainInv = player.inventory;
 
         ElementList list = new ElementList();
 
         int invSize = mainInv.getSizeInventory();
 
-        for(int i = 0; i < invSize; i++) {
+        for (int i = 0; i < invSize; i++) {
             ItemStack stackInSlot = mainInv.getStackInSlot(i);
 
-            if(stackInSlot != null && stackInSlot.getItem() instanceof IElementProvider) {
+            if (stackInSlot != null && stackInSlot.getItem() instanceof IElementProvider) {
                 IElementProvider elementItem = (IElementProvider) stackInSlot.getItem();
+                if (elementItem.getPurity(player, stackInSlot) < purityRequired) continue;
                 ElementList els = elementItem.getElements(player, stackInSlot);
-                if(els.size() != 0) {
+                if (els.size() != 0) {
                     list.add(elementItem.getElements(player, stackInSlot));
                 }
             }

@@ -15,6 +15,11 @@ import net.minecraft.world.World;
 public class SpellFireBall implements ISpellBall {
 
     @Override
+    public int getPurity() {
+        return 1;
+    }
+
+    @Override
     public String getUnlocalizedName() {
         return "fireball";
     }

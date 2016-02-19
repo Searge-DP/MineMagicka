@@ -8,6 +8,7 @@ import org.apache.commons.lang3.text.WordUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.List;
 
@@ -83,7 +84,9 @@ public class ElementBase implements IElement {
     }
 
     @Override
-    public Pair<IElement, IElement> getCombination() {
+    public
+    @Nullable
+    Pair<IElement, IElement> getCombination() {
         return ingredients;
     }
 
