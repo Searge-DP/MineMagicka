@@ -45,6 +45,6 @@ public class SpellMudSlinger implements ISpellBall {
 
     @Override
     public ElementList getElements() {
-        return (new ElementList()).add(ElementReference.water, 1).add(ElementReference.earth, 1);
+        return (new ElementList()).add(ElementReference.water, 1).add(ElementReference.earth, 2);
     }
 }
