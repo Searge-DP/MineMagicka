@@ -16,29 +16,11 @@ public class ItemStaff extends ModItem implements ICasterItem {
         this.setFull3D();
     }
 
-    @Override
-    public boolean canCast(ItemStack stack, EntityPlayer player, ElementCompound comp) {
-        ISpell spell = SpellRegistry.getSpellFromElements(comp);
-        int purityRequired = 0;
-        if (spell != null) {
-            purityRequired = spell.getPurity();
-        }
-        return ElementProviderHelper.requestElements(player, comp, purityRequired, false);
-    }
+
 
     @Override
     public boolean isActive(ItemStack stack, EntityPlayer player) {
         return true; // TODO: 2/16/16 implement cooldown 
-    }
-
-    @Override
-    public void onCast(ItemStack stack, EntityPlayer player, ElementCompound comp) {
-        ISpell spell = SpellRegistry.getSpellFromElements(comp);
-        int purityRequired = 0;
-        if (spell != null) {
-            purityRequired = spell.getPurity();
-        }
-        ElementProviderHelper.requestElements(player, comp, purityRequired, true);
     }
 
     @Override
