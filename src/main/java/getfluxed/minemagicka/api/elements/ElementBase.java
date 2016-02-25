@@ -8,6 +8,7 @@ import org.apache.commons.lang3.text.WordUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.List;
 
@@ -20,14 +21,14 @@ public class ElementBase implements IElement {
     private ResourceLocation icon;
 
     /**
-     * DO NOT USE THIS! It creates a primary element, and should only be used by MineMagika itself.
+     * DO NOT USE THIS! It creates a primary element, and should only be used by MineMagicka itself.
      */
     public ElementBase(String name, int color, ResourceLocation icon) {
         this(name, color, icon, null);
     }
 
     /**
-     * DO NOT PASS NULL TO INGREDIENTS! This creates a primary element, and should only be used by MineMagika itself.
+     * DO NOT PASS NULL TO INGREDIENTS! This creates a primary element, and should only be used by MineMagicka itself.
      */
     public ElementBase(String name, int color, ResourceLocation icon, Pair<IElement, IElement> ingredients) {
         this.name = name;
@@ -83,7 +84,9 @@ public class ElementBase implements IElement {
     }
 
     @Override
-    public Pair<IElement, IElement> getCombination() {
+    public
+    @Nullable
+    Pair<IElement, IElement> getCombination() {
         return ingredients;
     }
 

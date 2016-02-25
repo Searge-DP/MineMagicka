@@ -16,6 +16,11 @@ import java.util.List;
 public class SpellStopTime implements ISpell {
 
     @Override
+    public int getPurity() {
+        return 2;
+    }
+
+    @Override
     public CastingType getType() {
         return CastingType.SEAL;
     }

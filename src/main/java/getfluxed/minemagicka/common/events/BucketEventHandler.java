@@ -12,7 +12,7 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class BucketEventHandler { // TODO nuke this class from orbit
+public class BucketEventHandler {
 
     public BucketEventHandler() {
         MinecraftForge.EVENT_BUS.register(this);

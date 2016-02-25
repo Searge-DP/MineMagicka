@@ -3,6 +3,7 @@ package getfluxed.minemagicka.api;
 import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.spells.ISpell;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +20,9 @@ public class SpellRegistry {
         return spells;
     }
 
-    public static ISpell getSpellFromName(String name) {
+    public static
+    @Nullable
+    ISpell getSpellFromName(String name) {
         for (ISpell el : getSpells().values()) {
             if (el.getUnlocalizedName().equals(name)) {
                 return el;
@@ -28,7 +31,9 @@ public class SpellRegistry {
         return null;
     }
 
-    public static ISpell getSpellFromElements(ElementCompound elements) {
+    public static
+    @Nullable
+    ISpell getSpellFromElements(ElementCompound elements) {
         for (ISpell spell : getSpells().values()) {
             if (spell.spellMatches(elements)) {
                 return spell;

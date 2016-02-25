@@ -15,6 +15,12 @@ import net.minecraft.world.World;
  *         Created at 6:00 PM on 2/15/16.
  */
 public class SpellHydrate implements ISpellBall {
+
+    @Override
+    public int getPurity() {
+        return 0;
+    }
+
     @Override
     public int getColor(EntityBall ball, World world) {
         return 0x0040FF;

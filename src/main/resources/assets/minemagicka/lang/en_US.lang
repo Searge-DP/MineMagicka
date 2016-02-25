@@ -16,6 +16,9 @@ item.mm.staff.name=Mage's Staff
 item.mm.page_magick.name=Compendium Page
 item.mm.page_magick_locked.name=Locked Compendium Page
 
+item.mm.magic_resource.name=Sphere of %1$s
+item.mm.magic_resource.empty=Empty Sphere
+
 mm.element.hydros.description=Water, Flow
 mm.element.zoia.description=Life, Birth
 mm.element.alexia.description=Shield, Protection
@@ -30,6 +33,8 @@ mm.spells.fireball.name=Volída
 mm.spells.heal.name=Pligés therapeía
 mm.spells.waterball.name=Sfaíra neroú
 mm.spells.stoptime.name=Télos chrónou
+mm.spells.haste.name=Pódia tou Ermí
+mm.spells.dig.name=Dákry ti gi
 
 mm.spellcasting.failed.badelement=The word %1$s seemed too strange to shout...
 mm.spellcasting.failed.channelfailed=You shouted %1$s, but your %2$s refused to budge...

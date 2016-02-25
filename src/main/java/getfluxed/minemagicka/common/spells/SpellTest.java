@@ -17,6 +17,11 @@ import net.minecraft.world.World;
 public class SpellTest implements ISpell {
 
     @Override
+    public int getPurity() {
+        return 0;
+    }
+
+    @Override
     public CastingType getType() {
         return CastingType.WEAVE;
     }

@@ -15,6 +15,7 @@ public class SpellReference {
     public static ISpell stoptime = new SpellStopTime();
     public static ISpell haste = new SpellHaste();
     public static ISpell dig = new SpellDig();
+    public static ISpell mudslinger = new SpellMudSlinger();
 
     public static ISpell test = new SpellTest();
 
@@ -27,6 +28,7 @@ public class SpellReference {
         SpellRegistry.registerSpell(stoptime);
         SpellRegistry.registerSpell(haste);
         SpellRegistry.registerSpell(dig);
+        SpellRegistry.registerSpell(mudslinger);
 
         if (MineMagicka.isDevEnv)
             SpellRegistry.registerSpell(test);

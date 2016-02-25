@@ -10,6 +10,11 @@ import net.minecraft.world.World;
 public class SpellEarthBall implements ISpellBall {
 
     @Override
+    public int getPurity() {
+        return 0;
+    }
+
+    @Override
     public String getUnlocalizedName() {
         return "earthball";
     }

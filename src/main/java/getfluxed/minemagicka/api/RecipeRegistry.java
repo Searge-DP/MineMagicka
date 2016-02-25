@@ -3,6 +3,7 @@ package getfluxed.minemagicka.api;
 import getfluxed.minemagicka.api.recipes.RecipeMagickInfusion;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,9 @@ public class RecipeRegistry {
         return infusionRecipes;
     }
 
-    public static RecipeMagickInfusion getInfusionRecipe(ItemStack input, int currentLiquid) {
+    public static
+    @Nullable
+    RecipeMagickInfusion getInfusionRecipe(ItemStack input, int currentLiquid) {
         for (RecipeMagickInfusion r : getInfusionRecipes()) {
             if (r.canInfuse(input, currentLiquid)) {
                 return r;

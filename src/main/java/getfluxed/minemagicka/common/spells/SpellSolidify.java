@@ -19,6 +19,11 @@ import java.util.List;
 public class SpellSolidify implements ISpell {
 
     @Override
+    public int getPurity() {
+        return 0;
+    }
+
+    @Override
     public CastingType getType() {
         return CastingType.CREATE;
     }
@@ -41,11 +46,7 @@ public class SpellSolidify implements ISpell {
     public void cast(World world, EntityPlayer player, ElementCompound elements, double x, double y, double z) {
         if (elements.getModifierAmount(ElementReference.arcane) > 0) {
             List<EntityLivingBase> entList = world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.fromBounds(3 - player.posX, 3 - player.posY, 3 - player.posZ, 3 + player.posX, 3 + player.posY, 3 + player.posZ));
-            for (EntityLivingBase base : entList) {
-                if (base.isEntityUndead()) {
-                    world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(MMItems.magickSolid, elements.getModifierAmount(ElementReference.arcane), ElementRegistry.getIdFromElement(ElementReference.arcane))));
-                }
-            }
+            entList.stream().filter(EntityLivingBase::isEntityUndead).forEach(base -> world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(MMItems.magickSolid, elements.getModifierAmount(ElementReference.arcane), ElementRegistry.getIdFromElement(ElementReference.arcane)))));
         }
         if (elements.getModifierAmount(ElementReference.cold) > 0) {
             if (world.getBiomeGenForCoords(player.getPosition()).isSnowyBiome()) {
@@ -67,12 +68,7 @@ public class SpellSolidify implements ISpell {
         }
         if (elements.getModifierAmount(ElementReference.life) > 0) {
             List<EntityLivingBase> entList = world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.fromBounds(3 - player.posX, 3 - player.posY, 3 - player.posZ, 3 + player.posX, 3 + player.posY, 3 + player.posZ));
-            for (EntityLivingBase base : entList) {
-                if (!base.isEntityUndead()) {
-                    world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(MMItems.magickSolid, elements.getModifierAmount(ElementReference.life), ElementRegistry.getIdFromElement(ElementReference.life))));
-
-                }
-            }
+            entList.stream().filter(base -> !base.isEntityUndead()).forEach(base -> world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(MMItems.magickSolid, elements.getModifierAmount(ElementReference.life), ElementRegistry.getIdFromElement(ElementReference.life)))));
         }
         if (elements.getModifierAmount(ElementReference.lightning) > 0) {
             if (world.isThundering()) {

@@ -8,6 +8,7 @@ import getfluxed.minemagicka.api.spells.EntityBall;
 import getfluxed.minemagicka.client.GUIHandler;
 import getfluxed.minemagicka.common.blocks.MMBlocks;
 import getfluxed.minemagicka.common.events.BucketEventHandler;
+import getfluxed.minemagicka.common.events.SingleCasterEventHandler;
 import getfluxed.minemagicka.common.events.StaffEventHandler;
 import getfluxed.minemagicka.common.items.MMItems;
 import getfluxed.minemagicka.common.liquids.MMLiquids;
@@ -62,6 +63,7 @@ public class MineMagicka {
 
         new BucketEventHandler();
         new StaffEventHandler();
+        new SingleCasterEventHandler();
 
     }
 

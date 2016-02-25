@@ -48,9 +48,9 @@ public class StaffEventHandler {
 
         if (held != null && held.getItem() instanceof ICasterItem) {
             if (casting.matcher(msg).matches()) {
-                if (((ICasterItem) held.getItem()).isActive(held, player)) {
-                    e.setCanceled(true);
+                e.setCanceled(true);
 
+                if (((ICasterItem) held.getItem()).isActive(held, player)) {
                     String trimmed = msg.substring(0, msg.length() - 1);
                     String[] split = trimmed.split(",");
                     String[] elements = split[0].split(" ");
@@ -84,31 +84,37 @@ public class StaffEventHandler {
                         }
                     }
 
-                    ISpell spell = SpellRegistry.getSpellFromElements(comp);
+                    cast(comp, held, player);
 
-                    if (spell != null) {
-                        if (((ICasterItem) held.getItem()).canCast(held, player, comp)) {
-                            ((ICasterItem) held.getItem()).onCast(held, player, comp);
-                            spell.cast(player.worldObj, player, comp, player.posX, player.posY, player.posZ);
-
-                            IChatComponent greenComp = new ChatComponentTranslation("mm.spellcasting.success");
-                            greenComp.getChatStyle().setColor(EnumChatFormatting.GREEN);
-                            S45PacketTitle titlePacket = new S45PacketTitle(S45PacketTitle.Type.TITLE, greenComp, 10, 60, 20);
-                            ((EntityPlayerMP) player).playerNetServerHandler.sendPacket(titlePacket);
-                            titlePacket = new S45PacketTitle(S45PacketTitle.Type.SUBTITLE, new ChatComponentText(spell.getName() + "!"), 10, 60, 20);
-                            ((EntityPlayerMP) player).playerNetServerHandler.sendPacket(titlePacket);
-                        } else {
-                            IChatComponent nameComp = new ChatComponentText(spell.getName());
-                            nameComp.getChatStyle().setItalic(true);
-                            player.addChatComponentMessage(new ChatComponentTranslation("mm.spellcasting.failed.channelfailed", nameComp, held.getChatComponent()));
-                        }
-                    } else {
-                        player.addChatComponentMessage(new ChatComponentTranslation("mm.spellcasting.failed.nospell"));
-                    }
                 } else {
                     player.addChatComponentMessage(new ChatComponentTranslation("mm.spellcasting.failed.sleepingstaff", held.getChatComponent()));
                 }
             }
+        }
+    }
+
+    public static void cast(ElementCompound comp, ItemStack held, EntityPlayer player) {
+        ISpell spell = SpellRegistry.getSpellFromElements(comp);
+
+        if (spell != null) {
+            int purity = ((ICasterItem) held.getItem()).getPurity(held, player);
+            if (((ICasterItem) held.getItem()).canCast(held, player, comp) && (purity == -1 || purity >= spell.getPurity())) {
+                ((ICasterItem) held.getItem()).onCast(held, player, comp);
+                spell.cast(player.worldObj, player, comp, player.posX, player.posY, player.posZ);
+
+                IChatComponent greenComp = new ChatComponentTranslation("mm.spellcasting.success");
+                greenComp.getChatStyle().setColor(EnumChatFormatting.GREEN);
+                S45PacketTitle titlePacket = new S45PacketTitle(S45PacketTitle.Type.TITLE, greenComp, 10, 60, 20);
+                ((EntityPlayerMP) player).playerNetServerHandler.sendPacket(titlePacket);
+                titlePacket = new S45PacketTitle(S45PacketTitle.Type.SUBTITLE, new ChatComponentText(spell.getName() + "!"), 10, 60, 20);
+                ((EntityPlayerMP) player).playerNetServerHandler.sendPacket(titlePacket);
+            } else {
+                IChatComponent nameComp = new ChatComponentText(spell.getName());
+                nameComp.getChatStyle().setItalic(true);
+                player.addChatComponentMessage(new ChatComponentTranslation("mm.spellcasting.failed.channelfailed", nameComp, held.getChatComponent()));
+            }
+        } else {
+            player.addChatComponentMessage(new ChatComponentTranslation("mm.spellcasting.failed.nospell"));
         }
     }
 }
