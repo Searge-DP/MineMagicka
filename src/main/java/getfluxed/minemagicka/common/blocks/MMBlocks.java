@@ -1,5 +1,6 @@
 package getfluxed.minemagicka.common.blocks;
 
+import getfluxed.minemagicka.common.blocks.machines.BlockEssenceTransfuser;
 import getfluxed.minemagicka.common.blocks.misc.BlockMagickBlock;
 import getfluxed.minemagicka.common.blocks.researchtable.BlockResearchTableBook;
 import getfluxed.minemagicka.common.blocks.trees.magick.BlockMagicLog;
@@ -39,6 +40,8 @@ public class MMBlocks {
     public static Block leavesMagick = new BlockMagickLeaves();
 
     public static Block magickBlock = new BlockMagickBlock();
+    public static Block essenceTransfuser= new BlockEssenceTransfuser();
+    
 
     public static Map<String, Block> renderMap = new HashMap<>();
     public static Map<String, Block> renderFluidMap = new HashMap<>();
@@ -53,6 +56,8 @@ public class MMBlocks {
         registerBlock(logMagick, "magick_log");
         registerBlock(magickBlock, "magick_block");
         registerBlock(leavesMagick, "magick_leaves");
+        registerBlock(essenceTransfuser, "essense_transfuser");
+        
 
 
     }

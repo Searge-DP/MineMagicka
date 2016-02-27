@@ -1,60 +1,34 @@
 package getfluxed.minemagicka.client.gui.book;
 
+import java.util.List;
+
+import org.lwjgl.opengl.GL11;
+
+import getfluxed.minemagicka.api.compendium.ICompendiumEntry;
+import getfluxed.minemagicka.api.compendium.ICompendiumPage;
+import getfluxed.minemagicka.api.compendium.IGuiCompendium;
 import getfluxed.minemagicka.common.reference.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.List;
-
-public class GuiBookMagick extends GuiScreen { // TODO: 1/6/16 Implement getfluxed.minemagicka.api.compendium.IGuiCompendium
+public class GuiBookMagick extends GuiScreen implements IGuiCompendium {
     public static ResourceLocation texture = new ResourceLocation(Reference.modid, "textures/gui/guiBookMagick.png");
-    public static ResourceLocation other = new ResourceLocation(Reference.modid, "textures/gui/guiBookOther.png");
     int guiWidth = 256;
-    int guiHeight = 256;
+    int guiHeight = 171;
     int left, top;
     int middleX = (guiWidth / 2) - guiWidth;
     int middleY = (guiHeight / 2) - guiHeight;
 
-    @SuppressWarnings({"unchecked"})
     @Override
     public void initGui() {
-        this.guiWidth = 256;
-        this.guiHeight = 256;
         super.initGui();
 
         this.left = (this.width / 2) - (guiWidth / 2);
         this.top = (this.height / 2) - (guiHeight / 2);
-        texture = new ResourceLocation(Reference.modid, "textures/gui/guiBookMagick.png");
-        other = new ResourceLocation(Reference.modid, "textures/gui/guiBookOther.png");
-
-        buttonList.add(new GuiButton(0, left + 10, top + 14, 11, 231, "") {
-            @Override
-            public void drawButton(Minecraft mc, int x, int y) {
-                mc.renderEngine.bindTexture(other);
-                boolean mouse = x > xPosition && x < xPosition + width && y > yPosition && y < yPosition + height;
-                if (mouse)
-                    drawTexturedModalRect(xPosition, yPosition, 0, 0, 11, 231);
-                else {
-                    drawTexturedModalRect(xPosition, yPosition, 22, 0, 11, 231);
-                }
-            }
-        });
-        buttonList.add(new GuiButton(1, left + guiWidth - 22, top + 14, 11, 231, "") {
-            @Override
-            public void drawButton(Minecraft mc, int x, int y) {
-                mc.renderEngine.bindTexture(other);
-                boolean mouse = x > xPosition && x < xPosition + width && y > yPosition && y < yPosition + height;
-                if (mouse)
-                    drawTexturedModalRect(xPosition, yPosition, 11, 0, 11, 231);
-                else {
-                    drawTexturedModalRect(xPosition, yPosition, 33, 0, 11, 231);
-                }
-            }
-        });
-
     }
 
     @Override
@@ -63,7 +37,6 @@ public class GuiBookMagick extends GuiScreen { // TODO: 1/6/16 Implement getflux
 
             mc.renderEngine.bindTexture(texture);
         }
-
         drawTexturedModalRect(left, top, 0, 0, guiWidth, guiHeight);
         super.drawScreen(par1, par2, par3);
     }
@@ -85,6 +58,61 @@ public class GuiBookMagick extends GuiScreen { // TODO: 1/6/16 Implement getflux
 
     public List<GuiButton> getButtonList() {
         return buttonList;
+    }
+
+    @Override
+    public ICompendiumEntry getEntry() {
+        return null;
+    }
+
+    @Override
+    public ICompendiumPage getPage() {
+        return null;
+    }
+
+    @Override
+    public int getPageIndex() {
+        return 0;
+    }
+
+    @Override
+    public int getTop() {
+        return this.top;
+    }
+
+    @Override
+    public int getLeft() {
+        return this.left;
+    }
+
+    @Override
+    public int getWidth() {
+        return guiWidth;
+    }
+
+    @Override
+    public int getHeight() {
+        return guiHeight;
+    }
+
+    @Override
+    public float getZLevel() {
+        return 0;
+    }
+
+    @Override
+    public float getElapsedTicks() {
+        return 0;
+    }
+
+    @Override
+    public float getPartialTicks() {
+        return 0;
+    }
+
+    @Override
+    public float getTickDelta() {
+        return 0;
     }
 
 }

@@ -1,11 +1,14 @@
 package getfluxed.minemagicka.client;
 
 import getfluxed.minemagicka.MineMagicka;
+import getfluxed.minemagicka.client.gui.essencetransfuser.ContainerEssenseTransfuser;
+import getfluxed.minemagicka.client.gui.essencetransfuser.GuiEssenseTransfuser;
 import getfluxed.minemagicka.client.gui.magickinfuser.ContainerMagickInfuser;
 import getfluxed.minemagicka.client.gui.magickinfuser.GuiMagickInfuser;
 import getfluxed.minemagicka.client.gui.researchtable.ContainerResearchTableBook;
 import getfluxed.minemagicka.client.gui.researchtable.GuiResearchTable;
 import getfluxed.minemagicka.common.tileentities.TileEntityMagickInfuser;
+import getfluxed.minemagicka.common.tileentities.machines.TileEntityEssenceTransfuser;
 import getfluxed.minemagicka.common.tileentities.researchtable.TileEntityResearchTableBook;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -35,6 +38,12 @@ public class GUIHandler implements IGuiHandler {
                     return new ContainerResearchTableBook(player.inventory, (TileEntityResearchTableBook) te);
                 }
                 break;
+                
+            case 2:
+                if (te != null && te instanceof TileEntityEssenceTransfuser) {
+                    return new ContainerEssenseTransfuser(player.inventory, (TileEntityEssenceTransfuser) te);
+                }
+                break;
         }
 
         return null;
@@ -53,6 +62,11 @@ public class GUIHandler implements IGuiHandler {
             case 1:
                 if (te != null && te instanceof TileEntityResearchTableBook) {
                     return new GuiResearchTable(player.inventory, (TileEntityResearchTableBook) te);
+                }
+                break;
+            case 2:
+                if (te != null && te instanceof TileEntityEssenceTransfuser) {
+                    return new GuiEssenseTransfuser(player.inventory, (TileEntityEssenceTransfuser) te);
                 }
                 break;
         }

@@ -30,8 +30,8 @@ import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.HashMap;
 
-@SuppressWarnings("serial")
-public abstract class PlugNPlayMessage<REQ extends PlugNPlayMessage> implements Serializable, IMessage, IMessageHandler<REQ, IMessage> {
+@SuppressWarnings({ "rawtypes", "serial" })
+public abstract class PlugNPlayMessage<REQ extends PlugNPlayMessage<?>> implements Serializable, IMessage, IMessageHandler<REQ, IMessage> {
 
     private static final HashMap<Class, Pair<Reader, Writer>> handlers = new HashMap<Class, Pair<Reader, Writer>>();
     private static final HashMap<Class, Field[]> fieldCache = new HashMap<Class, Field[]>();
@@ -241,6 +241,7 @@ public abstract class PlugNPlayMessage<REQ extends PlugNPlayMessage> implements 
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void writeField(Field f, Class clazz, ByteBuf buf) throws IllegalArgumentException, IllegalAccessException {
         Pair<Reader, Writer> handler = getHandler(clazz);
         handler.getRight().write(f.get(this), buf);
