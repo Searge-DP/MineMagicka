@@ -45,18 +45,20 @@ public class SpellDig implements ISpellBall {
         int miningLevel = ball.elements.getModifierAmount(ElementReference.cold) > 0 ? 3 : 1;
 
         BlockPos mpos = mop.getBlockPos();
-        for (int x = mpos.getX() - 1; x <= mpos.getX() + 1; x++) {
-            for (int y = mpos.getY() - 1; y <= mpos.getY() + 1; y++) {
-                for (int z = mpos.getZ() - 1; z <= mpos.getZ() + 1; z++) {
-                    BlockPos pos = new BlockPos(x, y, z);
-                    IBlockState state = world.getBlockState(pos);
-                    if (state.getBlock().getHarvestLevel(state) <= miningLevel && state.getBlock().getBlockHardness(world, pos) != -1) {
-                        List<ItemStack> drops = state.getBlock().getDrops(world, pos, world.getBlockState(pos), 0);
-                        world.setBlockToAir(pos);
-                        drops.forEach(item -> {
-                            EntityItem itemEntity = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), item);
-                            world.spawnEntityInWorld(itemEntity);
-                        });
+        if (mpos != null) {
+            for (int x = mpos.getX() - 1; x <= mpos.getX() + 1; x++) {
+                for (int y = mpos.getY() - 1; y <= mpos.getY() + 1; y++) {
+                    for (int z = mpos.getZ() - 1; z <= mpos.getZ() + 1; z++) {
+                        BlockPos pos = new BlockPos(x, y, z);
+                        IBlockState state = world.getBlockState(pos);
+                        if (state.getBlock().getHarvestLevel(state) <= miningLevel && state.getBlock().getBlockHardness(world, pos) != -1) {
+                            List<ItemStack> drops = state.getBlock().getDrops(world, pos, world.getBlockState(pos), 0);
+                            world.setBlockToAir(pos);
+                            drops.forEach(item -> {
+                                EntityItem itemEntity = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), item);
+                                world.spawnEntityInWorld(itemEntity);
+                            });
+                        }
                     }
                 }
             }

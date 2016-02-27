@@ -1,19 +1,15 @@
 package getfluxed.minemagicka.client.gui.book;
 
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
 import getfluxed.minemagicka.api.compendium.ICompendiumEntry;
 import getfluxed.minemagicka.api.compendium.ICompendiumPage;
 import getfluxed.minemagicka.api.compendium.IGuiCompendium;
 import getfluxed.minemagicka.common.reference.Reference;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.List;
 
 public class GuiBookMagick extends GuiScreen implements IGuiCompendium {
     public static ResourceLocation texture = new ResourceLocation(Reference.modid, "textures/gui/guiBookMagick.png");

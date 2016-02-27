@@ -1,9 +1,9 @@
 package getfluxed.minemagicka.api.aroma;
 
+import fluxedCore.buffs.Buff;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import fluxedCore.buffs.Buff;
 
 public class IncenseRegistry {
 

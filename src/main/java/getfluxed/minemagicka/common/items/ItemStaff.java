@@ -1,11 +1,7 @@
 package getfluxed.minemagicka.common.items;
 
 import fluxedCore.handlers.ClientEventHandler;
-import getfluxed.minemagicka.api.SpellRegistry;
-import getfluxed.minemagicka.api.elements.ElementCompound;
-import getfluxed.minemagicka.api.spells.ElementProviderHelper;
 import getfluxed.minemagicka.api.spells.ICasterItem;
-import getfluxed.minemagicka.api.spells.ISpell;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 

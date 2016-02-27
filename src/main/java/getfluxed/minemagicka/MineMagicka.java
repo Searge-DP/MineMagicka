@@ -7,6 +7,7 @@ import getfluxed.minemagicka.api.recipes.RecipeMagickInfusion;
 import getfluxed.minemagicka.api.spells.EntityBall;
 import getfluxed.minemagicka.client.GUIHandler;
 import getfluxed.minemagicka.common.blocks.MMBlocks;
+import getfluxed.minemagicka.common.crafting.MMRecipes;
 import getfluxed.minemagicka.common.events.BucketEventHandler;
 import getfluxed.minemagicka.common.events.SingleCasterEventHandler;
 import getfluxed.minemagicka.common.events.StaffEventHandler;
@@ -50,11 +51,11 @@ public class MineMagicka {
         MMLiquids.preInit();
         MMBlocks.preInit();
         MMItems.preInit();
-        RecipeRegistry.registerMagickInfusionRecipe(new RecipeMagickInfusion(new ItemStack(Items.stick), new ItemStack(Items.diamond), 500));
         ElementReference.preInit();
         SpellReference.preInit();
         BuffReference.preInit();
         PacketHandler.preInit();
+        MMRecipes.preInit();
         NatureRegistry.registerSap(new ItemStack(MMItems.treeSap), new TreeSap("Tree Sap", 0xFFFFFF), Blocks.log);
         NatureRegistry.registerSap(new ItemStack(MMItems.treeSapMagick), new TreeSap("Magick Sap", 0xFF55FF), MMBlocks.logMagick);
 
@@ -76,7 +77,6 @@ public class MineMagicka {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent e) {
-        RecipeRegistry.registerMagickInfusionRecipe(new RecipeMagickInfusion(new ItemStack(Items.paper), new ItemStack(MMItems.pageLocked), 250));
         GameRegistry.registerWorldGenerator(new GenerationHandler(), 0);
     }
 

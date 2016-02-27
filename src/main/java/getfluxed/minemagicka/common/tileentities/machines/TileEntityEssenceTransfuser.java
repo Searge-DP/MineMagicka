@@ -66,7 +66,7 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
     public void readInventoryFromNBT(NBTTagCompound tags) {
         NBTTagList nbttaglist = tags.getTagList("Items", Constants.NBT.TAG_COMPOUND);
         for (int iter = 0; iter < nbttaglist.tagCount(); iter++) {
-            NBTTagCompound tagList = (NBTTagCompound) nbttaglist.getCompoundTagAt(iter);
+            NBTTagCompound tagList = nbttaglist.getCompoundTagAt(iter);
             byte slotID = tagList.getByte("Slot");
             if (slotID >= 0 && slotID < items.length) {
                 items[slotID] = ItemStack.loadItemStackFromNBT(tagList);

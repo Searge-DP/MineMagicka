@@ -1,11 +1,11 @@
 package getfluxed.minemagicka.common.items.aroma.incense;
 
-import java.util.List;
-
 import getfluxed.minemagicka.common.items.ModItem;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 public class ItemIncenseStick extends ModItem{
 
