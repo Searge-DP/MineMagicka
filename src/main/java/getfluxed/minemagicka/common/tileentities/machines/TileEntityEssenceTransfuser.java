@@ -1,5 +1,6 @@
 package getfluxed.minemagicka.common.tileentities.machines;
 
+import net.minecraft.block.BlockFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -7,23 +8,25 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.ITickable;
+import net.minecraft.util.*;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class TileEntityEssenceTransfuser extends TileEntity implements ITickable, ISidedInventory {
     private ItemStack[] items;
 
+    private String customName = "Essence Transfuser";
+
+    private int fuelTime;
+    private int cookTime;
+
+    private static final int GLASS = 0;
+    private static final int MATERIAL = 1;
+    private static final int FUEL = 2;
+    private static final int OUT = 3;
+
     public TileEntityEssenceTransfuser() {
         items = new ItemStack[4];
-    }
-
-    @Override
-    public void update() {
-
     }
 
     @Override
@@ -39,7 +42,7 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
         switch (slot) {
-        case 0:
+        case GLASS:
             int[] ids = OreDictionary.getOreIDs(stack);
             for (int i : ids) {
                 if (OreDictionary.getOreName(i).equals("blockGlass")) {
@@ -47,11 +50,11 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
                 }
             }
             break;
-        case 1:
+        case MATERIAL:
             return true;
-        case 2:
+        case FUEL:
             return TileEntityFurnace.isItemFuel(stack);
-        case 3:
+        case OUT:
             return false;
         }
         return false;
@@ -72,6 +75,10 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
                 items[slotID] = ItemStack.loadItemStackFromNBT(tagList);
             }
         }
+        if (tags.hasKey("CustomName", 8))
+            customName = tags.getString("CustomName");
+        fuelTime = tags.getInteger("FuelTime");
+        cookTime = tags.getInteger("CookTime");
     }
 
     @Override
@@ -92,6 +99,82 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
         }
 
         tags.setTag("Items", nbttaglist);
+
+        tags.setString("CustomName", customName);
+        tags.setInteger("FuelTime", fuelTime);
+        tags.setInteger("CookTime", cookTime);
+    }
+
+    public boolean isBurning() {
+        return this.fuelTime > 0;
+    }
+
+    @Override
+    public void update() {
+        boolean flag = this.isBurning();
+        boolean dirty = false;
+
+        if (this.isBurning()) {
+            --this.fuelTime;
+        }
+
+        if (!this.worldObj.isRemote) {
+            if (this.isBurning() || this.items[FUEL] != null && this.items[MATERIAL] != null && this.items[GLASS] != null) {
+                if (!this.isBurning() && this.canSmelt()) {
+                    this.fuelTime = TileEntityFurnace.getItemBurnTime(this.items[1]);
+
+                    if (this.isBurning()) {
+                        dirty = true;
+
+                        if (this.items[1] != null) {
+                            --this.items[1].stackSize;
+
+                            if (this.items[1].stackSize == 0) {
+                                this.items[1] = items[1].getItem().getContainerItem(items[1]);
+                            }
+                        }
+                    }
+                }
+
+                if (this.isBurning() && this.canSmelt()) {
+                    ++this.fuelTime;
+
+                    if (this.fuelTime == getCookTime()) {
+                        this.fuelTime = 0;
+                        this.processItem();
+                        dirty = true;
+                    }
+                }
+                else {
+                    this.fuelTime = 0;
+                }
+            }
+            else if (!this.isBurning() && this.fuelTime > 0) {
+                this.fuelTime = MathHelper.clamp_int(this.fuelTime - 2, 0, getCookTime());
+            }
+
+            if (flag != this.isBurning()) {
+                dirty = true;
+                //BlockFurnace.setState(this.isBurning(), this.worldObj, this.pos);
+            }
+        }
+
+        if (dirty) {
+            this.markDirty();
+        }
+    }
+
+    public boolean canSmelt() {
+        return false; //todo
+    }
+
+    public void processItem() {
+        //todo
+    }
+
+
+    public int getCookTime() {
+        return 200;
     }
 
     @Override
