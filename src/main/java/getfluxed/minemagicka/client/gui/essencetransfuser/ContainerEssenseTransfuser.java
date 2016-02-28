@@ -38,7 +38,16 @@ public class ContainerEssenseTransfuser extends Container {
      * Called when a player shift-clicks on a slot. You must override this or
      * you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber) {
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber) { //TODO
+        switch (slotNumber) {
+            case TileEntityEssenceTransfuser.FUEL:
+                break;
+            case TileEntityEssenceTransfuser.GLASS:
+                break;
+            case TileEntityEssenceTransfuser.MATERIAL:
+                break;
+        }
         return null;
     }
 

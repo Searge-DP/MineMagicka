@@ -25,11 +25,12 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
 
     private int fuelTime;
     private int cookTime;
+    private int maxFuelTime = 1;
 
-    private static final int GLASS = 0;
-    private static final int MATERIAL = 1;
-    private static final int FUEL = 2;
-    private static final int OUT = 3;
+    public static final int GLASS = 0;
+    public static final int MATERIAL = 1;
+    public static final int FUEL = 2;
+    public static final int OUT = 3;
 
     public TileEntityEssenceTransfuser() {
         items = new ItemStack[4];
@@ -48,20 +49,20 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
         switch (slot) {
-        case GLASS:
-            int[] ids = OreDictionary.getOreIDs(stack);
-            for (int i : ids) {
-                if (OreDictionary.getOreName(i).equals("blockGlass")) {
-                    return true;
+            case GLASS:
+                int[] ids = OreDictionary.getOreIDs(stack);
+                for (int i : ids) {
+                    if (OreDictionary.getOreName(i).equals("blockGlass")) {
+                        return true;
+                    }
                 }
-            }
-            break;
-        case MATERIAL:
-            return true;
-        case FUEL:
-            return TileEntityFurnace.isItemFuel(stack);
-        case OUT:
-            return false;
+                break;
+            case MATERIAL:
+                return true;
+            case FUEL:
+                return TileEntityFurnace.isItemFuel(stack);
+            case OUT:
+                return false;
         }
         return false;
     }
@@ -84,6 +85,7 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
         if (tags.hasKey("CustomName", 8))
             customName = tags.getString("CustomName");
         fuelTime = tags.getInteger("FuelTime");
+        maxFuelTime = tags.getInteger("MaxFuelTime");
         cookTime = tags.getInteger("CookTime");
     }
 
@@ -107,6 +109,7 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
         tags.setTag("Items", nbttaglist);
 
         tags.setString("CustomName", customName);
+        tags.setInteger("MaxFuelTime", maxFuelTime);
         tags.setInteger("FuelTime", fuelTime);
         tags.setInteger("CookTime", cookTime);
     }
@@ -127,37 +130,33 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
         if (!this.worldObj.isRemote) {
             if (this.isBurning() || (this.items[FUEL] != null && this.items[MATERIAL] != null && this.items[GLASS] != null)) {
                 if (!this.isBurning() && this.canSmelt()) {
-                    this.fuelTime = TileEntityFurnace.getItemBurnTime(this.items[2]);
+                    this.maxFuelTime = this.fuelTime = TileEntityFurnace.getItemBurnTime(this.items[FUEL]);
                     dirty = true;
 
-                    if (this.items[1] != null) {
-                        --this.items[1].stackSize;
+                    if (this.items[FUEL] != null) {
+                        --this.items[FUEL].stackSize;
 
-                        if (this.items[1].stackSize == 0) {
-                            this.items[1] = items[1].getItem().getContainerItem(items[1]);
+                        if (this.items[FUEL].stackSize == 0) {
+                            this.items[FUEL] = items[FUEL].getItem().getContainerItem(items[FUEL]);
                         }
                     }
                 }
 
                 if (this.isBurning() && this.canSmelt()) {
-//                    ++this.fuelTime;
-                    System.out.println(fuelTime);
-                    if (this.fuelTime == getCookTime()) {
+                    ++this.cookTime;
+                    if (this.cookTime == getMaxCookTime()) {
                         this.fuelTime = 0;
                         this.processItem();
                         dirty = true;
                     }
-                } else {
-                    this.fuelTime = 0;
                 }
             } else if (!this.isBurning() && this.fuelTime > 0) {
-                this.fuelTime = MathHelper.clamp_int(this.fuelTime - 2, 0, getCookTime());
+                this.fuelTime = MathHelper.clamp_int(this.fuelTime - 2, 0, getMaxCookTime());
             }
 
             if (flag != this.isBurning()) {
                 dirty = true;
-                // BlockFurnace.setState(this.isBurning(), this.worldObj,
-                // this.pos);
+                // BlockFurnace.setState(this.isBurning(), this.worldObj, this.pos);
             }
         }
 
@@ -171,19 +170,11 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
             return false;
         } else {
             ITransfuserRecipe recipe = RecipeRegistry.getTransfuserRecipe(worldObj, pos, items[MATERIAL]);
-            if (recipe == null)
-                return false;
-            System.out.println("not null recipe");
+            if (recipe == null) return false;
             ItemStack itemstack = recipe.output(worldObj, pos, items[MATERIAL]);
-            if (itemstack == null)
-                return false;
-            System.out.println("item not null");
-            if (this.items[OUT] == null)
-                return true;
-            System.out.println("out is null");
-            if (!this.items[OUT].isItemEqual(itemstack))
-                return false;
-            System.out.println("out is not equal");
+            if (itemstack == null) return false;
+            if (this.items[OUT] == null) return true;
+            if (!this.items[OUT].isItemEqual(itemstack) || !ItemStack.areItemStackTagsEqual(items[OUT], itemstack)) return false;
             int result = items[OUT].stackSize + itemstack.stackSize;
             return result <= getInventoryStackLimit() && result <= this.items[OUT].getMaxStackSize();
         }
@@ -191,7 +182,9 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
 
     public void processItem() {
         if (this.canSmelt()) {
-            ItemStack itemstack = RecipeRegistry.getTransfuserRecipe(worldObj, getPos(), getStackInSlot(1)).outputStack();
+            ITransfuserRecipe recipe = RecipeRegistry.getTransfuserRecipe(worldObj, pos, items[MATERIAL]);
+            if (recipe == null) return;
+            ItemStack itemstack = recipe.output(worldObj, pos, items[MATERIAL]);
 
             if (this.items[OUT] == null) {
                 this.items[OUT] = itemstack.copy();
@@ -211,7 +204,7 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
         }
     }
 
-    public int getCookTime() {
+    public int getMaxCookTime() {
         return 200;
     }
 
@@ -310,7 +303,7 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
 
     @Override
     public IChatComponent getDisplayName() {
-        return new ChatComponentText(getCommandSenderName());
+        return new ChatComponentText(customName);
     }
 
     @Override
@@ -318,13 +311,13 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
         int[] slots;
         switch (side) {
         case DOWN:
-            slots = new int[] { 3 };
+            slots = new int[] { OUT };
             break;
         case UP:
-            slots = new int[] { 1 };
+            slots = new int[] { MATERIAL };
             break;
         default:
-            slots = new int[] { 0, 2 };
+            slots = new int[] { FUEL, GLASS };
             break;
         }
         return slots;
@@ -334,7 +327,7 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
     public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
         for (int i : getSlotsForFace(direction)) {
             if (index == i) {
-                if (isItemValidForSlot(index, itemStackIn)) {
+                if (isItemValidForSlot(i, itemStackIn)) {
                     if ((getStackInSlot(0) != null && getStackInSlot(0).isItemEqual(itemStackIn) && getStackInSlot(0).stackSize + itemStackIn.stackSize <= getStackInSlot(0).getMaxStackSize()) || (getStackInSlot(0) == null)) {
                         return true;
                     }
@@ -356,4 +349,15 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
         return false;
     }
 
+    public int getFuelTime() {
+        return fuelTime;
+    }
+
+    public int getMaxFuelTime() {
+        return maxFuelTime;
+    }
+
+    public int getCookTime() {
+        return cookTime;
+    }
 }
