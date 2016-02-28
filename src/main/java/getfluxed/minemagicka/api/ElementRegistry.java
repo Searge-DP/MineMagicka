@@ -32,17 +32,4 @@ public class ElementRegistry {
     IElement getElementFromName(String name) {
         return elements.get(name);
     }
-
-    public static int getIdFromElement(IElement el) {
-        int ret = 0;
-        for (String set : elements.keySet()) {
-            IElement key = getElementFromName(set);
-            if (key != null && key.equals(el)) {
-                return ret;
-            } else {
-                ret++;
-            }
-        }
-        return -1;
-    }
 }
