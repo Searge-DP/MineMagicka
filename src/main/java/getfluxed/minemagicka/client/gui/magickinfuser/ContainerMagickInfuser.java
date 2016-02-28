@@ -1,7 +1,7 @@
 package getfluxed.minemagicka.client.gui.magickinfuser;
 
 import getfluxed.minemagicka.client.gui.slots.SlotTileDep;
-import getfluxed.minemagicka.common.tileentities.TileEntityMagickInfuser;
+import getfluxed.minemagicka.common.blocks.tile.TileEntityMagickInfuser;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

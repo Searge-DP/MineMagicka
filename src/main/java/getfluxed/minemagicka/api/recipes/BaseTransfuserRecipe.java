@@ -23,7 +23,7 @@ public class BaseTransfuserRecipe implements ITransfuserRecipe {
     }
 
     @Override
-    public boolean matches(World world, BlockPos pos, ItemStack materialStack) {
+    public boolean matches(ItemStack materialStack) {
         if (in instanceof ItemStack)
             return OreDictionary.itemMatches(materialStack, (ItemStack) in, false);
         else if (in instanceof String) {
@@ -38,7 +38,7 @@ public class BaseTransfuserRecipe implements ITransfuserRecipe {
     }
 
     @Override
-    public ItemStack output(World world, BlockPos pos, ItemStack materialStack) {
+    public ItemStack output(ItemStack materialStack) {
         return out;
     }
 

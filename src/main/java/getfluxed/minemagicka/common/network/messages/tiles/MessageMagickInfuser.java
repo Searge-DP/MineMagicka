@@ -1,7 +1,7 @@
 package getfluxed.minemagicka.common.network.messages.tiles;
 
 import getfluxed.minemagicka.common.network.messages.PlugNPlayMessage;
-import getfluxed.minemagicka.common.tileentities.TileEntityMagickInfuser;
+import getfluxed.minemagicka.common.blocks.tile.TileEntityMagickInfuser;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;

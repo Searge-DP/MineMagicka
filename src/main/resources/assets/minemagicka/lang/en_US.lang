@@ -8,6 +8,7 @@ tile.mm.researchTableBook.name=Research Table
 tile.mm.magick_log.name=Magick Log
 tile.mm.magick_block.name=Magick Block
 tile.mm.magick_leaves.name=Magick Leaves
+tile.mm.essenceTransfuser.name=Essence Transfuser
 
 item.mm.bucketmagickliquid.name=Bucket of Magick
 item.mm.bookMagick.name=The Compendium

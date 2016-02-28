@@ -52,10 +52,18 @@ public class RecipeRegistry {
         return registerTransfuserRecipe(new BaseTransfuserRecipe(input, output));
     }
 
-    public static @Nullable ITransfuserRecipe getTransfuserRecipe(World world, BlockPos pos, ItemStack material) {
+    public static @Nullable ITransfuserRecipe getTransfuserRecipe(ItemStack material) {
         for (ITransfuserRecipe recipe : transfusionRecipes) {
-            if (recipe.matches(world, pos, material))
+            if (recipe.matches(material))
                 return recipe;
+        }
+        return null;
+    }
+
+    public static @Nullable ItemStack getTransfuserOutput(ItemStack material) {
+        for (ITransfuserRecipe recipe : transfusionRecipes) {
+            if (recipe.matches(material))
+                return recipe.output(material);
         }
         return null;
     }

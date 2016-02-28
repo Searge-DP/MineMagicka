@@ -1,27 +1,21 @@
-package getfluxed.minemagicka.common.tileentities.machines;
+package getfluxed.minemagicka.common.blocks.tile.machines;
 
 import getfluxed.minemagicka.api.RecipeRegistry;
-import getfluxed.minemagicka.api.recipes.ITransfuserRecipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.*;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class TileEntityEssenceTransfuser extends TileEntity implements ITickable, ISidedInventory {
     private ItemStack[] items;
 
-    private String customName = "Essence Transfuser";
+    private String customName = null;
 
     private int fuelTime;
     private int cookTime;
@@ -65,6 +59,10 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
             return false;
         }
         return false;
+    }
+
+    public void setCustomName(String customName) {
+        this.customName = customName;
     }
 
     @Override
@@ -155,10 +153,7 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
         if (this.items[GLASS] == null) {
             return false;
         } else {
-            ITransfuserRecipe recipe = RecipeRegistry.getTransfuserRecipe(worldObj, pos, items[MATERIAL]);
-            if (recipe == null)
-                return false;
-            ItemStack itemstack = recipe.output(worldObj, pos, items[MATERIAL]);
+            ItemStack itemstack = RecipeRegistry.getTransfuserOutput(items[MATERIAL]);
             if (itemstack == null)
                 return false;
             if (this.items[OUT] == null)
@@ -172,10 +167,8 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
 
     public void processItem() {
         if (this.canSmelt()) {
-            ITransfuserRecipe recipe = RecipeRegistry.getTransfuserRecipe(worldObj, pos, items[MATERIAL]);
-            if (recipe == null)
-                return;
-            ItemStack itemstack = recipe.output(worldObj, pos, items[MATERIAL]);
+            ItemStack itemstack = RecipeRegistry.getTransfuserOutput(items[MATERIAL]);
+            if (itemstack == null) return;
 
             if (this.items[OUT] == null) {
                 this.items[OUT] = itemstack.copy();
@@ -289,12 +282,14 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
 
     @Override
     public boolean hasCustomName() {
-        return true;
+        return customName != null;
     }
 
     @Override
     public IChatComponent getDisplayName() {
-        return new ChatComponentText(customName);
+        if (hasCustomName())
+            return new ChatComponentText(customName);
+        return new ChatComponentTranslation("tile.mm.essenceTransfuser.name");
     }
 
     @Override

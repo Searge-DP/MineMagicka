@@ -2,7 +2,7 @@ package getfluxed.minemagicka.client.gui.researchtable;
 
 import getfluxed.minemagicka.client.gui.researchtable.ResearchBlock.BlockType;
 import getfluxed.minemagicka.common.reference.Reference;
-import getfluxed.minemagicka.common.tileentities.researchtable.TileEntityResearchTableBook;
+import getfluxed.minemagicka.common.blocks.tile.researchtable.TileEntityResearchTableBook;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;

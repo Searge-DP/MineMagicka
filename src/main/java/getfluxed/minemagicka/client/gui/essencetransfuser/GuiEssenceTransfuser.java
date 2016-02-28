@@ -1,14 +1,12 @@
 package getfluxed.minemagicka.client.gui.essencetransfuser;
 
 import getfluxed.minemagicka.common.reference.Reference;
-import getfluxed.minemagicka.common.tileentities.machines.TileEntityEssenceTransfuser;
+import getfluxed.minemagicka.common.blocks.tile.machines.TileEntityEssenceTransfuser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
 public class GuiEssenceTransfuser extends GuiContainer {
 

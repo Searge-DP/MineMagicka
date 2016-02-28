@@ -4,7 +4,7 @@ import getfluxed.minemagicka.MineMagicka;
 import getfluxed.minemagicka.common.items.MMItems;
 import getfluxed.minemagicka.common.network.PacketHandler;
 import getfluxed.minemagicka.common.network.messages.tiles.MessageMagickInfuser;
-import getfluxed.minemagicka.common.tileentities.TileEntityMagickInfuser;
+import getfluxed.minemagicka.common.blocks.tile.TileEntityMagickInfuser;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;

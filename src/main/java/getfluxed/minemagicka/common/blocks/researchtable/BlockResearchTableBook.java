@@ -1,7 +1,7 @@
 package getfluxed.minemagicka.common.blocks.researchtable;
 
 import getfluxed.minemagicka.MineMagicka;
-import getfluxed.minemagicka.common.tileentities.researchtable.TileEntityResearchTableBook;
+import getfluxed.minemagicka.common.blocks.tile.researchtable.TileEntityResearchTableBook;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

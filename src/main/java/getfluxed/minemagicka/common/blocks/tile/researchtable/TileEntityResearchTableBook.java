@@ -1,4 +1,4 @@
-package getfluxed.minemagicka.common.tileentities.researchtable;
+package getfluxed.minemagicka.common.blocks.tile.researchtable;
 
 import fluxedCore.tileEntities.TileEntityInventory;
 import net.minecraft.util.IChatComponent;

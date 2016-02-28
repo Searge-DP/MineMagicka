@@ -1,4 +1,4 @@
-package getfluxed.minemagicka.common.tileentities;
+package getfluxed.minemagicka.common.blocks.tile;
 
 import fluxedCore.tileEntities.TileEntityInventory;
 import getfluxed.minemagicka.api.RecipeRegistry;

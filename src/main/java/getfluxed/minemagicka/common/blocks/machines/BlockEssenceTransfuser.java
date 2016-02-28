@@ -1,7 +1,7 @@
 package getfluxed.minemagicka.common.blocks.machines;
 
 import getfluxed.minemagicka.MineMagicka;
-import getfluxed.minemagicka.common.tileentities.machines.TileEntityEssenceTransfuser;
+import getfluxed.minemagicka.common.blocks.tile.machines.TileEntityEssenceTransfuser;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
