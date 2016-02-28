@@ -124,6 +124,9 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
             --this.fuelTime;
         }
 
+        if (!canSmelt())
+            cookTime = 0;
+
         if (this.isBurning() || (this.items[FUEL] != null && this.items[MATERIAL] != null && this.items[GLASS] != null)) {
             if (!this.isBurning() && this.canSmelt()) {
                 this.maxFuelTime = this.fuelTime = TileEntityFurnace.getItemBurnTime(this.items[FUEL]);
