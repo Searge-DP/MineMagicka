@@ -18,6 +18,7 @@ item.mm.page_magick.name=Compendium Page
 item.mm.page_magick_locked.name=Locked Compendium Page
 
 item.mm.magic_resource.name=Sphere of %1$s
+item.mm.solid_magic.name=Crystallized %1$s
 item.mm.magic_resource.empty=Empty Sphere
 
 mm.element.hydros.description=Water, Flow

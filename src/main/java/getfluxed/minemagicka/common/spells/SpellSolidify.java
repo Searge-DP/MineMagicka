@@ -4,15 +4,18 @@ import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.casting.CastingType;
 import getfluxed.minemagicka.api.elements.ElementCompound;
 import getfluxed.minemagicka.api.elements.ElementList;
+import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.api.spells.ISpell;
 import getfluxed.minemagicka.common.items.MMItems;
-import getfluxed.minemagicka.common.reference.ElementReference;
+import getfluxed.minemagicka.common.items.magick.ItemMagickSolid;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+
+import static getfluxed.minemagicka.common.reference.ElementReference.*;
 
 import java.util.List;
 
@@ -35,59 +38,64 @@ public class SpellSolidify implements ISpell {
 
     @Override
     public ElementList getElements() {
-        ElementList castList = new ElementList();
-        castList.add(ElementReference.earth, 1);
-        castList.add(ElementReference.water, 1);
-        castList.add(ElementReference.life, 1);
-        return castList;
+        return new ElementList().add(earth, 1).add(arcane, 1).add(cold, 1);
     }
 
     @Override
-    public void cast(World world, EntityPlayer player, ElementCompound elements, double x, double y, double z) {
-        if (elements.getModifierAmount(ElementReference.arcane) > 0) {
-            List<EntityLivingBase> entList = world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.fromBounds(3 - player.posX, 3 - player.posY, 3 - player.posZ, 3 + player.posX, 3 + player.posY, 3 + player.posZ));
-            entList.stream().filter(EntityLivingBase::isEntityUndead).forEach(base -> world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(MMItems.magickSolid, elements.getModifierAmount(ElementReference.arcane), ElementRegistry.getIdFromElement(ElementReference.arcane)))));
+    public void cast(World world, EntityPlayer player, ElementCompound elements, double x, double y, double z) { // todo have failure messages if conditions not met
+        if (elements.getModifierAmount(arcane) > 0) {
+            List<EntityLivingBase> entList = world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().expand(3, 3, 3));
+            for (EntityLivingBase entity : entList)
+                if (entity.isEntityUndead()) {
+                    makeItem(world, x, y, z, elements, arcane);
+                    break;
+                }
         }
-        if (elements.getModifierAmount(ElementReference.cold) > 0) {
+        if (elements.getModifierAmount(cold) > 0) {
             if (world.getBiomeGenForCoords(player.getPosition()).isSnowyBiome()) {
-                world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(MMItems.magickSolid, elements.getModifierAmount(ElementReference.cold), ElementRegistry.getIdFromElement(ElementReference.cold))));
-
+                makeItem(world, x, y, z, elements, cold);
             }
         }
-        if (elements.getModifierAmount(ElementReference.earth) > 0) {
+        if (elements.getModifierAmount(earth) > 0) {
             if (player.posY < 32) {
-                world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(MMItems.magickSolid, elements.getModifierAmount(ElementReference.earth), ElementRegistry.getIdFromElement(ElementReference.earth))));
-
+                makeItem(world, x, y, z, elements, earth);
             }
         }
-        if (elements.getModifierAmount(ElementReference.fire) > 0) {
+        if (elements.getModifierAmount(fire) > 0) {
             if (player.isBurning()) {
-                world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(MMItems.magickSolid, elements.getModifierAmount(ElementReference.fire), ElementRegistry.getIdFromElement(ElementReference.fire))));
-
+                makeItem(world, x, y, z, elements, fire);
             }
         }
-        if (elements.getModifierAmount(ElementReference.life) > 0) {
-            List<EntityLivingBase> entList = world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.fromBounds(3 - player.posX, 3 - player.posY, 3 - player.posZ, 3 + player.posX, 3 + player.posY, 3 + player.posZ));
-            entList.stream().filter(base -> !base.isEntityUndead()).forEach(base -> world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(MMItems.magickSolid, elements.getModifierAmount(ElementReference.life), ElementRegistry.getIdFromElement(ElementReference.life)))));
+        if (elements.getModifierAmount(life) > 0) {
+            List<EntityLivingBase> entList = world.getEntitiesWithinAABB(EntityLivingBase.class, player.getEntityBoundingBox().expand(3, 3, 3));
+            for (EntityLivingBase entity : entList)
+                if (!entity.isEntityUndead()) {
+                    makeItem(world, x, y, z, elements, arcane);
+                    break;
+                }
         }
-        if (elements.getModifierAmount(ElementReference.lightning) > 0) {
+        if (elements.getModifierAmount(lightning) > 0) {
             if (world.isThundering()) {
-                world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(MMItems.magickSolid, elements.getModifierAmount(ElementReference.lightning), ElementRegistry.getIdFromElement(ElementReference.lightning))));
-
+                makeItem(world, x, y, z, elements, lightning);
             }
         }
-        if (elements.getModifierAmount(ElementReference.shield) > 0) {
+        if (elements.getModifierAmount(shield) > 0) {
             if (player.getHealth() <= 4) {
-                world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(MMItems.magickSolid, elements.getModifierAmount(ElementReference.shield), ElementRegistry.getIdFromElement(ElementReference.shield))));
-
+                makeItem(world, x, y, z, elements, shield);
             }
         }
-        if (elements.getModifierAmount(ElementReference.water) > 0) {
+        if (elements.getModifierAmount(water) > 0) {
             if (player.isWet()) {
-                world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(MMItems.magickSolid, elements.getModifierAmount(ElementReference.water), ElementRegistry.getIdFromElement(ElementReference.water))));
+                makeItem(world, x, y, z, elements, water);
             }
         }
 
+    }
+
+    private void makeItem(World world, double x, double y, double z, ElementCompound comp, IElement element) {
+        ItemStack stack = ItemMagickSolid.ofElement(element.getUnlocalizedName());
+        stack.stackSize = comp.getModifierAmount(element);
+        world.spawnEntityInWorld(new EntityItem(world, x, y, z, stack));
     }
 
 }

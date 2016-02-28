@@ -1,10 +1,12 @@
-package getfluxed.minemagicka.common.items;
+package getfluxed.minemagicka.common.items.magick;
 
 import fluxedCore.util.NBTHelper;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.elements.ElementList;
 import getfluxed.minemagicka.api.elements.IElement;
 import getfluxed.minemagicka.api.spells.IElementProvider;
+import getfluxed.minemagicka.common.items.MMItems;
+import getfluxed.minemagicka.common.items.ModItem;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

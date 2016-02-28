@@ -2,7 +2,7 @@ package getfluxed.minemagicka.common.crafting;
 
 import getfluxed.minemagicka.api.RecipeRegistry;
 import getfluxed.minemagicka.api.recipes.RecipeMagickInfusion;
-import getfluxed.minemagicka.common.items.ItemMagicResource;
+import getfluxed.minemagicka.common.items.magick.ItemMagicResource;
 import getfluxed.minemagicka.common.items.MMItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

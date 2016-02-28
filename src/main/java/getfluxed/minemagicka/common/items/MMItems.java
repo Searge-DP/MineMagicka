@@ -4,6 +4,7 @@ import getfluxed.minemagicka.MineMagicka;
 import getfluxed.minemagicka.api.ElementRegistry;
 import getfluxed.minemagicka.api.nature.TreeSap;
 import getfluxed.minemagicka.common.blocks.MMBlocks;
+import getfluxed.minemagicka.common.items.magick.ItemMagicResource;
 import getfluxed.minemagicka.common.items.magick.ItemMagickSolid;
 import getfluxed.minemagicka.common.items.nature.ItemSapExtractor;
 import getfluxed.minemagicka.common.items.nature.ItemTreeSap;
