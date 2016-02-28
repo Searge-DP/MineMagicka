@@ -1,9 +1,15 @@
 package getfluxed.minemagicka.common.tileentities.machines;
 
+import getfluxed.minemagicka.api.RecipeRegistry;
+import getfluxed.minemagicka.api.recipes.ITransfuserRecipe;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -165,11 +171,41 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
     }
 
     public boolean canSmelt() {
-        return false; //todo
+        if (this.items[MATERIAL] == null || this.items[GLASS] == null) {
+            return false;
+        } else {
+            ITransfuserRecipe recipe = RecipeRegistry.getTransfuserRecipe(worldObj, pos, items[MATERIAL]);
+            if (recipe == null) return false;
+            ItemStack itemstack = recipe.output(worldObj, pos, items[MATERIAL]);
+            if (itemstack == null) return false;
+            if (this.items[OUT] == null) return true;
+            if (!this.items[OUT].isItemEqual(itemstack)) return false;
+            int result = items[OUT].stackSize + itemstack.stackSize;
+            return result <= getInventoryStackLimit() && result <= this.items[OUT].getMaxStackSize();
+        }
     }
 
     public void processItem() {
-        //todo
+        if (this.canSmelt()) {
+            ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.items[MATERIAL]);
+
+            if (this.items[OUT] == null) {
+                this.items[OUT] = itemstack.copy();
+            }
+            else if (this.items[OUT].getItem() == itemstack.getItem()) {
+                this.items[OUT].stackSize += itemstack.stackSize;
+            }
+
+            --this.items[MATERIAL].stackSize;
+            --this.items[GLASS].stackSize;
+
+            if (this.items[MATERIAL].stackSize <= 0) {
+                this.items[MATERIAL] = null;
+            }
+            if (this.items[GLASS].stackSize <= 0) {
+                this.items[GLASS] = null;
+            }
+        }
     }
 
 
