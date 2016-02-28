@@ -9,6 +9,7 @@ import getfluxed.minemagicka.common.items.MMItems;
 import getfluxed.minemagicka.common.items.blocks.ItemBlockMod;
 import getfluxed.minemagicka.common.reference.Reference;
 import getfluxed.minemagicka.common.tileentities.TileEntityMagickInfuser;
+import getfluxed.minemagicka.common.tileentities.machines.TileEntityEssenceTransfuser;
 import getfluxed.minemagicka.common.tileentities.researchtable.TileEntityResearchTableBook;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -56,7 +57,7 @@ public class MMBlocks {
         registerBlock(logMagick, "magick_log");
         registerBlock(magickBlock, "magick_block");
         registerBlock(leavesMagick, "magick_leaves");
-        registerBlock(essenceTransfuser, "essense_transfuser");
+        registerBlock(essenceTransfuser, "essenceTransfuser", TileEntityEssenceTransfuser.class);
         
 
 
