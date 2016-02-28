@@ -10,14 +10,14 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class GuiEssenseTransfuser extends GuiContainer {
+public class GuiEssenceTransfuser extends GuiContainer {
 
     private static final ResourceLocation texture = new ResourceLocation(Reference.modid, "textures/gui/extractorEssence.png");
     private TileEntityEssenceTransfuser tile;
     private InventoryPlayer invPlayer;
 
-    public GuiEssenseTransfuser(InventoryPlayer invPlayer, TileEntityEssenceTransfuser tile2) {
-        super(new ContainerEssenseTransfuser(invPlayer, tile2));
+    public GuiEssenceTransfuser(InventoryPlayer invPlayer, TileEntityEssenceTransfuser tile2) {
+        super(new ContainerEssenceTransfuser(invPlayer, tile2));
         this.invPlayer = invPlayer;
         this.tile = tile2;
 

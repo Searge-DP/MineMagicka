@@ -121,16 +121,14 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
     @Override
     public void update() {
         boolean flag = this.isBurning();
-        boolean dirty = false;
 
-        if (this.isBurning()) {
+        if (flag) {
             --this.fuelTime;
         }
 
         if (this.isBurning() || (this.items[FUEL] != null && this.items[MATERIAL] != null && this.items[GLASS] != null)) {
             if (!this.isBurning() && this.canSmelt()) {
                 this.maxFuelTime = this.fuelTime = TileEntityFurnace.getItemBurnTime(this.items[FUEL]);
-                dirty = true;
 
                 if (this.items[FUEL] != null) {
                     --this.items[FUEL].stackSize;
@@ -145,22 +143,11 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
                 ++this.cookTime;
                 if (this.cookTime == getMaxCookTime()) {
                     this.cookTime = 0;
-//                    this.fuelTime = 0;
                     this.processItem();
-                    dirty = true;
                 }
             }
         } else if (!this.isBurning() && this.fuelTime > 0) {
             this.fuelTime = MathHelper.clamp_int(this.fuelTime - 2, 0, getMaxCookTime());
-        }
-
-        if (flag != this.isBurning()) {
-            dirty = true;
-            // BlockFurnace.setState(this.isBurning(), this.worldObj, this.pos);
-        }
-
-        if (dirty) {
-            // this.markDirty();
         }
     }
 

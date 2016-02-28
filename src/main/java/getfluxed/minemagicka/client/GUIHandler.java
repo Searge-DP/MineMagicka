@@ -1,8 +1,8 @@
 package getfluxed.minemagicka.client;
 
 import getfluxed.minemagicka.MineMagicka;
-import getfluxed.minemagicka.client.gui.essencetransfuser.ContainerEssenseTransfuser;
-import getfluxed.minemagicka.client.gui.essencetransfuser.GuiEssenseTransfuser;
+import getfluxed.minemagicka.client.gui.essencetransfuser.ContainerEssenceTransfuser;
+import getfluxed.minemagicka.client.gui.essencetransfuser.GuiEssenceTransfuser;
 import getfluxed.minemagicka.client.gui.magickinfuser.ContainerMagickInfuser;
 import getfluxed.minemagicka.client.gui.magickinfuser.GuiMagickInfuser;
 import getfluxed.minemagicka.client.gui.researchtable.ContainerResearchTableBook;
@@ -41,7 +41,7 @@ public class GUIHandler implements IGuiHandler {
                 
             case 2:
                 if (te != null && te instanceof TileEntityEssenceTransfuser) {
-                    return new ContainerEssenseTransfuser(player.inventory, (TileEntityEssenceTransfuser) te);
+                    return new ContainerEssenceTransfuser(player.inventory, (TileEntityEssenceTransfuser) te);
                 }
                 break;
         }
@@ -66,7 +66,7 @@ public class GUIHandler implements IGuiHandler {
                 break;
             case 2:
                 if (te != null && te instanceof TileEntityEssenceTransfuser) {
-                    return new GuiEssenseTransfuser(player.inventory, (TileEntityEssenceTransfuser) te);
+                    return new GuiEssenceTransfuser(player.inventory, (TileEntityEssenceTransfuser) te);
                 }
                 break;
         }

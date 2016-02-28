@@ -8,8 +8,8 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerEssenseTransfuser extends Container {
-    public ContainerEssenseTransfuser(InventoryPlayer invPlayer, TileEntityEssenceTransfuser tile) {
+public class ContainerEssenceTransfuser extends Container {
+    public ContainerEssenceTransfuser(InventoryPlayer invPlayer, TileEntityEssenceTransfuser tile) {
 
         addSlotToContainer(new SlotTileDep(tile, 0, 47, 17));
         addSlotToContainer(new SlotTileDep(tile, 1, 65, 17));
