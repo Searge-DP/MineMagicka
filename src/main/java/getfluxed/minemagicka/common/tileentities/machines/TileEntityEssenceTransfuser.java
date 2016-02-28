@@ -2,19 +2,19 @@ package getfluxed.minemagicka.common.tileentities.machines;
 
 import getfluxed.minemagicka.api.RecipeRegistry;
 import getfluxed.minemagicka.api.recipes.ITransfuserRecipe;
-import net.minecraft.block.BlockFurnace;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.util.*;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -125,43 +125,39 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
         }
 
         if (!this.worldObj.isRemote) {
-            if (this.isBurning() || this.items[FUEL] != null && this.items[MATERIAL] != null && this.items[GLASS] != null) {
+            if (this.isBurning() || (this.items[FUEL] != null && this.items[MATERIAL] != null && this.items[GLASS] != null)) {
                 if (!this.isBurning() && this.canSmelt()) {
-                    this.fuelTime = TileEntityFurnace.getItemBurnTime(this.items[1]);
+                    this.fuelTime = TileEntityFurnace.getItemBurnTime(this.items[2]);
+                    dirty = true;
 
-                    if (this.isBurning()) {
-                        dirty = true;
+                    if (this.items[1] != null) {
+                        --this.items[1].stackSize;
 
-                        if (this.items[1] != null) {
-                            --this.items[1].stackSize;
-
-                            if (this.items[1].stackSize == 0) {
-                                this.items[1] = items[1].getItem().getContainerItem(items[1]);
-                            }
+                        if (this.items[1].stackSize == 0) {
+                            this.items[1] = items[1].getItem().getContainerItem(items[1]);
                         }
                     }
                 }
 
                 if (this.isBurning() && this.canSmelt()) {
-                    ++this.fuelTime;
-
+//                    ++this.fuelTime;
+                    System.out.println(fuelTime);
                     if (this.fuelTime == getCookTime()) {
                         this.fuelTime = 0;
                         this.processItem();
                         dirty = true;
                     }
-                }
-                else {
+                } else {
                     this.fuelTime = 0;
                 }
-            }
-            else if (!this.isBurning() && this.fuelTime > 0) {
+            } else if (!this.isBurning() && this.fuelTime > 0) {
                 this.fuelTime = MathHelper.clamp_int(this.fuelTime - 2, 0, getCookTime());
             }
 
             if (flag != this.isBurning()) {
                 dirty = true;
-                //BlockFurnace.setState(this.isBurning(), this.worldObj, this.pos);
+                // BlockFurnace.setState(this.isBurning(), this.worldObj,
+                // this.pos);
             }
         }
 
@@ -171,15 +167,23 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
     }
 
     public boolean canSmelt() {
-        if (this.items[MATERIAL] == null || this.items[GLASS] == null) {
+        if (this.items[GLASS] == null) {
             return false;
         } else {
             ITransfuserRecipe recipe = RecipeRegistry.getTransfuserRecipe(worldObj, pos, items[MATERIAL]);
-            if (recipe == null) return false;
+            if (recipe == null)
+                return false;
+            System.out.println("not null recipe");
             ItemStack itemstack = recipe.output(worldObj, pos, items[MATERIAL]);
-            if (itemstack == null) return false;
-            if (this.items[OUT] == null) return true;
-            if (!this.items[OUT].isItemEqual(itemstack)) return false;
+            if (itemstack == null)
+                return false;
+            System.out.println("item not null");
+            if (this.items[OUT] == null)
+                return true;
+            System.out.println("out is null");
+            if (!this.items[OUT].isItemEqual(itemstack))
+                return false;
+            System.out.println("out is not equal");
             int result = items[OUT].stackSize + itemstack.stackSize;
             return result <= getInventoryStackLimit() && result <= this.items[OUT].getMaxStackSize();
         }
@@ -187,12 +191,11 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
 
     public void processItem() {
         if (this.canSmelt()) {
-            ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.items[MATERIAL]);
+            ItemStack itemstack = RecipeRegistry.getTransfuserRecipe(worldObj, getPos(), getStackInSlot(1)).outputStack();
 
             if (this.items[OUT] == null) {
                 this.items[OUT] = itemstack.copy();
-            }
-            else if (this.items[OUT].getItem() == itemstack.getItem()) {
+            } else if (this.items[OUT].getItem() == itemstack.getItem()) {
                 this.items[OUT].stackSize += itemstack.stackSize;
             }
 
@@ -207,7 +210,6 @@ public class TileEntityEssenceTransfuser extends TileEntity implements ITickable
             }
         }
     }
-
 
     public int getCookTime() {
         return 200;
